@@ -2925,7 +2925,7 @@
 #include "modular_twilight_axis\firearms\code\jobs\corsair.dm"
 #include "modular_twilight_axis\firearms\code\jobs\grenzelhoft_jager.dm"
 #include "modular_twilight_axis\firearms\code\jobs\guildmaster.dm"
-#include "modular_twilight_axis\firearms\code\jobs\guildman.dm"
+#include "modular_twilight_axis\firearms\code\jobs\guildsman.dm"
 #include "modular_twilight_axis\firearms\code\jobs\gunslinger.dm"
 #include "modular_twilight_axis\firearms\code\jobs\lord.dm"
 #include "modular_twilight_axis\firearms\code\jobs\maa_grenadier.dm"

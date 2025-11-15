@@ -21,6 +21,7 @@
 	class_categories = TRUE
 	job_subclasses = list(
 		/datum/advclass/mercenary/anthrax,
+		/datum/advclass/mercenary/anthrax/assasin,
 		/datum/advclass/mercenary/atgervi,
 		/datum/advclass/mercenary/atgervi/shaman,
 		/datum/advclass/mercenary/condottiero,
@@ -52,3 +53,21 @@
     /datum/advclass/mercenary/twilight_grenzelhoft_jager
 	)
 	same_job_respawn_delay = 30 MINUTES
+
+/proc/update_mercenary_slots()
+	var/datum/job/mercenary_job = SSjob.GetJob("Mercenary")
+	if(!mercenary_job)
+		return
+
+	var/player_count = length(GLOB.joined_player_list)
+	var/slots = 4
+	
+	if(player_count > 50)
+		var/extra = floor((player_count - 50) / 10)
+		slots += extra
+
+	//4 slots minimum, 8 maximum.
+	slots = min(slots, 8)
+
+	mercenary_job.total_positions = slots
+	mercenary_job.spawn_positions = slots

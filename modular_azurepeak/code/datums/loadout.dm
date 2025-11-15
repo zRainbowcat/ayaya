@@ -360,6 +360,34 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	category = "Одежда"
 	path = /obj/item/clothing/suit/roguetown/shirt/exoticsilkbra
 
+/datum/loadout_item/desertbra
+	name = "Desert Bra"
+	path = /obj/item/clothing/suit/roguetown/shirt/desertbra
+
+/datum/loadout_item/deserthood
+	name = "Desert Hood"
+	path = /obj/item/clothing/head/roguetown/deserthood
+
+/datum/loadout_item/desertskirt
+	name = "Desert Skirt"
+	path = /obj/item/clothing/under/roguetown/skirt/desert
+
+/datum/loadout_item/explorerhat
+	name = "Explorer Hat"
+	path = /obj/item/clothing/head/roguetown/explorerhat
+
+/datum/loadout_item/explorervest
+	name = "Explorer Vest"
+	path = /obj/item/clothing/suit/roguetown/shirt/explorer
+
+/datum/loadout_item/fancycoat
+	name = "Fancy Coat"
+	path = /obj/item/clothing/cloak/poncho/fancycoat
+
+/datum/loadout_item/explorerpants
+	name = "Explorer Pants"
+	path = /obj/item/clothing/under/roguetown/tights/explorerpants
+
 /datum/loadout_item/bottomtunic
 	name = "Low-cut Tunic"
 	category = "Одежда"
@@ -683,6 +711,10 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	category = "Аксессуары"
 	path = /obj/item/clothing/neck/roguetown/psicross/inhumen/aalloy
 
+/datum/loadout_item/zcross_iron
+	name = "Iron Zcross"
+	path = /obj/item/clothing/neck/roguetown/psicross/inhumen/iron
+
 /datum/loadout_item/wedding_band
 	name = "silver wedding band"
 	category = "Аксессуары"
@@ -768,6 +800,24 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	name = "Donator Kit - Gilded Knight Helm - Required: Knight Helmet"
 	category = list("Разное", "Донат")
 	path = /obj/item/enchantingkit/bigfoot
+	donatitem = TRUE
+
+/datum/loadout_item/donator_ravoxhelm_oldrw
+	name = "Donator Kit - Plumed Ravox Helmet - Required: Heavy Helmet"
+	category = list("Разное", "Донат")
+	path = /obj/item/enchantingkit/ravoxhelm_oldrw
+	donatitem = TRUE
+
+/datum/loadout_item/donator_necranhelm_oldrw
+	name = "Donator Kit - Hooded Necra Helmet - Required: Heavy Helmet"
+	category = list("Разное", "Донат")
+	path = /obj/item/enchantingkit/necranhelm_oldrw
+	donatitem = TRUE
+
+/datum/loadout_item/donator_astratanhelm_oldrw
+	name = "Donator Kit - Plumed Astrata Helmet - Required: Heavy Helmet"
+	category = list("Разное", "Донат")
+	path = /obj/item/enchantingkit/astratanhelm_oldrw
 	donatitem = TRUE
 
 /datum/loadout_item/donator_bigfoot_axe
@@ -999,7 +1049,7 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 /datum/loadout_item/donat/tabard/crusader/ravox
 	name = "Табард-плащ Равокса"
 	category = list("Плащи", "Донат")
-	path = /obj/item/clothing/cloak/tabard/crusader/ravox
+	path = /obj/item/clothing/cloak/cleric/ravox
 	donatitem = TRUE
 
 /datum/loadout_item/donat/tabard/crusader/eora

@@ -859,12 +859,6 @@
 					var/skilldiff = user.get_skill_level(user_skill) - get_skill_level(src_skill)
 					. += "<font size = 3><i>[skilldiff_report(skilldiff)] in my wielded skill than they are in theirs.</i></font>"
 
-	var/showassess = FALSE
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(get_dist(src, H) <= ((2 + clamp(floor(((H.STAPER - 10))),-1, 4)) + HAS_TRAIT(user, TRAIT_INTELLECTUAL)))
-			showassess = TRUE
-
 	if(!obscure_name || client?.prefs.masked_examine)
 		if((user.client?.prefs.chatheadshot) && headshot_link)
 			. += "<span class='info'><img src=[headshot_link] width=100 height=100/></span>"

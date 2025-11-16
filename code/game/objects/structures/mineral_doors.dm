@@ -66,6 +66,8 @@
 /obj/structure/mineral_door/onkick(mob/user)
 	if(isSwitchingStates)
 		return
+	if(brokenstate == 1)
+		return
 	if(door_opened)
 		playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 		user.visible_message(span_warning("[user] kicks [src] shut!"), \

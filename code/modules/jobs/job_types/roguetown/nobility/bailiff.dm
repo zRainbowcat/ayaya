@@ -18,7 +18,7 @@
 
 	give_bank_account = TRUE
 	noble_income = 20
-	min_pq = 11
+	min_pq = 17
 	max_pq = null
 	round_contrib_points = 3
 	cmode_music = 'sound/music/combat_knight.ogg'

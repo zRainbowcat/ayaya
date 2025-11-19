@@ -83,7 +83,10 @@
 					user.visible_message(span_info("[user] repairs [I]'s coverage!"))
 					I.repair_coverage()
 				if(XP_ON_SUCCESS > 0)
-					user.mind.add_sleep_experience(/datum/skill/craft/sewing, user.STAINT * XP_ON_SUCCESS)
+					if(I.anvilrepair)
+						user.mind.add_sleep_experience(I.anvilrepair, user.STAINT * XP_ON_SUCCESS)
+					else
+						user.mind.add_sleep_experience(/datum/skill/craft/sewing, user.STAINT * XP_ON_SUCCESS)
 				I.obj_integrity = min(I.obj_integrity + (max_integrity/10), I.max_integrity) //10%
 				src.obj_integrity = min(src.obj_integrity - 10, src.max_integrity) //can restore 700% for good cloth kits, and 300% for bad cloth, 400% for bad metal,  1000% for good metal kit.
 				if(I.obj_broken && istype(I, /obj/item/clothing) && I.obj_integrity >= I.max_integrity)
@@ -158,3 +161,4 @@
 	grid_width = 32
 	grid_height = 32
 	dropshrink = 0.7
+	anvilrepair = /datum/skill/craft/blacksmithing //for empty kit code

@@ -21,7 +21,7 @@
 		)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/survival/repairkitmetal
+/datum/crafting_recipe/roguetown/survival/repairkitmetalingot
 	name = "empty metal kit (iron bar)"
 	result = /obj/item/armorkit_empty
 	reqs = list(
@@ -29,7 +29,7 @@
 		)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/survival/repairkitmetal
+/datum/crafting_recipe/roguetown/survival/repairkitmetalscrap
 	name = "empty metal kit (scrap)"
 	result = /obj/item/armorkit_empty
 	reqs = list(

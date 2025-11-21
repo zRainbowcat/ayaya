@@ -686,6 +686,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 /mob/living/carbon/human/after_creation()
 	if(dna?.species)
 		dna.species.after_creation(src)
+	
 	roll_stats()
 
 /mob/dead/new_player/proc/transfer_character()

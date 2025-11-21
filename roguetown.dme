@@ -2823,6 +2823,7 @@
 #include "modular_azurepeak\code\game\objects\items\twstrap.dm"
 #include "modular_azurepeak\code\game\objects\structures\fartravel.dm"
 #include "modular_azurepeak\code\game\objects\weapons\axes.dm"
+#include "modular_azurepeak\code\game\turfs\crawlspace.dm"
 #include "modular_azurepeak\code\modules\clothing\rogueclothes\cloaks.dm"
 #include "modular_azurepeak\code\modules\clothing\rogueclothes\crown.dm"
 #include "modular_azurepeak\code\modules\clothing\rogueclothes\hats.dm"

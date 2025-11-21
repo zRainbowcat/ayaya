@@ -1329,15 +1329,19 @@
 /datum/status_effect/buff/adrenaline_rush/on_apply()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_ADRENALINE_RUSH, INNATE_TRAIT)
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.playsound_local(get_turf(H), 'sound/misc/adrenaline_rush.ogg', 100, TRUE)
-		H.blood_volume = min((H.blood_volume + blood_restore), BLOOD_VOLUME_NORMAL)
-		H.stamina -= max((H.stamina - (H.max_stamina / 2)), 0)
+	var/mob/living/carbon/human/human = owner
+	if(istype(human))
+		human.playsound_local(get_turf(human), 'sound/misc/adrenaline_rush.ogg', 100, TRUE)
+		human.blood_volume = min((human.blood_volume + blood_restore), BLOOD_VOLUME_NORMAL)
+		human.stamina -= max((human.stamina - (human.max_stamina / 2)), 0)
+		human.pain_threshold += 50
 
 /datum/status_effect/buff/adrenaline_rush/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_ADRENALINE_RUSH, INNATE_TRAIT)
+	var/mob/living/carbon/human/human = owner
+	if(istype(human))
+		human.pain_threshold -= 50
 
 /datum/status_effect/buff/magicknowledge
 	id = "intelligence"

@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(learnable_songst3, (list(/obj/effect/proc_holder/spell/invoked/
 	. = ..()
 	src.holder = holder
 	holder?.inspiration = src
-	ADD_TRAIT(holder, INSPIRING_MUSICIAN, "inspiration")
+	ADD_TRAIT(holder, TRAIT_INSPIRING_MUSICIAN, "inspiration")
 
 /mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"

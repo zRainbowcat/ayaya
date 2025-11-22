@@ -172,12 +172,12 @@
 /////////////////////////////////
 
 /datum/patron/proc/can_pray_inhumen(mob/living/follower)
+	SHOULD_CALL_PARENT(TRUE)
 	// Allows death-bed prayers
 	if(follower.has_status_effect(STATUS_EFFECT_UNCONSCIOUS))
 		if(follower.has_status_effect(STATUS_EFFECT_SLEEPING))
 			to_chat(follower, span_danger("I mustn't be sleeping to pray!"))
 			return FALSE	//Stops praying just by sleeping.
-	SHOULD_CALL_PARENT(TRUE)
 	. = TRUE
 
 // Graggar - When bleeding, near blood on ground, zchurch, bad-cross, or ritual chalk
@@ -240,7 +240,9 @@
 	if(follower.has_status_effect(/datum/status_effect/mood/vgood))
 		return TRUE
 	// Allows prayers during sex
-	if(follower.sexcon.arousal >= 10)
+	var/list/arousal_data = list()
+	SEND_SIGNAL(follower, COMSIG_SEX_GET_AROUSAL, arousal_data)
+	if(arousal_data["arousal"] >= 10)
 		return TRUE
 	// Allows praying atop ritual chalk of the god.
 	for(var/obj/structure/ritualcircle/baotha in view(1, get_turf(follower)))

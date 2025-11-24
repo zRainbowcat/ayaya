@@ -1000,6 +1000,12 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	path = /obj/item/clothing/suit/roguetown/shirt/twilight_elven/coat/alt
 	donatitem = TRUE
 
+/datum/loadout_item/donat/maid_dress
+	name = "Платье горничной"
+	category = list("Одежда", "Донат")
+	path = /obj/item/clothing/suit/roguetown/shirt/dress/maid
+	donatitem = TRUE
+
 // Табарды и плащи
 
 /datum/loadout_item/donat/matron
@@ -1116,6 +1122,12 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	path = /obj/item/clothing/cloak/twilight_elven/short
 	donatitem = TRUE
 
+/datum/loadout_item/donat/maid_apron
+	name = "Фартук горничной"
+	category = list("Плащи", "Донат")
+	path = /obj/item/clothing/cloak/apron/waist/maid
+	donatitem = TRUE
+
 /datum/loadout_item/donat/scarf
 	name = "Шарф"
 	category = list("Аксессуары", "Донат")
@@ -1195,4 +1207,10 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	name = "Шляпа мага(черная)"
 	category = list("Головные уборы", "Донат")
 	path = /obj/item/clothing/head/roguetown/wizhat/black
+	donatitem = TRUE
+
+/datum/loadout_item/donat/maid_headdress
+	name = "Чепчик горничной"
+	category = list("Головные уборы", "Донат")
+	path = /obj/item/clothing/head/roguetown/maidhead
 	donatitem = TRUE

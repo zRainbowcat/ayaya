@@ -60,3 +60,20 @@
   WeNeedMorePhoron:
   - bugfix: Alt right click on a massive pile of item shouldn't lag out the server
       anymore (I'll find you)
+2025-12-05:
+  ApplePlastic:
+  - rscadd: New Martyr Sword sprite, courtesy to Zydras
+  Lamasmaster:
+  - rscadd: New T0, muffle to Matthios
+  - balance: Moved Transact back to T1
+  PPooch:
+  - bugfix: Werewolf name jank applying to normal mob hopefully squashed
+  Ryan180602:
+  - bugfix: Lickers don't get critres anymore.
+  WeNeedMorePhoron:
+  - config: Game_options.txt is now provided out of the box for locally hosted build
+      so no more zoomie speed
+  hazelrat:
+  - rscadd: Added servantry service bells to the keep. Ring them if you want attention
+      from the servants!
+  - rscadd: Added a new, quieter sound effect to service bells.

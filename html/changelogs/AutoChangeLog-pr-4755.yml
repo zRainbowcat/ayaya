@@ -1,4 +1,0 @@
-author: "PPooch"
-delete-after: True
-changes:
-  - bugfix: "Werewolf name jank applying to normal mob hopefully squashed"

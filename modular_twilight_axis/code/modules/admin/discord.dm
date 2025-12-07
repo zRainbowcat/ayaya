@@ -97,7 +97,7 @@
 
 	var/datum/tgs_chat_embed/structure/embed = new()
 	embed.title = "Изменение PQ!"
-	embed.description = "```diff\n[value > 0 ? "+[value]" : value]\n```"
+	embed.description = reason ? reason : "Причина не указана!"
 	embed.colour = value > 0 ? "#a6da95" : "#ed8796"
 	embed.footer = create_discord_embed_footer()
 
@@ -109,20 +109,19 @@
 		"Администратор", "`[admin_ckey]`"
 	)
 
+	var/datum/tgs_chat_embed/field/field_changed_value = new(
+		"Изменено на", "`[value]`"
+	)
+
 	field_player_ckey.is_inline = TRUE
 	field_admin_ckey.is_inline = TRUE
+	field_changed_value.is_inline = TRUE
 
 	embed.fields = list(
 		field_player_ckey,
 		field_admin_ckey,
+		field_changed_value,
 	)
-
-	if(reason)
-		var/datum/tgs_chat_embed/field/field_reason = new(
-			"Причина", "[copytext_char(reason, 1)]"
-		)
-		field_reason.is_inline = FALSE
-		embed.fields.Add(field_reason)
 
 	var/datum/tgs_message_content/message = new("")
 	message.embed = embed

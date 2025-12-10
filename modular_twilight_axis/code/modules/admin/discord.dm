@@ -96,8 +96,8 @@
 		return
 
 	var/datum/tgs_chat_embed/structure/embed = new()
-	embed.title = "Изменение PQ!"
-	embed.description = reason ? reason : "Причина не указана!"
+	embed.title = "Изменение PQ"
+	embed.description = reason ? "## Причина:\n" + reason : "Причина не указана!"
 	embed.colour = value > 0 ? "#a6da95" : "#ed8796"
 	embed.footer = create_discord_embed_footer()
 

@@ -158,6 +158,12 @@
 /obj/projectile/bullet/on_hit(atom/target, blocked = FALSE)
 	if(isliving(target))
 		var/mob/living/T = target
+		if(istype(fired_from, /obj/item/gun/ballistic/twilight_firearm)) //Double damage in close range
+			var/obj/item/gun/ballistic/twilight_firearm/G = fired_from
+			for(var/mob/M in range(5, T))
+				if(M == firer)
+					damage *= 2
+					armor_penetration *= 2
 		if(!istype(T.get_inactive_held_item(), /obj/item/rogueweapon/shield) && !istype(T.get_active_held_item(), /obj/item/rogueweapon/shield) && (blocked == 0))
 			switch(gunpowder) //Hande gunpowder types that are BLOCKED by shields and armor
 				if("fyrepowder")
@@ -211,7 +217,6 @@
 	. = ..()
 	if(isliving(firer) && (istype(fired_from, /obj/item/gun/ballistic/twilight_firearm) || istype(fired_from, /obj/item/gun/ballistic/revolver/grenadelauncher/twilight_runelock)))
 		var/mob/living/M = firer
-		//var/obj/item/gun/G = fired_from
 		var/skill = (M?.mind ? M.get_skill_level(/datum/skill/combat/twilight_firearms) : 1)
 		if(isliving(target))
 			var/mob/living/T = target

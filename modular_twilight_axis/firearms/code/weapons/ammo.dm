@@ -164,6 +164,9 @@
 				if(M == firer)
 					damage *= 2
 					armor_penetration *= 2
+				else
+					T.visible_message(span_danger("The [src.name] misses [T] narrowly, grazing them!, \
+									span_danger("The [src.name] misses me narrowly, grazing me!"), null, COMBAT_MESSAGE_RANGE)
 		if(!istype(T.get_inactive_held_item(), /obj/item/rogueweapon/shield) && !istype(T.get_active_held_item(), /obj/item/rogueweapon/shield) && (blocked == 0))
 			switch(gunpowder) //Hande gunpowder types that are BLOCKED by shields and armor
 				if("fyrepowder")

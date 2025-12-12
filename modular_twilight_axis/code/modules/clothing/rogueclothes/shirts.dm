@@ -104,6 +104,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	body_parts_covered = CHEST|GROIN|VITALS
+	flags_inv= HIDEBOOB|HIDECROTCH
 	var/hammerhold_colors = list("white", "black", "red")
 	var/hammerhold_variants = list("a", "b", "c", "d")
 	var/picked = FALSE
@@ -160,6 +161,7 @@
 	desc = "Боярский плащ вдохновленный эльфийской культурой, который носят знатные представители Хаммерхолда"
 	icon_state = "coat_a"
 	item_state = "coat_a"
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	hammerhold_colors = list("red", "beige")
 	hammerhold_variants = null
 
@@ -239,6 +241,7 @@
 	desc = ""
 	icon_state = "white_mage_coat"
 	item_state = "white_mage_coat"
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	hammerhold_colors = list("white", "blue")
 	hammerhold_variants = null
 
@@ -273,6 +276,7 @@
 	desc = ""
 	icon_state = "white_mage_robe"
 	item_state = "white_mage_robe"
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	hammerhold_colors = list("white", "blue")
 	hammerhold_variants = null
 

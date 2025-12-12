@@ -78,7 +78,6 @@
 	picked = FALSE
 
 /obj/item/clothing/head/roguetown/twilight_hammerhold_hat/attack_right(mob/user)
-	..()
 	if(!picked)
 		var/choiceV = input(user, "Choose a variant.", "Hammerhold colors") as anything in hammerhold_variants
 		if(choiceV == "a")

@@ -343,29 +343,32 @@
 	if(!user || damage_mult <= 0)
 		return 0
 
-	var/damage = 0
-
-	// --- СТАТЫ ---
-	var/str = user.get_stat(STATKEY_STR)
-	var/dex = user.get_stat(STATKEY_SPD)
-	var/con = user.get_stat(STATKEY_CON)
-	damage = str
-
-	// считаем 10 за базу, как “средний” человек
-	var/dex_bonus = (dex - 10) * 0.1  // ±10% за 1 DEX (чуть поменьше, как “точность/техника”)
-	damage += damage*con_bonus 
-	damage *= damage_mult
-	
-	// --- НАВЫКИ ---
-	var/unarmed_skill = user.get_skill_level(/datum/skill/combat/unarmed)
-	var/music_skill = user.get_skill_level(/datum/skill/misc/music)
+	var/damage = 10
 
 	// --- Активное оружие и его показатели ---
 	var/obj/holding = user.get_active_held_item()
 	if(holding)
 		if(istype(holding, /obj/item/rogueweapon/katar) || istype(holding, /obj/item/rogueweapon/knuckles))
 			var/weapon_force = holding.force
-			damage += weapon_force/2
+			damage = weapon_force
+	
+	else
+		// --- СТАТЫ ---
+		var/str = user.get_stat(STATKEY_STR)
+		var/dex = user.get_stat(STATKEY_SPD)
+		var/con = user.get_stat(STATKEY_CON)
+
+		// считаем 10 за базу, как “средний” человек
+		var/str_bonus = (str - 10) * 0.3  // ±30% за 1 DEX (чуть поменьше, как “точность/техника”)
+		var/dex_bonus = (dex - 10) * 0.2  // ±20% за 1 DEX (чуть поменьше, как “точность/техника”)
+		var/con_bonus = (con - 10) * 0.1  // ±10% за 1 DEX (чуть поменьше, как “точность/техника”)
+		damage += damage*str_bonus + damage*dex_bonus  + damage*con_bonus 
+	
+	damage *= damage_mult
+
+	// --- НАВЫКИ ---
+	var/unarmed_skill = user.get_skill_level(/datum/skill/combat/unarmed)
+	var/music_skill = user.get_skill_level(/datum/skill/misc/music)
 
 	// 25% за уровень безоружки, 15% за уровень музыки
 	var/skill_bonus = (unarmed_skill * 0.2) + (music_skill * 0.1)

@@ -1,0 +1,4 @@
+author: "kano-dot"
+delete-after: True
+changes:
+  - bugfix: "fixed half-elves not being able to pick wood elf ears."

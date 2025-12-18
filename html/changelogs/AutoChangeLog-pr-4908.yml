@@ -1,0 +1,4 @@
+author: "Geevies"
+delete-after: True
+changes:
+  - bugfix: "Bundles now spawn at the correct 2x1 grid size."

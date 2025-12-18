@@ -1,0 +1,5 @@
+author: "Geevies"
+delete-after: True
+changes:
+  - qol: "Left clicking a scabbard on the ground or in storage will now pick the entire thing up."
+  - qol: "Right clicking a scabbard will now always draw from it, as it works now."

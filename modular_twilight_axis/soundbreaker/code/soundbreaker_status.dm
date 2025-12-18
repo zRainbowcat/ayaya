@@ -36,17 +36,14 @@
 		to_chat(owner, span_notice("Your rhythm surges ([stacks]/[max_stacks])."))
 
 /datum/status_effect/buff/soundbreaker_combo/on_remove()
-	// аура
 	clear_visuals()
 	if(owner)
 		if(aura_overlay)
 			owner.cut_overlay(aura_overlay)
 		aura_overlay = null
 
-		// чистим мелкие ноты + очередь
 		soundbreaker_clear_note_icons(owner)
 
-		// чистим историю в трекере, чтобы не висели хвосты 11/111
 		if(owner.soundbreaker_combo)
 			var/datum/soundbreaker_combo_tracker/T = owner.soundbreaker_combo
 			if(T && islist(T.history))
@@ -62,11 +59,11 @@
 
 	var/colour
 	switch(stacks)
-		if(1) colour = "#44aaff" // синий
-		if(2) colour = "#55dd77" // зелёный
-		if(3) colour = "#ffdd66" // жёлтый
-		if(4) colour = "#ff8844" // оранжевый
-		if(5) colour = "#ff4444" // красный
+		if(1) colour = "#44aaff"
+		if(2) colour = "#55dd77"
+		if(3) colour = "#ffdd66"
+		if(4) colour = "#ff8844"
+		if(5) colour = "#ff4444"
 		else colour = "#888888"
 
 	owner.add_filter(SOUNDBREAKER_COMBO_FILTER, 2, list(

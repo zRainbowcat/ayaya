@@ -127,19 +127,14 @@
 	if(!user || !note_id)
 		return
 
-	// музыка обязательна для комбо/стаков
 	if(!soundbreaker_has_music(user))
 		return
 
-	// история нот и проверка комбо — на ЮЗЕРЕ
 	var/datum/soundbreaker_combo_tracker/T = soundbreaker_get_combo_tracker(user)
 	if(T && target)
 		T.register_hit(note_id, target)
 
-	// МАЛЕНЬКАЯ ИКОНКА ВВОДА — НАД ЮЗЕРОМ
 	soundbreaker_show_note_icon(user, note_id)
-
-	// стаки ритма — тоже на юзере
 	soundbreaker_add_combo_stack(user)
 
 /// Получить/создать трекер на мобе
@@ -258,7 +253,6 @@
 		if(stacks >= 3)
 			bclass = BCLASS_STAB
 
-	// ХУМАНЫ
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 
@@ -291,14 +285,12 @@
 
 		return FALSE
 
-	// SIMPLE_WOUNDS
 	if(HAS_TRAIT(target, TRAIT_SIMPLE_WOUNDS))
 		if(target.apply_damage(final_damage, damage_type))
 			target.simple_woundcritroll(bclass, final_damage, user, zone)
 			return TRUE
 		return FALSE
 
-	// Всё остальное просто принимает урон
 	return target.apply_damage(final_damage, damage_type)
 
 /// Удар по одной случайной цели на тайле.
@@ -340,8 +332,6 @@
 	return null
 
 /// Скалирование урона саундбрекера от статов и навыков
-/// base_damage — то, что ты прописываешь в спелле/комбо (номинальный урон)
-/// Возвращает уже “боевой” урон.
 #define SB_MIN_DAMAGE_MULT 0.5
 #define SB_MAX_DAMAGE_MULT 3
 
@@ -364,10 +354,9 @@
 		var/dex = user.get_stat(STATKEY_SPD)
 		var/con = user.get_stat(STATKEY_CON)
 
-		// считаем 10 за базу, как “средний” человек
-		var/str_bonus = (str - 10) * 0.3  // ±30% за 1 DEX (чуть поменьше, как “точность/техника”)
-		var/dex_bonus = (dex - 10) * 0.2  // ±20% за 1 DEX (чуть поменьше, как “точность/техника”)
-		var/con_bonus = (con - 10) * 0.1  // ±10% за 1 DEX (чуть поменьше, как “точность/техника”)
+		var/str_bonus = (str - 10) * 0.3
+		var/dex_bonus = (dex - 10) * 0.2
+		var/con_bonus = (con - 10) * 0.1
 		damage += damage*str_bonus + damage*dex_bonus  + damage*con_bonus 
 	
 	damage *= damage_mult
@@ -385,17 +374,14 @@
 
 	return max(1, round(damage))
 
+// Прок отчистки
 /proc/soundbreaker_reset_rhythm(mob/living/user)
 	if(!user)
 		return
 
-	// снимаем бафф
 	user.remove_status_effect(/datum/status_effect/buff/soundbreaker_combo)
 
-	// чистим маленькие иконки
 	soundbreaker_clear_note_icons(user)
-
-	// чистим историю нот в трекере
 	if(user.soundbreaker_combo)
 		var/datum/soundbreaker_combo_tracker/T = user.soundbreaker_combo
 		if(T && islist(T.history))

@@ -595,6 +595,7 @@
 	slot_flags = ITEM_SLOT_BACK //Too big for hip
 	smeltresult = /obj/item/ingot/iron
 	smelt_bar_num = 2 // 1 bar loss
+	vorpal = TRUE // snicker snack this shit cuts heads off effortlessly (DO NOT PUT THIS ON ANYTHING ELSE UNLESS IT'S SUPER FUCKING RARE!!!)
 
 /datum/intent/sword/thrust/exe
 	swingdelay = 4	//Slight delay to stab; big and heavy.
@@ -607,7 +608,8 @@
 	icon_state = "astratasword"
 	max_integrity = 200
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/peel)
-	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/exe, /datum/intent/rend, /datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/rend, /datum/intent/axe/chop)
+	vorpal = TRUE // snicker snack this shit cuts heads off effortlessly (DO NOT PUT THIS ON ANYTHING ELSE UNLESS IT'S SUPER FUCKING RARE!!!)
 
 /obj/item/rogueweapon/sword/long/exe/getonmobprop(tag)
 	. = ..()

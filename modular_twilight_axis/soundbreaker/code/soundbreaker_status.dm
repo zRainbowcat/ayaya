@@ -8,7 +8,7 @@
 /datum/status_effect/buff/soundbreaker_combo
 	id = "soundbreaker_combo"
 	status_type = STATUS_EFFECT_REFRESH
-	duration = 5 SECONDS
+	duration = 3 SECONDS
 	tick_interval = 1 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/buff/soundbreaker_combo
 
@@ -78,3 +78,82 @@
 		owner.remove_filter(SOUNDBREAKER_COMBO_FILTER)
 
 #undef SOUNDBREAKER_COMBO_FILTER
+
+/datum/status_effect/buff/soundbreaker_prepared
+	id = "soundbreaker_prepared"
+	status_type = STATUS_EFFECT_REPLACE
+	duration = SB_PREP_WINDOW
+
+	var/note_id = 0
+	var/damage_mult = 1
+	var/damage_type = BRUTE
+
+/datum/status_effect/buff/soundbreaker_prepared/on_apply(note_to_prime, mult_to_prime, type_to_prime)
+	. = ..()
+	note_id = note_to_prime
+	damage_mult = mult_to_prime
+	damage_type = type_to_prime
+	return TRUE
+
+/datum/status_effect/buff/soundbreaker_prepared/refresh(note_to_prime, mult_to_prime, type_to_prime)
+	. = ..()
+	if(QDELETED(src))
+		return
+	note_id = note_to_prime
+	damage_mult = mult_to_prime
+	damage_type = type_to_prime
+
+/datum/status_effect/buff/soundbreaker_prepared/proc/set_payload(new_note_id, new_damage_mult, new_damage_type)
+	note_id = new_note_id
+	damage_mult = new_damage_mult
+	damage_type = new_damage_type
+
+/datum/status_effect/buff/soundbreaker_riff
+	id = "soundbreaker_riff"
+	status_type = STATUS_EFFECT_REFRESH
+	duration = 1 SECONDS
+	var/bonus = 20
+
+/datum/status_effect/buff/soundbreaker_riff/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_GUIDANCE, "soundbreaker_riff")
+	return TRUE
+
+/datum/status_effect/buff/soundbreaker_riff/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_GUIDANCE, "soundbreaker_riff")
+	. = ..()
+
+/obj/effect/temp_visual/soundbreaker_afterimage
+	name = "afterimage"
+	randomdir = FALSE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	anchored = TRUE
+
+	duration = 30
+	fade_time = 5
+
+	layer = ABOVE_MOB_LAYER - 0.1
+
+/obj/effect/temp_visual/soundbreaker_afterimage/Initialize(mapload, mob/living/source, custom_dur, custom_fade)
+	if(custom_dur)
+		duration = custom_dur
+	if(custom_fade)
+		fade_time = custom_fade
+
+	. = ..()
+
+	if(!source)
+		return INITIALIZE_HINT_QDEL
+
+	plane = source.plane
+	layer = source.layer - 0.05
+
+	appearance = source.appearance
+	setDir(source.dir)
+	alpha = 160
+	add_atom_colour("#44aaff", TEMPORARY_COLOUR_PRIORITY)
+
+/proc/soundbreaker_spawn_afterimage(mob/living/user, turf/T, dur_ds = 3, fade_ds = 3)
+	if(!user || !T)
+		return
+	new /obj/effect/temp_visual/soundbreaker_afterimage(T, user, dur_ds, fade_ds)

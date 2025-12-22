@@ -14,10 +14,17 @@
 	if(client && used_intent)
 		if(client.charging && used_intent.tranged && !used_intent.tshield)
 			return FALSE
-
+	
+	// TA Edit start - SOUNDBREAKER
+	var/success = FALSE
 	switch(d_intent)
 		if(INTENT_PARRY)
-			return attempt_parry(intenty, user)
+			success = attempt_parry(intenty, user)
 		if(INTENT_DODGE)
-			return attempt_dodge(intenty, user)
-			
+			success = attempt_dodge(intenty, user)
+
+	if(success)
+		soundbreaker_riff_on_successful_defense(src)
+
+	return success
+	// TA Edit end - SOUNDBREAKER

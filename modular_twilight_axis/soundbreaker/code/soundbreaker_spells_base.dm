@@ -1,4 +1,4 @@
-/obj/effect/proc_holder/spell/invoked/soundbreaker
+/obj/effect/proc_holder/spell/self/soundbreaker
 	name = "Soundbreaker Ability"
 	desc = "Base soundbreaking ability."
 	clothes_req = FALSE
@@ -29,7 +29,9 @@
 	var/damage_type = BRUTE
 	action_icon = 'modular_twilight_axis/soundbreaker/icons/soundspells.dmi'
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/self/soundbreaker/cast(list/targets, mob/living/user)
+	// ВАЖНО: возвращаем механику кулдауна (раньше её съедало отсутствие ..())
+	. = ..()
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
@@ -41,42 +43,38 @@
 		to_chat(L, span_warning("Your fists fall silent without a song. You must be playing music to weave sound into strikes."))
 		return
 
-	var/list/hit_targets = perform_attack(L)
+	// мгновенно заготавливаем удар на 5 секунд
+	if(!soundbreaker_prime_note(L, note_id, damage_mult, damage_type))
+		return
 
-	if(length(hit_targets))
-		for(var/mob/living/T in hit_targets)
-			on_successful_hit(L, T)
-	else
-		on_whiff(L)
-
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/perform_attack(mob/living/user)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/perform_attack(mob/living/user)
 	return list()
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/on_successful_hit(mob/living/user, mob/living/target)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/on_successful_hit(mob/living/user, mob/living/target)
 	if(!user || !target)
 		return
 	soundbreaker_on_hit(user, target, note_id)
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/on_whiff(mob/living/user)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/on_whiff(mob/living/user)
 	if(!user)
 		return
 	playsound(user, 'sound/combat/sp_whip_whiff.ogg', 40, TRUE)
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_swing_fx(turf/T)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_swing_fx(turf/T)
 	if(!T)
 		return
 	var/obj/effect/temp_visual/special_intent/fx = new(T, 0.4 SECONDS)
 	fx.icon = 'icons/effects/effects.dmi'
 	fx.icon_state = "sweep_fx"
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_exclaim_fx(turf/T)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_exclaim_fx(turf/T)
 	if(!T)
 		return
 	var/obj/effect/temp_visual/special_intent/fx = new(T, 0.5 SECONDS)
 	fx.icon = 'icons/effects/effects.dmi'
 	fx.icon_state = "blip"
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_get_front_turf(mob/living/user, distance = 1)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_get_front_turf(mob/living/user, distance = 1)
 	if(!user)
 		return null
 	var/turf/T = get_turf(user)
@@ -87,7 +85,7 @@
 		T = next
 	return T
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_get_arc_turfs(mob/living/user, distance = 1)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_get_arc_turfs(mob/living/user, distance = 1)
 	var/list/res = list()
 	if(!user)
 		return res
@@ -111,7 +109,7 @@
 
 	return res
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_step_behind(mob/living/user, mob/living/target)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_step_behind(mob/living/user, mob/living/target)
 	if(!user || !target)
 		return
 
@@ -125,7 +123,7 @@
 	if(behind && !behind.density)
 		user.forceMove(behind)
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_step_forward(mob/living/user, tiles)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_step_forward(mob/living/user, tiles)
 	if(!user)
 		return
 	var/turf/T = get_turf(user)
@@ -136,12 +134,12 @@
 		T = N
 	user.forceMove(T)
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_apply_offbalance(mob/living/user, mob/living/target)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_apply_offbalance(mob/living/user, mob/living/target)
 	if(!target)
 		return
 	sb_safe_offbalance(target, 1 SECONDS)
 
-/obj/effect/proc_holder/spell/invoked/soundbreaker/proc/soundbreaker_apply_short_stun(mob/living/user, mob/living/target)
+/obj/effect/proc_holder/spell/self/soundbreaker/proc/soundbreaker_apply_short_stun(mob/living/user, mob/living/target)
 	if(!target)
 		return
 	target.Stun(0.4 SECONDS)

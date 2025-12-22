@@ -345,6 +345,16 @@
 /mob/proc/resolveAdjacentClick(atom/A,obj/item/W,params,used_hand)
 	if(!A)
 		return
+	// TA Add start - SOUNDBREAKER
+	if(used_intent.is_attack_swing())
+		if(soundbreaker_try_consume_prepared_attack(
+			src,
+			ismob(A) ? A : null,
+			zone_selected
+		))
+			atkswinging = null
+			return
+	// TA Add end - SOUNDBREAKER
 	if(W)
 		W.melee_attack_chain(src, A, params)
 		if(isliving(src))
@@ -390,6 +400,16 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		H.stamina_add(used_intent.misscost)
+	// TA Add start - SOUNDBREAKER
+	if(used_intent.is_attack_swing())
+		if(soundbreaker_try_consume_prepared_attack(
+			src,
+			null,
+			zone_selected
+		))
+			atkswinging = null
+			return
+	// TA Add end - SOUNDBREAKER
 
 //Is the atom obscured by a PREVENT_CLICK_UNDER_1 object above it
 /atom/proc/IsObscured()

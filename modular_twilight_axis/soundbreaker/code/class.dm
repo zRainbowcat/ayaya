@@ -51,12 +51,12 @@
 	I.grant_inspiration(H, bard_tier = BARD_T3)
 
 	if(H.mind)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/sound_strike)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/resonant_wave)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/dulce_step)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/overload_chord)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/encore_line)
-		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/soundbreaker/solo_break)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/bend)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/bare)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/slap)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/shed)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/solo)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/soundbreaker/riff)
 		var/weapons = list("Lute","Guitar","Hurdy-Gurdy")
 		var/weapon_choice = tgui_input_list(H, "Choose your instrument.", "TAKE UP ARMS", weapons)
 		H.set_blindness(0)
@@ -69,3 +69,10 @@
 				backr = /obj/item/rogue/instrument/hurdygurdy
 
 		to_chat(H, span_notice("You feel a fighting rhythm pulsing in your veins. Your music belongs in a brawl."))
+
+/datum/intent/proc/is_attack_swing()
+	if(no_attack)
+		return FALSE
+	if(unarmed && istype(src, /datum/intent/unarmed/help))
+		return FALSE
+	return TRUE

@@ -4,12 +4,12 @@
 
 /proc/sb_get_note_icon_state(note_id)
 	switch(note_id)
-		if(SOUNDBREAKER_NOTE_STRIKE)      return "note_strike"
-		if(SOUNDBREAKER_NOTE_WAVE)        return "note_wave"
-		if(SOUNDBREAKER_NOTE_DULCE)       return "note_dulce"
-		if(SOUNDBREAKER_NOTE_OVERLOAD)    return "note_overload"
-		if(SOUNDBREAKER_NOTE_ENCORE)      return "note_encore"
-		if(SOUNDBREAKER_NOTE_SOLO)        return "note_solo"
+		if(SOUNDBREAKER_NOTE_BEND)      return "note_strike"
+		if(SOUNDBREAKER_NOTE_BARE)        return "note_wave"
+		if(SOUNDBREAKER_NOTE_SLAP)       return "note_dulce"
+		if(SOUNDBREAKER_NOTE_SHED)    return "note_overload"
+		if(SOUNDBREAKER_NOTE_SOLO)      return "note_encore"
+		if(SOUNDBREAKER_NOTE_RIFF)        return "note_solo"
 	return null
 
 /proc/soundbreaker_show_note_icon(mob/living/user, note_id)

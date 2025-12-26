@@ -133,7 +133,7 @@
 		return COMPONENT_SOUNDBREAKER_PRIMED
 	return 0
 
-/datum/component/combo_core/soundbreaker/proc/_sig_try_consume_prepared(datum/source, mob/living/target, zone)
+/datum/component/combo_core/soundbreaker/proc/_sig_try_consume_prepared(datum/source, atom/target_atom, zone)
 	SIGNAL_HANDLER
 
 	if(!owner)
@@ -142,7 +142,7 @@
 	if(!owner.has_status_effect(/datum/status_effect/buff/soundbreaker_prepared))
 		return 0
 
-	INVOKE_ASYNC(src, PROC_REF(TryConsumePreparedAttack), target, zone)
+	INVOKE_ASYNC(src, PROC_REF(TryConsumePreparedAttack), target_atom, zone)
 	return COMPONENT_SOUNDBREAKER_CONSUMED
 
 /datum/component/combo_core/soundbreaker/proc/_sig_riff_defense_success(datum/source)
@@ -242,8 +242,40 @@
 		return FALSE
 	return !!owner.has_status_effect(/datum/status_effect/buff/playing_music)
 
-// ----------------- Prepared note -----------------
+/datum/component/combo_core/soundbreaker/proc/GetTargetTurf(atom/target_atom)
+	if(!target_atom)
+		return null
+	if(isturf(target_atom))
+		return target_atom
+	return get_turf(target_atom)
 
+/// Направление "туда", куда кликнули. Если кликнули в свой же тайл — fallback на owner.dir
+/datum/component/combo_core/soundbreaker/proc/GetAimDir(turf/from_turf, turf/to_turf)
+	if(!from_turf || !to_turf)
+		return owner?.dir
+	if(from_turf == to_turf)
+		return owner?.dir
+	return get_dir(from_turf, to_turf)
+
+/// Синхронизируем поворот под клик (это важно для визуала/FX), но не ломаем механику
+/datum/component/combo_core/soundbreaker/proc/FaceTurf(turf/T)
+	if(!owner || !T)
+		return
+	var/turf/me = get_turf(owner)
+	if(!me)
+		return
+	var/d = GetAimDir(me, T)
+	if(d)
+		owner.setDir(d)
+
+
+/// Берём "primary" моба, если кликнули по мобу, иначе пытаемся найти живого на тайле
+/datum/component/combo_core/soundbreaker/proc/GetPrimaryFromClick(atom/target_atom, turf/target_turf)
+	if(isliving(target_atom))
+		return target_atom
+	return _first_living_on_turf(target_turf)
+
+// ----------------- Prepared note -----------------
 /datum/component/combo_core/soundbreaker/proc/NoteDisplayName(note_id)
 	switch(note_id)
 		if(SOUNDBREAKER_NOTE_BEND) return "Bend"
@@ -294,8 +326,7 @@
 	return max(0, cost)
 
 /// Consume prepared note on swing attempt.
-/// IMPORTANT: returns TRUE if it consumed the prepared state (even if no target hit).
-/datum/component/combo_core/soundbreaker/proc/TryConsumePreparedAttack(mob/living/target, zone = BODY_ZONE_CHEST)
+/datum/component/combo_core/soundbreaker/proc/TryConsumePreparedAttack(atom/target_atom, zone = BODY_ZONE_CHEST)
 	if(!owner)
 		return FALSE
 
@@ -303,8 +334,9 @@
 	if(!P)
 		return FALSE
 
-	if(target)
-		owner.face_atom(target)
+	var/turf/target_turf = GetTargetTurf(target_atom)
+	if(target_turf)
+		FaceTurf(target_turf)
 
 	var/note_id = P.note_id
 	var/damage_mult = P.damage_mult
@@ -315,7 +347,9 @@
 
 	owner.remove_status_effect(/datum/status_effect/buff/soundbreaker_prepared)
 	owner.stamina_add(GetNoteStaminaCost())
-	var/mob/living/last_hit = ExecuteNote(target, note_id, damage_mult, damage_type, zone)
+
+	var/mob/living/primary = GetPrimaryFromClick(target_atom, target_turf)
+	var/mob/living/last_hit = ExecuteNote(primary, target_turf, note_id, damage_mult, damage_type, zone)
 
 	if(last_hit)
 		OnHit(last_hit, note_id, zone)
@@ -324,23 +358,23 @@
 
 	return TRUE
 
-/datum/component/combo_core/soundbreaker/proc/ExecuteNote(mob/living/primary_target, note_id, damage_mult, damage_type, zone = BODY_ZONE_CHEST)
+/datum/component/combo_core/soundbreaker/proc/ExecuteNote(mob/living/primary_target, turf/target_turf, note_id, damage_mult, damage_type, zone = BODY_ZONE_CHEST)
 	if(!owner || !note_id)
 		return null
 
 	switch(note_id)
 		if(SOUNDBREAKER_NOTE_BEND)
-			return NoteBendPlay(primary_target, damage_mult, damage_type, zone)
+			return NoteBendPlay(primary_target, target_turf, damage_mult, damage_type, zone)
 		if(SOUNDBREAKER_NOTE_BARE)
-			return NoteBarePlay(primary_target, damage_mult, damage_type, zone)
+			return NoteBarePlay(primary_target, target_turf, damage_mult, damage_type, zone)
 		if(SOUNDBREAKER_NOTE_SLAP)
-			return NoteSlapPlay(primary_target, damage_mult, damage_type, zone)
+			return NoteSlapPlay(primary_target, target_turf, damage_mult, damage_type, zone)
 		if(SOUNDBREAKER_NOTE_SHED)
-			return NoteShedPlay(primary_target, damage_mult, damage_type, zone)
+			return NoteShedPlay(primary_target, target_turf, damage_mult, damage_type, zone)
 		if(SOUNDBREAKER_NOTE_SOLO)
-			return NoteSoloPlay(primary_target, damage_mult, damage_type, zone)
+			return NoteSoloPlay(primary_target, target_turf, damage_mult, damage_type, zone)
 		if(SOUNDBREAKER_NOTE_RIFF)
-			return NoteRiffPlay(primary_target, damage_mult, damage_type, zone)
+			return NoteRiffPlay(primary_target, target_turf, damage_mult, damage_type, zone)
 
 	return null
 
@@ -815,11 +849,13 @@
 	return null
 
 // ----------------- Notes play procs -----------------
-/datum/component/combo_core/soundbreaker/proc/NoteBendPlay(mob/living/primary, damage_mult, damage_type, zone)
-	var/turf/T = GetFrontTurf(1)
+/datum/component/combo_core/soundbreaker/proc/NoteBendPlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
+	// Bend: бьём именно в кликнутый тайл; если клика нет — fallback на фронт
+	var/turf/T = target_turf || GetFrontTurf(1)
 	if(!T)
 		return null
 
+	FaceTurf(T)
 	sb_fx_eq_pillars(T, owner.dir)
 
 	if(primary && get_turf(primary) == T)
@@ -830,17 +866,32 @@
 
 	return null
 
-/datum/component/combo_core/soundbreaker/proc/NoteBarePlay(mob/living/primary, damage_mult, damage_type, zone)
-	var/mob/living/last_hit = null
-	var/turf/T = get_turf(owner)
 
+/datum/component/combo_core/soundbreaker/proc/NoteBarePlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
+	// Bare: “волна” 2 тайла по направлению клика
+	var/mob/living/last_hit = null
+	var/turf/start = get_turf(owner)
+	if(!start)
+		return null
+
+	var/turf/aim = target_turf || GetFrontTurf(1)
+	if(!aim)
+		return null
+
+	var/dir = GetAimDir(start, aim)
+	if(!dir)
+		return null
+
+	owner.setDir(dir)
+
+	var/turf/T = start
 	for(var/i in 1 to 2)
-		var/turf/next = get_step(T, owner.dir)
+		var/turf/next = get_step(T, dir)
 		if(!next)
 			break
 		T = next
 
-		sb_fx_wave_forward(T, owner.dir)
+		sb_fx_wave_forward(T, dir)
 
 		if(primary && get_turf(primary) == T)
 			if(HitSpecific(primary, damage_mult, damage_type, BCLASS_PUNCH, zone))
@@ -852,13 +903,20 @@
 
 	return last_hit
 
-/datum/component/combo_core/soundbreaker/proc/NoteSlapPlay(mob/living/primary, damage_mult, damage_type, zone)
+
+/datum/component/combo_core/soundbreaker/proc/NoteSlapPlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
+	// Slap: кольцо вокруг owner (фронт/лево/право) ПО НАПРАВЛЕНИЮ КЛИКА
 	var/mob/living/last_hit = null
 	var/turf/origin = get_turf(owner)
 	if(!origin)
 		return null
 
+	var/turf/aim = target_turf || GetFrontTurf(1)
+	if(aim)
+		FaceTurf(aim)
+
 	var/list/turfs = list()
+
 	var/turf/front = get_step(origin, owner.dir)
 	if(front) turfs += front
 
@@ -884,11 +942,14 @@
 
 	return last_hit
 
-/datum/component/combo_core/soundbreaker/proc/NoteShedPlay(mob/living/primary, damage_mult, damage_type, zone)
-	var/turf/T = GetFrontTurf(1)
+
+/datum/component/combo_core/soundbreaker/proc/NoteShedPlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
+	// Shed: “шард” в кликнутый тайл (или фронт)
+	var/turf/T = target_turf || GetFrontTurf(1)
 	if(!T)
 		return null
 
+	FaceTurf(T)
 	sb_fx_note_shatter(T)
 
 	var/mob/living/hit = null
@@ -903,7 +964,28 @@
 
 	return hit
 
-/datum/component/combo_core/soundbreaker/proc/NoteSoloPlay(mob/living/primary, damage_mult, damage_type, zone)
+
+/datum/component/combo_core/soundbreaker/proc/NoteRiffPlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
+	// Riff: одиночный удар в кликнутый тайл (или фронт)
+	var/mob/living/last_hit = null
+	var/turf/T = target_turf || GetFrontTurf(1)
+	if(!T)
+		return null
+
+	FaceTurf(T)
+	sb_fx_riff_single(T)
+	sb_fx_riff_cluster(owner)
+
+	if(primary && get_turf(primary) == T)
+		if(HitSpecific(primary, damage_mult, damage_type, BCLASS_PUNCH, zone))
+			last_hit = primary
+	else
+		last_hit = HitOneOnTurf(T, damage_mult, damage_type, BCLASS_PUNCH, zone)
+
+	owner.apply_status_effect(/datum/status_effect/buff/soundbreaker_riff)
+	return last_hit
+
+/datum/component/combo_core/soundbreaker/proc/NoteSoloPlay(mob/living/primary, turf/target_turf, damage_mult, damage_type, zone)
 	var/mob/living/last_hit = null
 
 	var/turf/start = get_turf(owner)
@@ -911,10 +993,12 @@
 		return null
 
 	var/dash_dir = owner.dir
-	if(primary)
+	if(target_turf)
+		dash_dir = GetAimDir(start, target_turf)
+	else if(primary)
 		var/turf/pt = get_turf(primary)
 		if(pt)
-			dash_dir = get_dir(start, pt)
+			dash_dir = GetAimDir(start, pt)
 
 	var/intent = owner.used_intent?.type
 	var/allow_attack = (intent != INTENT_HELP)
@@ -939,6 +1023,7 @@
 
 	soundbreaker_spawn_afterimage(owner, start, 0.8 SECONDS)
 	soundbreaker_spawn_afterimage(owner, t1, 0.8 SECONDS)
+
 	var/mob/living/v2 = _first_living_on_turf(t2)
 	var/mob/living/v1 = _first_living_on_turf(t1)
 
@@ -967,24 +1052,6 @@
 		return last_hit
 
 	return null
-
-/datum/component/combo_core/soundbreaker/proc/NoteRiffPlay(mob/living/primary, damage_mult, damage_type, zone)
-	var/mob/living/last_hit = null
-	var/turf/T = GetFrontTurf(1)
-	if(!T)
-		return null
-
-	sb_fx_riff_single(T)
-	sb_fx_riff_cluster(owner)
-
-	if(primary && get_turf(primary) == T)
-		if(HitSpecific(primary, damage_mult, damage_type, BCLASS_PUNCH, zone))
-			last_hit = primary
-	else
-		last_hit = HitOneOnTurf(T, damage_mult, damage_type, BCLASS_PUNCH, zone)
-
-	owner.apply_status_effect(/datum/status_effect/buff/soundbreaker_riff)
-	return last_hit
 
 // ----------------- Riff defense proc -----------------
 /datum/component/combo_core/soundbreaker/proc/RiffOnSuccessfulDefense()

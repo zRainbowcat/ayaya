@@ -120,6 +120,16 @@
 /datum/status_effect/buff/soundbreaker_prepared/proc/update_alert()
 	if(!owner)
 		return
+
+	if(!linked_alert)
+		if(alert_type)
+			var/atom/movable/screen/alert/status_effect/A = owner.throw_alert(id, alert_type)
+			A?.attached_effect = src
+			linked_alert = A
+
+	if(!linked_alert)
+		return
+
 	linked_alert.name = "Prepared: [note_name]"
 	linked_alert.desc = "Your next strike will play this note."
 	linked_alert.icon_state = soundbreaker_note_icon_state(note_id)

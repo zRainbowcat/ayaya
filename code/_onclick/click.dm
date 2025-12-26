@@ -349,7 +349,7 @@
 	if(used_intent.is_attack_swing())
 		if(soundbreaker_try_consume_prepared_attack(
 			src,
-			ismob(A) ? A : null,
+			A,
 			zone_selected
 		))
 			atkswinging = null

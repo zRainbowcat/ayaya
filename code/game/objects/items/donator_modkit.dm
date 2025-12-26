@@ -11,7 +11,11 @@
 
 /obj/item/enchantingkit/pre_attack(obj/item/I, mob/user)
 	if(is_type_in_list(I, target_items))
-		var/obj/item/R = target_items[I.type]
+		var/obj/item/R
+		if(target_items[I.type] && !result_item)
+			R = target_items[I.type]
+		else
+			R = result_item
 		R = new R(get_turf(user))
 		to_chat(user, span_notice("You apply the [src] to [I], using the enchanting dust and tools to turn it into [R]."))
 		R.name += " <font size = 1>([I.name])</font>"

@@ -286,6 +286,7 @@
 #include "code\_globalvars\lists\surgery.dm"
 #include "code\_globalvars\lists\typecache.dm"
 #include "code\_globalvars\lists\wounds.dm"
+#include "code\_globalvars\lists\bounty.dm"
 #include "code\_js\byjax.dm"
 #include "code\_js\menus.dm"
 #include "code\_onclick\adjacent.dm"

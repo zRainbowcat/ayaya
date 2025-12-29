@@ -1,6 +1,6 @@
 /datum/advclass/mercenary/twilight_gunslinger
 	name = "Gunslinger"
-	tutorial = "As gunpowder becomes more widespread accross Grimoria, so do the Gunslingers - those who earn their living through their skill with those advanced weapons. Excelling both with your pistol and your trusty saber, you count yourself as one of these fine gentlemen, travelling the land with but a gun in your hand."
+	tutorial = "As gunpowder becomes more widespread accross Psydonia, so do the Gunslingers - those who earn their living through their skill with those advanced weapons. Excelling both with your pistol and your trusty saber, you count yourself as one of these fine gentlemen, travelling the land with but a gun in your hand."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/mercenary/twilight_gunslinger
@@ -16,20 +16,21 @@
 		STATKEY_STR = 1,
 		STATKEY_PER = 2,
 		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
+		STATKEY_SPD = 2,
 		STATKEY_WIL = 2,
 	)
 	subclass_skills = list(
-		/datum/skill/combat/twilight_firearms = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/twilight_firearms = SKILL_LEVEL_MASTER,
+		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/staves = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
+		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/tracking = SKILL_LEVEL_APPRENTICE,
 	)
 	extra_context = "Chooses between Lone Wolf (Sabre & Arquebus Pistol) and Otavan Dragoon (Falchion & Runelock Pistol) subclasses."

@@ -8,7 +8,6 @@
 	)
 	class_select_category = CLASS_CAT_ROGUE
 	category_tags = list(CTAG_ADVENTURER)
-	maximum_possible_slots = 3
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_CON = 2,

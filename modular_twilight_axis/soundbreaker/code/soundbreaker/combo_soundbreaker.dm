@@ -321,17 +321,15 @@
 /datum/component/combo_core/soundbreaker/proc/GetNoteStaminaCost()
 	var/wil = owner.get_stat(STATKEY_WIL)
 	var/athl_skill = owner.get_skill_level(/datum/skill/misc/athletics)
-	var/wil_bonus = (wil - 10) * 0.5
-	var/athl_bonus = (athl_skill)
+	var/wil_bonus = (wil - 10) * 0.15
+	var/athl_bonus = (athl_skill) * 0.4
 	var/deminer_bonus = wil_bonus + athl_bonus
-	var/cost = 10 - deminer_bonus
+	var/cost = 5 - deminer_bonus
 
 	if(istype(owner.rmb_intent, /datum/rmb_intent/strong))
 		cost += 2
-	else if(istype(owner.rmb_intent, /datum/rmb_intent/swift))
+	if(istype(owner.rmb_intent, /datum/rmb_intent/swift))
 		cost += 1
-	else if(istype(owner.rmb_intent, /datum/rmb_intent/feint))
-		cost += 0
 	
 	return max(1, cost)
 
@@ -522,8 +520,8 @@
 	owner.active_hand_index = old_hand
 	return (success_main || success_off)
 
-#define SB_MIN_DAMAGE_MULT 0.5
-#define SB_MAX_DAMAGE_MULT 3
+#define SB_MIN_DAMAGE_MULT 0.75
+#define SB_MAX_DAMAGE_MULT 1.5
 
 /mob/living/carbon/human/get_punch_dmg()
 
@@ -563,7 +561,7 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		if(H.mind && H.mind.has_antag_datum(/datum/antagonist/werewolf))
-			return 50
+			return 30
 
 		var/used_str = H.get_stat(STATKEY_STR)
 		if(H.domhand)
@@ -640,11 +638,9 @@
 	else
 		damage = GetBaseUnarmedDamage(hand_index)
 
-	var/spd = owner.get_stat(STATKEY_SPD)
 	var/con = owner.get_stat(STATKEY_CON)
-	var/spd_bonus = (spd - 10) * 0.15
-	var/con_bonus = (con - 10) * 0.10
-	damage += damage * (spd_bonus + con_bonus)
+	var/con_bonus = (con - 10) * 0.1
+	damage += damage * con_bonus
 
 	damage *= damage_mult
 	var/unarmed_skill = owner.get_skill_level(/datum/skill/combat/unarmed)

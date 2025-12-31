@@ -1,4 +1,0 @@
-author: "SayonaraEcho"
-delete-after: True
-changes:
-  - bugfix: "Stationary church bell has now 20 seconds CD. Smaller bell has 5 seconds CD."

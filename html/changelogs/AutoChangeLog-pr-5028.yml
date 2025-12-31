@@ -1,6 +1,0 @@
-author: "PatapoIIIa"
-delete-after: True
-changes:
-  - bugfix: "Vampire Lords no longer initialize with an incorrect thrall limit"
-  - code_imp: "Restored subtype-defined thrall limits during vampire initialization"
-  - refactor: "Removed hardcoded thrall limit overrides"

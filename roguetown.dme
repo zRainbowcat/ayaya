@@ -2470,6 +2470,7 @@
 #include "code\modules\roguetown\roguestock\stockpile_animal.dm"
 #include "code\modules\roguetown\roguestock\stockpile_fruit.dm"
 #include "code\modules\roguetown\roguestock\stockpile_rawmat.dm"
+#include "code\modules\roguetown\roguestock\stockpile_seafood.dm"
 #include "code\modules\roguetown\roguestock\stockpile_vegetable.dm"
 #include "code\modules\sexcon\components\arousal.dm"
 #include "code\modules\sexcon\components\knotting.dm"

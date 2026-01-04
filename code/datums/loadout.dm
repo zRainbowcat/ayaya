@@ -162,6 +162,10 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	name = "Salvia Crown"
 	path = /obj/item/flowercrown/salvia
 
+/datum/loadout_item/briarthorns
+	name = "Briar Thorns"
+	path = /obj/item/clothing/head/roguetown/briarthorns
+
 //CLOAKS
 /datum/loadout_item/tabard
 	name = "Tabard"

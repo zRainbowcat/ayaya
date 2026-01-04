@@ -455,6 +455,11 @@
 	desc = "I've trekked these woods for some time now. I find traversal easier here."
 	icon_state = "guardsman"
 
+/atom/movable/screen/alert/status_effect/buff/anthraxbuff
+	name = "Apex Predator"
+	desc = "These are my hunting grounds. My prey won't escape me."
+	icon_state = "buff"
+
 /datum/status_effect/buff/wardenbuff
 	id = "wardenbuff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wardenbuff
@@ -476,6 +481,11 @@
 	id = "guardbuffone"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/guardbuffone
 	effectedstats = list(STATKEY_CON = 1,STATKEY_WIL = 1, STATKEY_SPD = 1)
+
+/datum/status_effect/buff/anthraxbuff
+	id = "anthraxbuff"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/anthraxbuff
+	effectedstats = list(STATKEY_SPD = 3,STATKEY_PER = 1)
 
 /datum/status_effect/buff/guardbuffone/process()
 

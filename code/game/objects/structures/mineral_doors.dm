@@ -1011,7 +1011,7 @@
 	lockid = "towner_fisher"
 
 /obj/structure/mineral_door/wood/towner/hunter
-	resident_advclass = list(/datum/advclass/hunter)
+	resident_advclass = list(/datum/advclass/hunter,/datum/advclass/hunter/spear)
 	lockid = "towner_hunter"
 
 /obj/structure/mineral_door/wood/towner/witch

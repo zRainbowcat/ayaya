@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	var/donoritem			//autoset on new if null
 	var/donatitem = FALSE
 	var/list/ckeywhitelist
-	var/triumph_cost
+	var/triumph_cost = 0
 	var/category = "Разное"
 
 /datum/loadout_item/New()

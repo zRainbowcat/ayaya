@@ -1075,6 +1075,7 @@
 #include "code\game\objects\items\melee\transforming.dm"
 #include "code\game\objects\items\rogueitems\bags.dm"
 #include "code\game\objects\items\rogueitems\bait.dm"
+#include "code\game\objects\items\rogueitems\bandage.dm"
 #include "code\game\objects\items\rogueitems\bells.dm"
 #include "code\game\objects\items\rogueitems\bombs.dm"
 #include "code\game\objects\items\rogueitems\books.dm"

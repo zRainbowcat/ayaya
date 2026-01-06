@@ -1,0 +1,4 @@
+author: "FreeStylaLT"
+delete-after: True
+changes:
+  - bugfix: "Fixed Tempo message showing for users who have not reached any stage of Tempo."

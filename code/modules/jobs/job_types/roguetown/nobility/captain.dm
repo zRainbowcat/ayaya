@@ -131,7 +131,7 @@
 			"Claymore",
 			"Great Mace",
 			"Battle Axe",
-			"Greataxe",
+			"Poleaxe",
 			"Estoc",
 			"Longsword",
 			"Flail",
@@ -153,9 +153,9 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)
 				r_hand = /obj/item/rogueweapon/greatsword/zwei
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
-			if("Greataxe")
+			if("Poleaxe")
 				H.adjust_skillrank_up_to(/datum/skill/combat/axes, 5, TRUE)
-				r_hand = /obj/item/rogueweapon/greataxe/steel/doublehead
+				r_hand = /obj/item/rogueweapon/greataxe/steel/knight
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
 			if("Estoc")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 5, TRUE)

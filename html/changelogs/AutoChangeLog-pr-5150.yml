@@ -1,0 +1,5 @@
+author: "Lamasmaster"
+delete-after: True
+changes:
+  - rscadd: "Steel Poleaxe"
+  - image: "Split 64 weapon DMI file into it's own"

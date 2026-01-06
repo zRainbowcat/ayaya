@@ -1,0 +1,6 @@
+author: "PatapoIIIa"
+delete-after: True
+changes:
+  - bugfix: "Prevented antagonist and adventurer roles from being revealed via house door names"
+  - qol: "Improved consistency of public-facing door naming"
+  - code_imp: "Adjusted resident door naming logic to respect hidden roles"

@@ -554,7 +554,6 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
 	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/chop)
 	icon_state = "martyrsword"
-	icon = 'icons/roguetown/weapons/64.dmi'
 	item_state = "martyrsword"
 	lefthand_file = 'icons/mob/inhands/weapons/roguemartyr_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguemartyr_righthand.dmi'

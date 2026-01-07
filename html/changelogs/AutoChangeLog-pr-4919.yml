@@ -1,0 +1,5 @@
+author: "BurpleBineapple"
+delete-after: True
+changes:
+  - rscadd: "Bad omens now trigger bad omen events."
+  - rscadd: "Bad omen events can now be force triggered at any time using the launch_omen_event() proc."

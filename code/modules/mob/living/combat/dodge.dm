@@ -162,9 +162,13 @@
 		if(!(L.mobility_flags & MOBILITY_STAND))
 			prob2defend *= 0.25
 
-		if(HAS_TRAIT(H, TRAIT_SENTINELOFWITS))
+		if(H && HAS_TRAIT(H, TRAIT_SENTINELOFWITS))
 			var/sentinel = H.calculate_sentinel_bonus()
 			prob2defend += sentinel
+
+		if(UH && HAS_TRAIT(UH, TRAIT_ARMOUR_LIKED))
+			if(HAS_TRAIT(UH, TRAIT_FENCERDEXTERITY))
+				prob2defend -= 10
 
 		prob2defend = clamp(prob2defend, 5, 90)
 
@@ -224,7 +228,12 @@
 			return FALSE
 		if(!UH?.mind) // For NPC, reduce the drained to 5 stamina
 			drained = drained_npc
-		if(!H.stamina_add(max(drained,5)))
+
+		//Tempo bonus
+		var/stamdrain = max(drained,5)
+		stamdrain -= H.get_tempo_bonus(TEMPO_TAG_STAMLOSS_DODGE)
+
+		if(!H.stamina_add(stamdrain))
 			to_chat(src, span_warning("I'm too tired to dodge!"))
 			return FALSE
 	else //we are a non human

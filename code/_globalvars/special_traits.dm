@@ -46,7 +46,9 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 			if(!item)
 				continue
 			// Проверка на триумфы
-			if(character.get_triumphs() >= item.triumph_cost)
+			if(item.triumph_cost == 0)
+				character.mind.special_items[item.name] = item.path
+			else if(character.get_triumphs() >= item.triumph_cost)
 				character.adjust_triumphs(-item.triumph_cost)
 				character.mind.special_items[item.name] = item.path
 			else
@@ -78,7 +80,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	if(istype(player.prefs.selected_patron, /datum/patron/inhumen))
 		heretic = TRUE
 
-	if(player.prefs.statpack.name == "Virtuous")
+	if(player.prefs.statpack.virtuous)
 		virtuous = TRUE
 
 	var/datum/virtue/virtue_type = player.prefs.virtue

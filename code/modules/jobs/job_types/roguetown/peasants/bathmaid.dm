@@ -27,7 +27,7 @@
 	job_traits = list(TRAIT_EMPATH, TRAIT_GOODLOVER, TRAIT_HOMESTEAD_EXPERT)
 	job_subclasses = list(
 		/datum/advclass/bathworker,
-		/datum/advclass/bathworker/concubine,
+		/datum/advclass/bathworker/harlot,
 		/datum/advclass/bathworker/courtesan
 	)
 
@@ -88,54 +88,62 @@
 	if(H.mind)
 		SStreasury.give_money_account(ECONOMIC_LOWER_CLASS, H, "Savings.")
 
-/datum/advclass/bathworker/concubine
-	name = "Concubine"
-	tutorial = "Unlike your fellow bath attendants who maintain a professional facade, you have abandoned all pretense. You are a prized possession of the nobility, adorned in exotic silks and gold. Your role is to provide companionship, entertainment, and pleasure. Working underneath the finespun courtesans, you're a step above the bath attendants in your craft."
-	outfit = /datum/outfit/job/roguetown/bathworker/concubine
+/datum/advclass/bathworker/harlot
+	name = "Harlot"
+	tutorial = "You're no stranger to selling your flesh, a veteran whore who's done your business in back alleys and brothels long enough to know the game. Yours has been a hard life, and you've learned a few things doing what you've needed to survive. You may not be fit for a noble's bed, but the workers and soldiers pay well enough."
+	outfit = /datum/outfit/job/bathworkerghtmaiden/harlot
 	category_tags = list(CTAG_BATHWORKER)
-	traits_applied = list(TRAIT_LIGHT_STEP, TRAIT_BEAUTIFUL)
+
+	traits_applied = list(TRAIT_LIGHT_STEP, TRAIT_NUTCRACKER)
 	subclass_stats = list(
-		STATKEY_PER = 3,
+		STATKEY_PER = 2,
 		STATKEY_WIL = 2,
-		STATKEY_STR = 1
-	)
-	subclass_skills = list(
-		/datum/skill/combat/whipsflails = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/stealing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/athletics = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/music = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/sewing = SKILL_LEVEL_JOURNEYMAN,
+		STATKEY_SPD = 2
 	)
 
-/datum/outfit/job/roguetown/bathworker/concubine/pre_equip(mob/living/carbon/human/H)
+	subclass_skills = list(
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/stealing = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/music = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
+		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
+		/datum/skill/combat/whipsflails = SKILL_LEVEL_NOVICE,
+		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/lockpicking = SKILL_LEVEL_JOURNEYMAN,
+	)
+	subclass_languages = list(
+		/datum/language/thievescant,
+	)
+
+/datum/outfit/job/bathworkerghtmaiden/harlot/pre_equip(mob/living/carbon/human/H)
 	..()
+	head = /obj/item/clothing/head/roguetown/armingcap
+	neck = /obj/item/clothing/neck/roguetown/collar/leather
 	beltl = /obj/item/roguekey/nightmaiden
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backl = /obj/item/storage/backpack/rogue/satchel
+	shoes = /obj/item/clothing/shoes/roguetown/sandals
 	backpack_contents = list(
-		/obj/item/rope = 1,
-		/obj/item/candle/eora = 1,
-		/obj/item/rogueweapon/whip = 1,
-		/obj/item/clothing/mask/rogue/blindfold = 1,
+		/obj/item/soap/bath = 1,
+		/obj/item/lockpickring/mundane = 1
 	)
 	if(should_wear_femme_clothes(H))
-		mask = /obj/item/clothing/mask/rogue/exoticsilkmask
-		neck = /obj/item/clothing/neck/roguetown/collar
-		shirt = /obj/item/clothing/suit/roguetown/shirt/exoticsilkbra
-		shoes = /obj/item/clothing/shoes/roguetown/anklets
-		belt = /obj/item/storage/belt/rogue/leather/exoticsilkbelt
+		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/random
+		armor = /obj/item/clothing/suit/roguetown/armor/corset
+		pants = /obj/item/clothing/under/roguetown/skirt/brown
+		belt =	/obj/item/storage/belt/rogue/leather/cloth/lady
 	else
+		belt = /obj/item/storage/belt/rogue/leather
+		pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/shorts
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/lowcut
 		neck = /obj/item/clothing/neck/roguetown/collar/bell/cowbell
-		pants = /obj/item/clothing/under/roguetown/trou/leathertights
-		belt = /obj/item/storage/belt/rogue/leather/black
 		shoes = /obj/item/clothing/shoes/roguetown/sandals
 
 	if(H.mind)

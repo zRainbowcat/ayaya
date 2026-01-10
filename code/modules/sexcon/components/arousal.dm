@@ -113,6 +113,7 @@
 	if(is_spent())
 		return
 	ejaculate()
+	record_round_statistic(STATS_PLEASURES)
 
 /datum/component/arousal/proc/ejaculate()
 	var/mob/living/mob = parent

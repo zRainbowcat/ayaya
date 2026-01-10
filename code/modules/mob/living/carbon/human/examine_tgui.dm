@@ -57,10 +57,9 @@
 	headshot = fam_pref.familiar_headshot_link
 	char_name = fam_pref.familiar_name
 	song_url = prefs.ooc_extra
-	is_vet = viewing.check_agevet()
 	if(!headshot)
 		headshot = "headshot_red.png"
-	
+
 	if(song_url)
 		has_song = TRUE
 
@@ -152,7 +151,7 @@
 		song_url = pref.ooc_extra
 		if(!headshot)
 			headshot = "headshot_red.png"
-	
+
 	if(song_url)
 		has_song = TRUE
 
@@ -199,7 +198,7 @@
 	var/artist_name = "Song Artist Hidden"
 	var/song_title
 	var/list/music_extra_data = list()
-	
+
 	C = viewing.client
 
 	if(ishuman(holder))
@@ -238,7 +237,6 @@
 			return TRUE
 
 /datum/examine_panel/ui_close()
-	viewing.client?.tgui_panel?.stop_music()
 	QDEL_NULL(src)
 
 /datum/examine_panel/ui_assets(mob/user)

@@ -20,7 +20,7 @@
 
 #define SB_COMBO_WINDOW (8 SECONDS)
 #define SB_MAX_HISTORY 5
-#define SB_BASE_COOLDOWN (1.5 SECONDS)
+#define SB_BASE_COOLDOWN (0.5 SECONDS)
 #define SB_PREP_WINDOW (5 SECONDS)
 
 #define SOUNDBREAKER_FX_ICON 				'modular_twilight_axis/soundbreaker/icons/soundanims.dmi'

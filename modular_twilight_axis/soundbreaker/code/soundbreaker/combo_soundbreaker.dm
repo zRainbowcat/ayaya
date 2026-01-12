@@ -670,7 +670,7 @@
 
 	var/damage
 	var/obj/item/holding = owner.get_active_held_item()
-	if(holding && (istype(holding, /obj/item/rogueweapon/katar) || istype(holding, /obj/item/rogueweapon/knuckles)))
+	if(holding)
 		damage = holding.force
 	else
 		damage = GetBaseUnarmedDamage(hand_index)
@@ -680,10 +680,14 @@
 	damage += damage * con_bonus
 
 	damage *= damage_mult
-	var/unarmed_skill = owner.get_skill_level(/datum/skill/combat/unarmed)
+	var/skill = 1
+	if(holding)
+		skill = owner.get_skill_level(holding.associated_skill)
+	else
+		skill = owner.get_skill_level(/datum/skill/combat/unarmed)
 	var/music_skill = owner.get_skill_level(/datum/skill/misc/music)
 
-	var/skill_bonus = (unarmed_skill * 0.2) + (music_skill * 0.1)
+	var/skill_bonus = (skill * 0.2) + (music_skill * 0.1)
 	skill_bonus = clamp(skill_bonus, SB_MIN_DAMAGE_MULT, SB_MAX_DAMAGE_MULT)
 
 	damage *= skill_bonus

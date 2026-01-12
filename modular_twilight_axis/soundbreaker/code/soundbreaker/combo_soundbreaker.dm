@@ -1352,7 +1352,7 @@
 
 /datum/component/combo_core/soundbreaker/proc/ComboBladeDancer(mob/living/target)
 	ApplyDamage(target, 0.9, BCLASS_PUNCH)
-	SmallBleed(target, 5)
+	SmallBleed(target, 10)
 
 	owner.visible_message(
 		span_danger("[owner] carves [target] in a shredding sequence!"),
@@ -1364,7 +1364,7 @@
 
 /datum/component/combo_core/soundbreaker/proc/ComboCrescendo(mob/living/target)
 	ApplyDamage(target, 1.5, BCLASS_PUNCH)
-	SafeOffbalance(target, 2 SECONDS)
+	SafeOffbalance(target, 3 SECONDS)
 
 	owner.visible_message(
 		span_danger("[owner] uppercuts [target] with a crushing crescendo!"),
@@ -1379,8 +1379,8 @@
 		ApplyDamage(target, 1.25, BCLASS_PUNCH)
 		target.Knockdown(3 SECONDS)
 	else
-		ApplyDamage(target, 2.0, BCLASS_PUNCH)
-		SafeOffbalance(target, 1.0 SECONDS)
+		ApplyDamage(target, 2.5, BCLASS_PUNCH)
+		SafeOffbalance(target, 1.5 SECONDS)
 
 	owner.visible_message(
 		span_danger("[owner] ends the phrase with a brutal finisher!"),

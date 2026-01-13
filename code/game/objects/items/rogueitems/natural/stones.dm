@@ -497,6 +497,48 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	desc = "Wait, this shouldn't be here?"
 	icon_state = "stonerandom"
 
+// actually random
+/obj/item/natural/rock/random_ore/Initialize()
+	. = ..()
+	var/obj/item/natural/rock/theboi = pick(list(
+		/obj/item/natural/rock/copper,
+		/obj/item/natural/rock/tin,
+		/obj/item/natural/rock/coal,
+		/obj/item/natural/rock/salt,
+		/obj/item/natural/rock/iron,
+		/obj/item/natural/rock/gold,
+		/obj/item/natural/rock/silver,
+		/obj/item/natural/rock/gem,
+	))
+	new theboi(get_turf(src))
+	return INITIALIZE_HINT_QDEL
+
+// Weighted random rock for use in dungeons.
+/obj/item/natural/rock/random_ore/dungeon
+
+/*
+BECAUSE this is a dungeon reward, and you're SUPPOSED to get SOMETHING, they've got a pretty high chance for good stuff.
+- MUMBLEMANCER
+*/
+
+/obj/item/natural/rock/random_ore/dungeon/Initialize()
+	. = ..()
+	// The amounts are going to be weird BC I wanted a % out of 100 and it's a 7 layer list.
+	// I am considering gems to be less problematic than gold BC gold can be melted into way more
+	// valuable stuff. Silver is the most egregious thing on this list, but I'm keeping it.
+	// All in all: you have a 16% chance of a "good" (read: at least like, 30 mammon) drop.
+	var/obj/item/natural/rock/theboi = pickweight(list(
+		/obj/item/natural/rock/copper = 20,
+		/obj/item/natural/rock/tin = 25,
+		/obj/item/natural/rock/coal = 25,
+		/obj/item/natural/rock/iron = 14,
+		/obj/item/natural/rock/gold = 5,
+		/obj/item/natural/rock/silver = 3,
+		/obj/item/natural/rock/gem = 8
+	))
+	new theboi(get_turf(src))
+	return INITIALIZE_HINT_QDEL
+
 /obj/item/natural/rock/random_ore/Initialize()
 	. = ..()
 	var/obj/item/natural/rock/theboi = pick(list(

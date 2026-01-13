@@ -412,3 +412,67 @@
   - bugfix: eora's t0 actually accounts for skill now
   - bugfix: eora's t0 tells you it restores hunger
   - rscadd: eora's t0 now grants a bit of hunger/thirst based on your skill level
+2026-01-13:
+  ADONAI:
+  - rscadd: more timechange tips exist now
+  BurpleBineapple:
+  - balance: They heavy padded coif now actually has padded gambeson durability and
+      protects the nose.
+  Geevies:
+  - rscadd: You can now put mobs into carts again, as long as they're not in combat
+      mode, or dead.
+  - rscadd: Added Parasols. They can be sewn, bought from the Luxury section, or spawned
+      in via the loadout.
+  - rscadd: Walking in gentle rain or snow with a parasol will give you a short mood
+      boost. It will not help in stormy weather.
+  - rscadd: Graggarites now get a mood boost when standing in blood rain. Blood rain
+      now has extra unique effects.
+  Kokserva:
+  - balance: a change in the color of sparks, indicating the location of ore and its
+      type.
+  Lamasmaster:
+  - spellcheck: Yeoman references
+  Ollanius:
+  - balance: Elvish Sabres and Daggers have been reset to their original damage values,
+      and now count (again) as silver weapons.
+  - balance: Removed the Stalker Falx's damage malus.
+  - balance: Elvish weapons now exclusively smelt into gold.
+  - balance: Dark Elven weapons and armorpieces now smelt into a special ingot, which
+      can be further refined into iron.
+  - balance: Elvish weapons are now in the 'Decorated' smithing category, require
+      Master-level skills to properly forge, and cost additional ingots to create.
+  - rscadd: Adds the Poop Knife. If you know, you know.
+  - rscadd: Adds the Skikudic ingot, with lore contributed from DrunkenLombax.
+  - rscadd: Adds new descriptions to a smattering of Elvish weapons, alongside the
+      Seax.
+  - rscadd: Stakes now have a visible inhand sprite, like their Blessed Silver variants.
+  - rscadd: Casting the 'PRAYER', 'RESPITE', and 'PERSIST' miracles now prints an
+      emote instead of forcing the caster to whisper.
+  - bugfix: Fixed a bug where mute Psydonites - either through vice or injury - were
+      unable to use any of their miracles.
+  - rscadd: The Stockpile should now accept all decrepit artifacts, alongside miscellaneous
+      valuables. No longer shall your collection of golden spoons be left mysteriously
+      worthless.
+  - bugfix: Silk tablecloths now only occupy two gridspaces, instead of nine(!!!)
+      gridspaces.
+  - bugfix: Silver War Axes no longer have an accidental -10 damage malus.
+  Onutsio:
+  - rscadd: Parlor Trick Xylixian miracle
+  - rscadd: Ventriloquism Xylix miracle
+  Randall:
+  - bugfix: Various HERMES mailtag fixes to clean up the directory.
+  - rscadd: Corsets can now be repaired with a needle.
+  Ryan180602:
+  - bugfix: strongkicks no longer break aggrograbs.
+  bearrrrrrrr:
+  - bugfix: calyx fix
+  - balance: spellsonker has 14 pts
+  mumblemancer:
+  - rscadd: dunjon stone and normal dunjon doors now have harder subtypes
+  - balance: manor kitchen and manor front doors are now "high security" doors and
+      are harder to lockpick
+  - balance: martyr room, church vault, and normal vault are now "high security" doors
+      and are harder to lockpick
+  - balance: other doors are less ass to lockpick
+  - balance: iron bars are now harder to pick than normal doors but still less so
+      than high security ones

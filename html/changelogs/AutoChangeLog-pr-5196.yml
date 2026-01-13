@@ -1,4 +1,0 @@
-author: "Geevies"
-delete-after: True
-changes:
-  - rscadd: "You can now put mobs into carts again, as long as they're not in combat mode, or dead."

@@ -120,9 +120,7 @@
 	switch(note_id)
 		if(SOUNDBREAKER_NOTE_BEND) return "sb_note_bend"
 		if(SOUNDBREAKER_NOTE_BARE) return "sb_note_bare"
-		if(SOUNDBREAKER_NOTE_SLAP) return "sb_note_slap"
 		if(SOUNDBREAKER_NOTE_SHED) return "sb_note_shed"
-		if(SOUNDBREAKER_NOTE_SOLO) return "sb_note_solo"
 		if(SOUNDBREAKER_NOTE_RIFF) return "sb_note_riff"
 	return "buff"
 

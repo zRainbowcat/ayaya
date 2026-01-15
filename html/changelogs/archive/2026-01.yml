@@ -481,3 +481,21 @@
   - balance: dungeons of matthios/tomb of i dont remember his name has reduced random
       gems in some tiles
   - balance: tomb has better loot in tiles that were previously shitty
+2026-01-15:
+  ADONAI:
+  - rscadd: special knife now in the lord's shitter
+  - balance: sergeant door lockdiff = 1.5
+  - balance: inquisitor manor secure storage = high sec (lockdiff 2.0)
+  - bugfix: global loadout ruma-clan sandals are no longer armored.
+  Ketrai:
+  - bugfix: eora tree pruning now correctly updates happiness at all skill levels
+  PatapoIIIa:
+  - qol: clarified and highlighted the Obfuscate memory-wipe feedback so players better
+      understand they forgot seeing the vampire
+  - code_imp: adjusted chat message formatting for the Obfuscate memory wipe
+  SirSwagmeyer:
+  - balance: expert daggers and athletics on vaquero
+  furrycactus:
+  - rscadd: Added Matricaria, Calendula, and Manabloom flower crowns, and sprites
+      for those individual flowers too.
+  - rscadd: Added a non-armour crown variant of the Briar Thorns.

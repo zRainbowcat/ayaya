@@ -1320,6 +1320,13 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	path = /obj/item/clothing/neck/roguetown/loveamulet
 	donatitem = TRUE
 
+/datum/loadout_item/donat/matthios_moneta
+	name = "Амулет из проколотой монеты"
+	category = list("Аксессуары", "Донат")
+	path = /obj/item/clothing/neck/roguetown/psicross/inhumen/matthios/moneta
+	donatitem = TRUE
+	ckeywhitelist = list("imony", "uedhighcommand")
+
 // Маски
 
 /datum/loadout_item/donat/naledimask

@@ -36,6 +36,7 @@
 	
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/storage/magebag/associate
+
 	backl = /obj/item/storage/backpack/rogue/satchel
 
 	shoes = /obj/item/clothing/shoes/roguetown/gladiator // FANCY SANDALS

@@ -473,6 +473,15 @@
 
 		C.take_damage(wear, BRUTE, "blunt")
 
+/datum/component/combo_core/soundbreaker/proc/_get_stamina_pct(mob/living/L)
+	if(!L)
+		return 1
+	if(!isnum(L.max_stamina) || L.max_stamina <= 0)
+		return 1
+	if(!isnum(L.stamina))
+		return 1
+	return clamp(L.stamina / L.max_stamina, 0, 1)
+
 /datum/component/combo_core/soundbreaker/proc/AttackViaPipeline(mob/living/target, damage, bclass = BCLASS_PUNCH, damage_type = BRUTE, zone = null, armor_penetration = 0, params = null)
 	if(!owner || !target)
 		return FALSE
@@ -1257,19 +1266,34 @@
 	ResetRhythm()
 
 /datum/component/combo_core/soundbreaker/proc/ComboCrescendo(mob/living/target)
-	ApplyDamage(target, 2.0, BCLASS_PUNCH, is_combo = TRUE)
-	SafeOffbalance(target, 2.5 SECONDS)
+	if(!owner || !target)
+		return
 
-	owner.visible_message(
-		span_danger("[owner] uppercuts [target] with a crushing crescendo!"),
-		span_notice("You launch [target] off-balance with a heavy uppercut beat."),
-	)
+	ApplyDamage(target, 1.5, BCLASS_PUNCH, is_combo = TRUE)
+	if(isnum(target.max_stamina) && target.max_stamina > 0)
+		var/drain = round(target.max_stamina * SB_CRESCENDO_STAM_DRAIN_PCT)
+		drain = clamp(drain, 1, 999)
+		target.stamina_add(drain)
+
+	var/stam_pct = _get_stamina_pct(target)
+	if(stam_pct <= SB_CRESCENDO_STAM_DRAIN_PCT)
+		SafeOffbalance(target, 2.5 SECONDS)
+
+		owner.visible_message(
+			span_danger("[owner] lands a crushing crescendo, breaking [target]'s footing!"),
+			span_notice("You smash through [target]'s tempo and break their footing!"),
+		)
+	else
+		owner.visible_message(
+			span_danger("[owner] hammers [target] with a crushing crescendo!"),
+			span_notice("You slam [target]'s stamina with a heavy uppercut beat."),
+		)
 
 	ShowComboIcon(target, SB_COMBO_ICON_CRESCENDO)
 	ResetRhythm()
 
 /datum/component/combo_core/soundbreaker/proc/ComboOverture(mob/living/target)
-	ApplyDamage(target, 1.5, BCLASS_PUNCH, is_combo = TRUE)
+	ApplyDamage(target, 2.0, BCLASS_PUNCH, is_combo = TRUE)
 	target.Stun(1.5 SECONDS)
 
 	owner.visible_message(

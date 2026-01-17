@@ -15,6 +15,7 @@
 #define SB_MAX_HISTORY 5
 #define SB_BASE_COOLDOWN (0.5 SECONDS)
 #define SB_PREP_WINDOW (5 SECONDS)
+#define SB_CRESCENDO_STAM_DRAIN_PCT 0.10
 
 #define SOUNDBREAKER_FX_ICON 				'modular_twilight_axis/soundbreaker/icons/soundanims.dmi'
 #define SOUNDBREAKER_FX96_ICON 				'modular_twilight_axis/soundbreaker/icons/soundanims96.dmi'

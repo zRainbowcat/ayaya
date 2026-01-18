@@ -176,10 +176,10 @@
 			playsound(partner, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
 			var/turf/turf = get_turf(partner)
 			new /obj/effect/decal/cleanable/coom(turf)
-			if(target)
-				var/datum/status_effect/facial/facial = target.has_status_effect(/datum/status_effect/facial)
+			if(partner)
+				var/datum/status_effect/facial/facial = partner.has_status_effect(/datum/status_effect/facial)
 				if(!facial)
-					target.apply_status_effect(/datum/status_effect/facial)
+					partner.apply_status_effect(/datum/status_effect/facial)
 				else
 					facial.refresh_cum()
 		if("into")

@@ -1,5 +1,5 @@
 /obj/item/clothing/neck/roguetown/leather/blackpowder
-	name = "Blackpowder Order coverall"
+	name = "blackpowder order coverall"
 	desc = "A robust coverall, worn by the warriors of the Otavan Blackpowder Order. A garnament fitting for the Final War."
 	icon = 'modular_twilight_axis/firearms/icons/obj_neck.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/firearms/icons/onmob_neck.dmi'

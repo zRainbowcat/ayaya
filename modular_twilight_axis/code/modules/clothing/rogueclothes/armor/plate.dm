@@ -9,7 +9,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/plate/raneshen_scale
 	slot_flags = ITEM_SLOT_ARMOR
-	name = "Ranesheni medium lamellar armor"
+	name = "ranesheni medium lamellar armor"
 	desc = "Armor used by the Empire's vanguard fighters. The plates are connected to each other with cord for mobility. The arms are protected by pauldrons, and the legs by a small chainmail skirt. The armor itself is decorated with bronze."
 	icon = 'modular_twilight_axis/icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/icons/roguetown/clothing/onmob/32х48/armor.dmi'
@@ -26,7 +26,7 @@
 	smelt_bar_num = 2
 
 /obj/item/clothing/suit/roguetown/armor/plate/full/raneshen_plated
-	name = "Ranesheni plate armor"
+	name = "ranesheni plate armor"
 	desc = "Full-fledged armor with scales, a light chainmail skirt protects the lower legs, has bronze decorations and strong protective shoulder pads."
 	icon = 'modular_twilight_axis/icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/icons/roguetown/clothing/onmob/32х48/armor.dmi'

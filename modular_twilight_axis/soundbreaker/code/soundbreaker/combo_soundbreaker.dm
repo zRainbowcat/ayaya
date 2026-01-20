@@ -878,36 +878,46 @@
 	fx.icon = 'icons/effects/effects.dmi'
 	fx.icon_state = "blip"
 
-/datum/component/combo_core/soundbreaker/proc/GetFrontTurf(distance = 1)
+/datum/component/combo_core/soundbreaker/proc/GetFrontTurf(distance = 1, dir_override = null)
 	if(!owner)
 		return null
+
 	var/turf/T = get_turf(owner)
+	if(!T)
+		return null
+
+	var/d = dir_override || owner.dir
+	if(!d)
+		d = owner.dir
+
 	for(var/i in 1 to distance)
-		var/turf/next = get_step(T, owner.dir)
+		var/turf/next = get_step(T, d)
 		if(!next)
 			break
 		T = next
+
 	return T
 
-/datum/component/combo_core/soundbreaker/proc/GetArcTurfs(distance = 1)
+/datum/component/combo_core/soundbreaker/proc/GetArcTurfs(distance = 1, dir_override = null)
 	var/list/res = list()
 	if(!owner)
 		return res
 
-	var/turf/center = GetFrontTurf(distance)
+	var/d = dir_override || owner.dir
+	if(!d)
+		d = owner.dir
+
+	var/turf/center = GetFrontTurf(distance, d)
 	if(!center)
 		return res
 
-	var/dir_left = turn(owner.dir, 90)
-	var/dir_right = turn(owner.dir, -90)
-
 	res += center
 
-	var/turf/up = get_step(center, dir_left)
-	if(up) res += up
+	var/turf/L = GetFrontTurf(distance, turn(d, 45))
+	if(L) res += L
 
-	var/turf/down = get_step(center, dir_right)
-	if(down) res += down
+	var/turf/R = GetFrontTurf(distance, turn(d, -45))
+	if(R) res += R
 
 	return res
 
@@ -1090,8 +1100,13 @@
 
 /datum/component/combo_core/soundbreaker/proc/ComboBassDrop(mob/living/target)
 	var/zone = TryGetZone(owner.zone_selected)
-	var/turf/front1 = GetFrontTurf(1)
-	var/list/wave2 = GetArcTurfs(2)
+	var/turf/origin = get_turf(owner)
+	var/turf/tt = target ? get_turf(target) : null
+	var/d = (origin && tt) ? get_dir(origin, tt) : owner.dir
+	if(!d) d = owner.dir
+
+	var/turf/front1 = GetFrontTurf(1, d)
+	var/list/wave2 = GetArcTurfs(2, d)
 	if(islist(wave2))
 		wave2 = wave2.Copy()
 
@@ -1133,12 +1148,16 @@
 			hit.Immobilize(1 SECONDS)
 
 /datum/component/combo_core/soundbreaker/proc/ComboReverbCut(mob/living/target)
-	var/list/turfs = GetArcTurfs(1)
-	var/zone = TryGetZone(owner.zone_selected)
-
 	var/turf/origin = get_turf(owner)
 	if(!origin)
 		return
+
+	var/turf/tt = target ? get_turf(target) : null
+	var/d = (origin && tt) ? get_dir(origin, tt) : owner.dir
+	if(!d) d = owner.dir
+
+	var/list/turfs = GetArcTurfs(1, d)
+	var/zone = TryGetZone(owner.zone_selected)
 
 	sb_fx_ring(origin)
 	var/any = FALSE

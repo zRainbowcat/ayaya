@@ -615,3 +615,30 @@
   the real lockpicking lawyer:
   - balance: '"high security" doors (check their descriptions for "reinforced locks")
       are slightly easier to pick than before'
+2026-01-20:
+  Burrito-Justice:
+  - bugfix: Construct crests layer over hair
+  FreeStylaLT:
+  - balance: Maneaters were made to be nastier to get caught in.
+  - rscadd: Adds Lonely Vice.
+  - refactor: Reworks Clingy Vice.
+  - refactor: Reworks Isolationist Vice. Changed to 'Finicky'.
+  - balance: Stress messages now show up in chat if they're stressful enough.
+  Lamasmaster:
+  - refactor: Armor smithing category
+  - balance: Cavalryman MAA
+  - admin: Ban panel updates
+  PatapoIIIa:
+  - bugfix: 'Prevent vampires from receiving duplicate Bloodheal coven instances by
+      relying on the base clan grant logic.
+
+      :cl:'
+  Quinalion:
+  - balance: Levy now can read, and less stupid
+  ReezeBL:
+  - bugfix: silver-blessed wdefense bonus applies correctly now
+  Ryan180602:
+  - balance: Martyr weapons have regular integrity.
+  - balance: Once a martyr weapon breaks, it reshifts into a random martyr weapon.
+  - balance: Pulling in a new martyr weapon from a cross carries the old integrity.
+  - balance: Martyr armour sellprice is 999 mammons.

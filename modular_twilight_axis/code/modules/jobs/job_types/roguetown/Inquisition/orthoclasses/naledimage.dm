@@ -1,4 +1,4 @@
-datum/advclass/naledimage
+/datum/advclass/naledimage
 	name = "Naledian Psydon Mage"
 	tutorial = "Psydonite mage, Unrivaled in knowledge of fate and secret."
 	allowed_sexes = list(MALE, FEMALE)

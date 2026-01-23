@@ -6,14 +6,14 @@
 /// External entrypoint: clear history.
 /// Args: none
 #define COMSIG_COMBO_CORE_CLEAR "combo_core_clear"
+
+/// Consume prepared attack on swing attempt
+/// Args: (mob/living/target_or_null, zone)
+#define COMSIG_ATTACK_TRY_CONSUME "try_consume_attack"
+#define COMPONENT_ATTACK_CONSUMED (1<<0)
 //COMBO-CORE - END //
 
 //SOUNDBREAKER - BEGIN//
-/// Consume prepared attack on swing attempt
-/// Args: (mob/living/target_or_null, zone)
-#define COMSIG_SOUNDBREAKER_TRY_CONSUME_PREPARED "soundbreaker_try_consume_prepared"
-#define COMPONENT_SOUNDBREAKER_CONSUMED (1<<0)
-
 /// Successful defense hook (Riff stance)
 /// Args: none
 #define COMSIG_SOUNDBREAKER_RIFF_DEFENSE_SUCCESS "soundbreaker_riff_defense_success"

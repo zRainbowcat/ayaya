@@ -93,16 +93,6 @@
 					user.do_attack_animation(M, user.used_intent.animname, used_item = src, used_intent = user.used_intent, simplified = TRUE)
 			return
 
-	var/rmb_stam_penalty = 0
-	if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-		rmb_stam_penalty = EXTRA_STAMDRAIN_SWIFSTRONG
-	if(istype(user.rmb_intent, /datum/rmb_intent/swift))
-		if(user.used_intent.clickcd > CLICK_CD_INTENTCAP)
-			rmb_stam_penalty = EXTRA_STAMDRAIN_SWIFSTRONG
-
-	var/drain = max(0, user.used_intent?.releasedrain + rmb_stam_penalty)
-	user.stamina_add(drain)
-	
 	_attacker_signal = null
 	_attacker_signal = SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_POST_SWINGDELAY, M, user, src)
 	if(_attacker_signal & COMPONENT_ITEM_NO_ATTACK)

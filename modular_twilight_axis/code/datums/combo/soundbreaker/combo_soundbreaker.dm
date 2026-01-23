@@ -33,13 +33,6 @@
 
 	return "blunt"
 
-/proc/soundbreaker_try_consume_prepared_attack(mob/living/user, atom/target_atom, zone)
-	if(!isliving(user))
-		return FALSE
-	if(SEND_SIGNAL(user, COMSIG_SOUNDBREAKER_TRY_CONSUME_PREPARED, target_atom, zone) & COMPONENT_SOUNDBREAKER_CONSUMED)
-		return TRUE
-	return FALSE
-
 /proc/soundbreaker_riff_defense_success(mob/living/defender)
 	if(!isliving(defender))
 		return
@@ -67,7 +60,7 @@
 
 	note_history = list()
 	RegisterSignal(owner, COMSIG_SOUNDBREAKER_PRIME_NOTE, PROC_REF(_sig_prime_note))
-	RegisterSignal(owner, COMSIG_SOUNDBREAKER_TRY_CONSUME_PREPARED, PROC_REF(_sig_try_consume_prepared))
+	RegisterSignal(owner, COMSIG_ATTACK_TRY_CONSUME, PROC_REF(_sig_try_consume_prepared))
 	RegisterSignal(owner, COMSIG_SOUNDBREAKER_RIFF_DEFENSE_SUCCESS, PROC_REF(_sig_riff_defense_success))
 	RegisterSignal(owner, COMSIG_SOUNDBREAKER_NOTE_PROJECTILE_HIT, PROC_REF(_sig_note_projectile_hit))
 	RegisterSignal(owner, COMSIG_SOUNDBREAKER_COMBO_CLEARED, PROC_REF(_sig_combo_cleared))
@@ -76,7 +69,7 @@
 /datum/component/combo_core/soundbreaker/Destroy(force)
 	if(owner)
 		UnregisterSignal(owner, COMSIG_SOUNDBREAKER_PRIME_NOTE)
-		UnregisterSignal(owner, COMSIG_SOUNDBREAKER_TRY_CONSUME_PREPARED)
+		UnregisterSignal(owner, COMSIG_ATTACK_TRY_CONSUME)
 		UnregisterSignal(owner, COMSIG_SOUNDBREAKER_RIFF_DEFENSE_SUCCESS)
 		UnregisterSignal(owner, COMSIG_SOUNDBREAKER_NOTE_PROJECTILE_HIT)
 		UnregisterSignal(owner, COMSIG_SOUNDBREAKER_COMBO_CLEARED)
@@ -158,7 +151,7 @@
 		return 0
 
 	INVOKE_ASYNC(src, PROC_REF(TryConsumePreparedAttack), target_atom, zone)
-	return COMPONENT_SOUNDBREAKER_CONSUMED
+	return COMPONENT_ATTACK_CONSUMED
 
 /datum/component/combo_core/soundbreaker/proc/_sig_riff_defense_success(datum/source)
 	SIGNAL_HANDLER
@@ -224,6 +217,11 @@
 	granted_spells = list()
 	spells_granted = FALSE
 
+/datum/component/combo_core/soundbreaker/ConsumeOnCombo(rule_id)
+	..()
+	if(owner)
+		owner.apply_status_effect(/datum/status_effect/buff/soundbreaker_breaker_window,GetComboStacks())
+
 /datum/component/combo_core/soundbreaker/proc/GetProxy()
 	if(!owner)
 		return null
@@ -248,9 +246,12 @@
 	RegisterInput(note_id, target, zone)
 	AddComboStack()
 	var/new_stacks = GetComboStacks()
+	var/in_rhythm = IsValidPrefix()
 
-	if(new_stacks >= 1)
+	if(in_rhythm && new_stacks >= 1)
 		owner.apply_status_effect(/datum/status_effect/buff/soundbreaker_breaker_window, new_stacks)
+	else
+		owner.remove_status_effect(/datum/status_effect/buff/soundbreaker_breaker_window)
 
 /datum/component/combo_core/soundbreaker/proc/AddComboStack()
 	if(!owner)
@@ -337,17 +338,17 @@
 /datum/component/combo_core/soundbreaker/proc/GetNoteStaminaCost()
 	var/wil = owner.get_stat(STATKEY_WIL)
 	var/athl_skill = owner.get_skill_level(/datum/skill/misc/athletics)
-	var/wil_bonus = (wil - 10) * 0.2
-	var/athl_bonus = (athl_skill) * 0.5
+	var/wil_bonus = (wil - 10) * 0.5
+	var/athl_bonus = (athl_skill) * 0.75
 	var/deminer_bonus = wil_bonus + athl_bonus
-	var/cost = 5 - deminer_bonus
+	var/cost = 10 - deminer_bonus
 
 	if(istype(owner.rmb_intent, /datum/rmb_intent/strong))
-		cost += 1
+		cost += 2
 	if(istype(owner.rmb_intent, /datum/rmb_intent/swift))
-		cost += 0.5
+		cost += 1
 	
-	return max(0.1, cost)
+	return max(1, cost)
 
 /// Consume prepared note on swing attempt.
 /datum/component/combo_core/soundbreaker/proc/TryConsumePreparedAttack(atom/target_atom, zone = BODY_ZONE_CHEST)
@@ -811,6 +812,30 @@
 	var/eff = accuracy_check(desired_zone, owner, target, /datum/skill/combat/unarmed, used_intent, I)
 	return eff || BODY_ZONE_CHEST
 
+/datum/component/combo_core/proc/IsValidPrefix()
+	if(!history || !rules)
+		return FALSE
+
+	var/list/skills_seq = list()
+	for(var/datum/combo_input_entry/E as anything in history)
+		skills_seq += E.skill_id
+
+	for(var/datum/combo_rule/R as anything in rules)
+		if(IsPrefix(skills_seq, R.pattern))
+			return TRUE
+
+	return FALSE
+
+/datum/component/combo_core/proc/IsPrefix(list/seq, list/pattern)
+	if(seq.len > pattern.len)
+		return FALSE
+
+	for(var/i in 1 to seq.len)
+		if(seq[i] != pattern[i])
+			return FALSE
+
+	return TRUE
+
 // ----------------- Note visuals (overhead) -----------------
 /datum/component/combo_core/soundbreaker/proc/GetNoteIconState(note_id)
 	switch(note_id)
@@ -1230,7 +1255,7 @@
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		apply_combo_armor_wear(H, zone, "blunt", ScaleDamage(1.5), 2)
+		apply_combo_armor_wear(H, zone, "blunt", ScaleDamage(2.75), 2)
 
 	owner.visible_message(
 		span_danger("[owner]'s syncopation rattles through [target]'s gear!"),
@@ -1351,7 +1376,7 @@
 	ResetRhythm()
 
 /datum/component/combo_core/soundbreaker/proc/ComboOverture(mob/living/target)
-	ApplyDamage(target, 2.0, BCLASS_PUNCH, is_combo = TRUE)
+	ApplyDamage(target, 1.75, BCLASS_PUNCH, is_combo = TRUE)
 	target.Stun(1.5 SECONDS)
 
 	owner.visible_message(

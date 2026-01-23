@@ -149,19 +149,54 @@
 	desc = "A defensive riff is active. A successful defense may grant combo."
 	icon_state = "buff"
 
-#define SB_BREAKER_PER_STACK 15
-#define SB_BREAKER_MAX_CHANCE 90
+#define SB_BREAKER_PER_STACK 			10
+#define SB_BREAKER_MAX_CHANCE 			90
+#define SB_BREAKER_CLICK_MOD_PER_STACK	0.02
+#define SB_BREAKER_BASE_SPEEDUP			0.05
+#define SB_BREAKER_BASE_CHANCE 			30
 
 /datum/status_effect/buff/soundbreaker_breaker_window
 	id = "soundbreaker_breaker_window"
-	duration = 1.5 SECONDS
-	status_type = STATUS_EFFECT_REFRESH
+	duration = 2.0 SECONDS
+	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
-	var/success_chance = SB_BREAKER_PER_STACK
-	
-/datum/status_effect/buff/soundbreaker_breaker_window/on_apply(stacks = 1)
-	. = ..()
-	success_chance = clamp(stacks * SB_BREAKER_PER_STACK, 0, SB_BREAKER_MAX_CHANCE)
+	var/success_chance = 0
+	var/stacks = 0
+	var/original_next_move = null
 
+/datum/status_effect/buff/soundbreaker_breaker_window/on_creation(mob/living/new_owner, stacks = 1)
+	src.stacks = stacks
+	. = ..()
+
+/datum/status_effect/buff/soundbreaker_breaker_window/on_apply()
+	. = ..()
+	success_chance = clamp(SB_BREAKER_BASE_CHANCE + stacks * SB_BREAKER_PER_STACK, 0, SB_BREAKER_MAX_CHANCE)
+	
+	if(!owner)
+		return
+
+	var/base_cd = owner.used_intent?.clickcd
+	if(!base_cd)
+		return
+
+	var/mult = 1 - (SB_BREAKER_BASE_SPEEDUP + stacks * SB_BREAKER_CLICK_MOD_PER_STACK)
+	original_next_move = owner.next_move
+	var/new_cd = round(base_cd * mult)
+	owner.changeNext_move(new_cd)
+
+/datum/status_effect/buff/soundbreaker_breaker_window/on_remove()
+	..()
+
+	if(!owner || original_next_move == null)
+		return
+
+	if(owner.next_move <= world.time)
+		return
+
+	owner.next_move = original_next_move
+
+#undef SB_BREAKER_BASE_SPEEDUP
+#undef SB_BREAKER_BASE_CHANCE 
+#undef SB_BREAKER_CLICK_MOD_PER_STACK
 #undef SB_BREAKER_MAX_CHANCE
 #undef SB_BREAKER_PER_STACK

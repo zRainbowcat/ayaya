@@ -32,6 +32,13 @@
 	/// Optional: callback on component instance (call(src, callback)(rule_id, target, zone))
 	var/callback
 	
+/// global proc for intercept ability on attack
+/proc/try_consume_attack_effects(mob/living/user, atom/target_atom, zone)
+	if(!isliving(user))
+		return FALSE
+	var/result = SEND_SIGNAL(user, COMSIG_ATTACK_TRY_CONSUME, target_atom, zone)
+	return (result & COMPONENT_ATTACK_CONSUMED)
+
 /datum/component/combo_core
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 	var/mob/living/owner

@@ -747,3 +747,9 @@
   - bugfix: 'fresh character slots default to no underwear selection
 
       :cl:'
+2026-01-24:
+  Onutsio:
+  - bugfix: fix death's door lux strand spawning
+  hazelrat:
+  - bugfix: Resolves a bug around quivers; clicking a quiver to nock an arrow on a
+      bow no longer also begins to draw the bow.

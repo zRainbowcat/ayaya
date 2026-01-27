@@ -222,7 +222,7 @@
 	tastes = list("salty fat" = 1)
 	name = "salo bread"
 	desc = "The salo's smooth consistency helps soften the rough grainy bread."
-	faretype = FARE_POOR
+	faretype = FARE_IMPOVERISHED
 	icon_state = "bread_salo"
 	foodtype = GRAIN | MEAT
 

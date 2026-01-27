@@ -236,9 +236,9 @@
 					/obj/item/rogueweapon/sword/falx,
 				)
 
-/datum/supply_pack/rogue/steel_weapons/flail
-	name = "Flail"
-	cost = 40 // 1 Steel Ingot
+/datum/supply_pack/rogue/steel_weapons/glaive
+	name = "Glaive"
+	cost = 105 // 3 Steel Ingot, 1 Small Log
 	contains = list(
-					/obj/item/rogueweapon/flail/sflail,
+					/obj/item/rogueweapon/halberd/glaive,
 				)

@@ -41,8 +41,6 @@
 
 	var/datum/special_intent/special
 
-	var/malumblessed_w = FALSE
-
 /obj/item/rogueweapon/Initialize()
 	. = ..()
 	if(!destroy_message)

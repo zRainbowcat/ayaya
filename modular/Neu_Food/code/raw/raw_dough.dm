@@ -145,8 +145,6 @@
 	slices_num = 2
 	slice_batch = TRUE
 	slice_path = /obj/item/reagent_containers/food/snacks/rogue/butterdoughslice
-	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/muffin
-	cooked_smell = /datum/pollutant/food/muffin
 	w_class = WEIGHT_CLASS_NORMAL
 	slice_sound = TRUE
 
@@ -287,3 +285,4 @@
 		user.put_in_hands(handpie)
 		qdel(I)
 		qdel(src)
+	

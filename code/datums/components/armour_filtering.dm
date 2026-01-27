@@ -3,15 +3,13 @@
 	var/required_trait
 	var/additive
 	var/positive
-	var/filter_id
 
-/datum/component/armour_filtering/Initialize(skill_trait, id, bonus_additive = FALSE)
+/datum/component/armour_filtering/Initialize(skill_trait, positive_bonus, bonus_additive = FALSE)
 	. = ..()
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 	required_trait = skill_trait
 	additive = bonus_additive
-	filter_id = id
 
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
@@ -109,7 +107,7 @@
 				to_chat(user, span_info("..yet another piece of my armour is on my mind."))
 				return
 			ADD_TRAIT(user, TRAIT_ARMOUR_LIKED, TRAIT_GENERIC)
-		trait_boon_equip(user, filter_id)
+		trait_boon_equip(user)
 		return
 
 	if(!positive)
@@ -120,7 +118,7 @@
 		to_chat(user, span_info("I miss [parent] already. ([required_trait])"))
 		if(HAS_TRAIT(user, TRAIT_ARMOUR_LIKED))
 			REMOVE_TRAIT(user, TRAIT_ARMOUR_LIKED, TRAIT_GENERIC)
-	trait_boon_drop(user, filter_id)
+	trait_boon_drop(user)
 	return
 
 
@@ -129,7 +127,7 @@ TRAIT UNIQUE PROCS
 */
 
 
-/datum/component/armour_filtering/proc/trait_boon_equip(mob/living/carbon/human/user, id)
+/datum/component/armour_filtering/proc/trait_boon_equip(mob/living/carbon/human/user)
 	if(HAS_TRAIT(user, TRAIT_FENCERDEXTERITY))
 		if(!positive)
 			user.dropItemToGround(parent, TRUE, TRUE)
@@ -137,46 +135,18 @@ TRAIT UNIQUE PROCS
 				return
 			REMOVE_TRAIT(user, TRAIT_ARMOUR_DISLIKED, TRAIT_GENERIC)
 		return
-
-	if(HAS_TRAIT(user, TRAIT_HONORBOUND))
-		if(!positive)
-			user.dropItemToGround(parent, TRUE, TRUE)
-			if(!HAS_TRAIT(user, TRAIT_ARMOUR_DISLIKED))
-				return
-			REMOVE_TRAIT(user, TRAIT_ARMOUR_DISLIKED, TRAIT_GENERIC)
-		return
-
-	if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT) && id == "ornate_plate")
+	
+	if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT))
 		if(positive)
 			user.apply_status_effect(/datum/status_effect/buff/psydonic_endurance)
 		return
-
-	if(HAS_TRAIT(user, TRAIT_NALEDI) && id == "naledi_mask")
-		if(positive)
-			user.remove_status_effect(/datum/status_effect/debuff/lost_naledi_mask)
-			user.remove_stress(/datum/stressevent/naledimasklost)
-		return
-
 	return
 
-/datum/component/armour_filtering/proc/trait_boon_drop(mob/living/carbon/human/user, id)
-	if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT) && id == "ornate_plate")
+/datum/component/armour_filtering/proc/trait_boon_drop(mob/living/carbon/human/user)
+	if(HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT))
 		if(positive)
 			if(!user.has_status_effect(/datum/status_effect/buff/psydonic_endurance))
 				return
 			user.remove_status_effect(/datum/status_effect/buff/psydonic_endurance)
 		return
-
-	if(HAS_TRAIT(user, TRAIT_NALEDI) && id == "naledi_mask")
-		if(positive)
-			if(istiefling(user))
-				return
-			if(user.has_status_effect(/datum/status_effect/debuff/lost_naledi_mask))
-				return
-			if(user.has_stress_event(/datum/stressevent/naledimasklost))
-				return
-			user.apply_status_effect(/datum/status_effect/debuff/lost_naledi_mask)
-			user.add_stress(/datum/stressevent/naledimasklost)
-		return
-
 	return

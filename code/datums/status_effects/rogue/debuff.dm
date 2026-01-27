@@ -8,7 +8,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt1
 	effectedstats = list(STATKEY_CON = -1)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt1
 	name = "Hungry"
@@ -20,7 +19,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
 	effectedstats = list(STATKEY_STR = -2, STATKEY_CON = -2, STATKEY_WIL = -1)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt2
 	name = "Hungry"
@@ -32,7 +30,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt3
 	effectedstats = list(STATKEY_STR = -5, STATKEY_CON = -3, STATKEY_WIL = -2)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt3
 	name = "Hungry"
@@ -44,7 +41,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt1
 	effectedstats = list(STATKEY_WIL = -1)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt1
 	name = "Thirsty"
@@ -56,7 +52,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt2
 	effectedstats = list(STATKEY_SPD = -1, STATKEY_WIL = -2)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt2
 	name = "Thirsty"
@@ -68,7 +63,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt3
 	effectedstats = list(STATKEY_STR = -1, STATKEY_SPD = -2, STATKEY_WIL = -3)
 	duration = 100
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt3
 	name = "Thirsty"
@@ -132,7 +126,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	effectedstats = list(STATKEY_SPD = -1)
 	duration = -1
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	name = "Dizzy"
@@ -144,7 +137,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	effectedstats = list(STATKEY_STR = -1, STATKEY_SPD = -2)
 	duration = -1
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	name = "Faint"
@@ -156,7 +148,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	effectedstats = list(STATKEY_STR = -3, STATKEY_SPD = -4)
 	duration = -1
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	name = "Drained"
@@ -166,7 +157,6 @@
 /datum/status_effect/debuff/sleepytime
 	id = "sleepytime"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/sleepytime
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/netted
 	name = "Net"
@@ -177,7 +167,7 @@
 	id = "net"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/netted
 	effectedstats = list(STATKEY_SPD = -5, STATKEY_WIL = -2)
-//	duration = 3 MINUTES // WHY?????
+	duration = 3 MINUTES
 
 /datum/status_effect/debuff/netted/on_apply()
 		. = ..()
@@ -224,7 +214,6 @@
 /datum/status_effect/debuff/vamp_dreams
 	id = "sleepytime"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/vamp_dreams
-	needs_processing = FALSE
 
 /atom/movable/screen/alert/status_effect/debuff/vamp_dreams
 	name = "Insight"
@@ -319,7 +308,7 @@
 /atom/movable/screen/alert/status_effect/debuff/call_to_arms
 	name = "Ravox's Call to Arms"
 	desc = "His voice keeps ringing in your ears, rocking your soul.."
-	icon_state = "call_to_arms_negative"
+	icon_state = "call_to_arms"
 
 /datum/status_effect/debuff/ravox_burden
 	id = "ravox_burden"
@@ -341,7 +330,7 @@
 /atom/movable/screen/alert/status_effect/debuff/call_to_slaughter
 	name = "Call to Slaughter"
 	desc = "A putrid rotting scent fills your nose as Graggar's call for slaughter rattles you to your core.."
-	icon_state = "call_to_slaughter_negative"
+	icon_state = "call_to_slaughter"
 
 //For revive - your body DIDN'T rot, but it did suffer damage. Unlike being rotted, this one is only timed. Not forever.
 /datum/status_effect/debuff/revived
@@ -449,7 +438,8 @@
 /atom/movable/screen/alert/status_effect/debuff/excomm
 	name = "Excommunicated!"
 	desc = "The Ten have forsaken me!"
-	icon_state = "excommunication"
+	icon_state = "muscles"
+	color ="#6d1313"
 
 /datum/status_effect/debuff/apostasy
 	id = "Apostasy!"
@@ -510,7 +500,8 @@
 /atom/movable/screen/alert/status_effect/debuff/apostasy
 	name = "Apostasy!"
 	desc = "Shame upon the member of clergy!"
-	icon_state = "apostate"
+	icon_state = "debuff"
+	color ="#7a0606"
 
 /datum/status_effect/debuff/hereticsermon
 	id = "Heretic on sermon!"
@@ -521,7 +512,8 @@
 /atom/movable/screen/alert/status_effect/debuff/hereticsermon
 	name = "Heretic on sermon!"
 	desc = "I was on the sermon. My patron is not proud of me."
-	icon_state = "hereticsermon"
+	icon_state = "debuff"
+	color ="#af9f9f"
 
 /datum/status_effect/debuff/lost_naledi_mask
 	id = "naledimask"
@@ -650,7 +642,7 @@
 /atom/movable/screen/alert/status_effect/debuff/disgracedguardsman
 	name = "Disgraced Guardsman"
 	desc = "I betrayed my liege."
-	icon_state = "guardsman_disgraced"
+	icon_state = "debuff"
 
 /datum/status_effect/debuff/vampbite
 	id = "Vampire Bite"
@@ -749,95 +741,6 @@
 		var/mob/living/carbon/C = owner
 		C.remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
 
-
-/datum/status_effect/debuff/necrandeathdoorwilloss
-	id = "Necran Deathly calm!"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/necranwilloss
-	effectedstats = list(STATKEY_WIL = -4)
-	var/blimmune = FALSE
-	var/nobreath = FALSE
-
-/datum/status_effect/debuff/necrandeathdoorwilloss/on_apply()
-	. = ..()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.add_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING, multiplicative_slowdown = PULL_PRONE_SLOWDOWN)
-		if(HAS_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE))
-			blimmune = TRUE
-		else
-			ADD_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE, STATUS_EFFECT_TRAIT)
-		if(HAS_TRAIT(H, TRAIT_NOBREATH))
-			nobreath = TRUE
-		else
-			ADD_TRAIT(H, TRAIT_NOBREATH, STATUS_EFFECT_TRAIT)
-
-/datum/status_effect/debuff/necrandeathdoorwilloss/on_remove()
-	. = ..()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
-		if(!blimmune)
-			REMOVE_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE, STATUS_EFFECT_TRAIT)
-		if(!nobreath)
-			REMOVE_TRAIT(H, TRAIT_NOBREATH, STATUS_EFFECT_TRAIT)
-
-/datum/status_effect/debuff/necrandeathdoorwilloss/process()
-	.=..()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.energy_add(-1)	//being in death's edge drains energy from people
-		var/area/rogue/our_area = get_area(H)
-		if(!(our_area.necra_area))
-			owner.remove_status_effect(/datum/status_effect/debuff/necrandeathdoorwilloss)
-
-/atom/movable/screen/alert/status_effect/debuff/necranwilloss
-	name = "Necran Deathly calm!"
-	desc = "I am on the edge of my lady's realm. My motivation slackens with such deathly tranquility."
-	icon_state = "debuff"
-	color ="#af9f9f"
-
-/datum/status_effect/debuff/deathdoorwilloss
-	id = "Deathly calm!"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/deathdoorwilloss
-	effectedstats = list(STATKEY_WIL = -8)
-	var/blimmune = FALSE
-	var/nobreath = FALSE
-
-/datum/status_effect/debuff/deathdoorwilloss/on_apply()
-	. = ..()
-	var/mob/living/carbon/human/H = owner
-	H.add_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING, multiplicative_slowdown = PULL_PRONE_SLOWDOWN)
-	if(HAS_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE))
-		blimmune = TRUE
-	else
-		ADD_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE, STATUS_EFFECT_TRAIT)
-	if(HAS_TRAIT(H, TRAIT_NOBREATH))
-		nobreath = TRUE
-	else
-		ADD_TRAIT(H, TRAIT_NOBREATH, STATUS_EFFECT_TRAIT)
-
-/datum/status_effect/debuff/deathdoorwilloss/on_remove()
-	. = ..()
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		H.remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
-		if(!blimmune)
-			REMOVE_TRAIT(H, TRAIT_BLOODLOSS_IMMUNE, STATUS_EFFECT_TRAIT)
-		if(!nobreath)
-			REMOVE_TRAIT(H, TRAIT_NOBREATH, STATUS_EFFECT_TRAIT)
-
-/datum/status_effect/debuff/deathdoorwilloss/process()
-	.=..()
-	owner.energy_add(-1)	//being in death's edge drains energy from people
-	var/area/rogue/our_area = get_area(owner)
-	if(!(our_area.necra_area))
-		owner.remove_status_effect(/datum/status_effect/debuff/deathdoorwilloss)
-
-/atom/movable/screen/alert/status_effect/debuff/deathdoorwilloss
-	name = "Deathly calm!"
-	desc = "I am on the edge of Death's realm. It is hard to feel motivated with such deathly tranquility."
-	icon_state = "debuff"
-	color ="#af9f9f"
 /datum/status_effect/debuff/no_coom_cheating //Gets triggered when someone sets their arousal, prevents orgasms from sating vice/giving mood boosts
 	id = "nocoomcheating"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/no_coom_cheating
@@ -846,7 +749,6 @@
 /atom/movable/screen/alert/status_effect/debuff/no_coom_cheating
 	name = "Arousal Imbalanced"
 	desc = "My arousal level changed drastically, any orgasm I have now will not be satisfactory."
-	icon_state = "arousalimbalance"
 
 /datum/status_effect/debuff/no_coom_cheating/on_apply()
 	. = ..()

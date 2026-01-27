@@ -21,7 +21,8 @@
 	leader = /datum/clan_leader/nosferatu
 	clane_covens = list(
 		/datum/coven/potence,
-		/datum/coven/obfuscate
+		/datum/coven/obfuscate,
+		/datum/coven/bloodheal
 	)
 	blood_preference = BLOOD_PREFERENCE_RATS | BLOOD_PREFERENCE_DEAD | BLOOD_PREFERENCE_KIN
 	clane_traits = list(

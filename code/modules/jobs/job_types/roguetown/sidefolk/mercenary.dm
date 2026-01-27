@@ -19,7 +19,6 @@
 	job_traits = list(TRAIT_STEELHEARTED)
 	always_show_on_latechoices = TRUE
 	class_categories = TRUE
-	same_job_respawn_delay = 30 MINUTES
 	job_subclasses = list(
 		/datum/advclass/mercenary/anthrax,
 		/datum/advclass/mercenary/anthrax/assasin,
@@ -57,27 +56,7 @@
     /datum/advclass/mercenary/twilight_gunslinger,
     /datum/advclass/mercenary/twilight_grenzelhoft_jager
 	)
- 
-
-/datum/job/roguetown/mercenary/after_spawn(mob/living/L, mob/M, latejoin = FALSE)
-	..()
-	if(L && ishuman(L))
-		var/mob/living/carbon/human/H = L
-		if(!H.mind)
-			return
-
-		// Get the mercenary statue from SSroguemachine
-		var/obj/structure/roguemachine/talkstatue/mercenary/statue = SSroguemachine.mercenary_statue
-		if(!statue && SSroguemachine.mercenary_statues.len)
-			statue = SSroguemachine.mercenary_statues[1]
-		if(statue)
-			// Send a message with a clickable link to register remotely
-			to_chat(M, span_boldnotice("I sense a mercenary statue calling out to me..."))
-			to_chat(M, span_notice("<a href='?src=[REF(statue)];register=[REF(H)]'>Touch the statue from afar</a> to register myself as available for contract."))
-
-			// Store the registration request
-			statue.pending_registrations[H.key] = H
-
+	same_job_respawn_delay = 30 MINUTES
 
 /proc/update_mercenary_slots()
 	var/datum/job/mercenary_job = SSjob.GetJob("Mercenary")

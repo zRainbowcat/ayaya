@@ -7,6 +7,7 @@
 		"Martyr",\
 		"Hand",\
 		"Steward",\
+		"Knight Captain",\
 		"Knight",\
 		"Templar",\
 		"Sergeant",\

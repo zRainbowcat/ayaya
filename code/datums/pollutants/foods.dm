@@ -159,7 +159,3 @@
 /datum/pollutant/food/roasted_seeds
 	name = "toasted seeds"
 	scent = "toasted seeds"
-
-/datum/pollutant/food/muffin
-	name = "fresh baked muffin"
-	scent = "fresh baked muffin"

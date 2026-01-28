@@ -189,10 +189,24 @@
 
 
 /obj/effect/proc_holder/spell/invoked/twilight_equalize/cast(list/targets, mob/living/user)
+	var/stat_to_change = STATKEY_STR
+	var/boons = list("Strength","Perception","Willpower","Constitution")
+	var/boon_choice = input("Choose your boon.", "IN FATHER'S NAME") as anything in boons
+	switch(boon_choice)
+		if("Strength")
+			stat_to_change = STATKEY_STR
+		if("Perception")
+			stat_to_change = STATKEY_PER
+		if("Willpower")
+			stat_to_change = STATKEY_WIL
+		if("Constitution")
+			stat_to_change = STATKEY_CON
+		else
+			stat_to_change = STATKEY_STR
 	if(ishuman(targets[1]))
 		var/mob/living/target = targets[1]
 		var/statchange = target.STASTR - user.STASTR
-		user.apply_status_effect(/datum/status_effect/buff/twilight_equalizebuff, statchange)
+		user.apply_status_effect(/datum/status_effect/buff/twilight_equalizebuff, statchange, stat_to_change)
 		return TRUE
 	revert_cast()
 	return FALSE
@@ -204,9 +218,9 @@
 	duration = 1 MINUTES
 	var/outline_colour = "#FFD700"
 
-/datum/status_effect/buff/twilight_equalizebuff/on_creation(mob/living/new_owner, statchange = 1)
+/datum/status_effect/buff/twilight_equalizebuff/on_creation(mob/living/new_owner, statchange = 1, stat_to_change = STATKEY_STR)
 	if(statchange != 0)
-		src.effectedstats = list(STATKEY_STR = statchange)
+		src.effectedstats = list("[stat_to_change]" = statchange)
 	return ..()
 
 /atom/movable/screen/alert/status_effect/buff/twilight_equalized
@@ -549,7 +563,7 @@
 	if(user.get_num_arms(FALSE) < 1 || (user.get_inactive_held_item() && user.get_active_held_item()))
 		to_chat(user, "<span class='notice'>I need a free hand to hold the People's Banner!</span>")
 		revert_cast(user)
-		return
+		return FALSE
 
 	if(src.conjured_weapon)
 		qdel(src.conjured_weapon)
@@ -673,7 +687,7 @@
 
 //T4
 
-/obj/effect/proc_holder/spell/targeted/shapeshift/twilight_wingsoffreedom
+/obj/effect/proc_holder/spell/self/wildshape_twilight_wingsoffreedom
 	name = "Wings of Freedom"
 	desc = "Transform into the strongest form of Matthios' own - a dragon. A mere mortal can't sustain this form for long, yet with the power Matthios grants you, you shall burn this world of tyranny to the ground."
 	overlay_state = "wingsoffreedom"
@@ -683,76 +697,242 @@
 	chargedrain = 0
 	chargetime = 0
 	recharge_time = 10 MINUTES
-	cooldown_min = 50
+	cooldown_min = 10 MINUTES
 	invocations = list("Я сожгу мир тирании дотла!!")
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/holy
 	devotion_cost = 200
 	miracle = TRUE
-	die_with_shapeshifted_form = FALSE
-	do_gib = FALSE
-	knockout_on_death = 30 SECONDS
-	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios
-	sound = 'sound/vo/mobs/vdragon/drgnroar.ogg'
 
-/obj/effect/proc_holder/spell/targeted/shapeshift/twilight_wingsoffreedom/Shapeshift(mob/living/carbon/human/caster)
-	if(!istype(caster)) // FVCK OFF
-		return
 
-	var/obj/shapeshift_holder/H = locate() in caster
-	if(H)
-		to_chat(caster, span_warning("You're already shapeshifted!"))
-		revert_cast(caster)
-		return
+/obj/effect/proc_holder/spell/self/wildshape_twilight_wingsoffreedom/cast(list/targets, mob/living/carbon/human/user = usr)
+	. = ..()
 
-	if(!do_after(caster, 10 SECONDS, target = caster))
-		to_chat(caster, span_userdanger("You are unable to concentrate enough to shapeshift!"))
-		revert_cast(caster)
-		return
+	if(user.has_status_effect(/datum/status_effect/debuff/submissive))
+		to_chat(user, span_warning("Your will is too broken to change form."))
+		revert_cast(user)
+		return FALSE
 
-	var/mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios/shape = new shapeshift_type(caster.loc)
-	if(caster.mind)
-		for(var/obj/effect/proc_holder/S in caster.mind.spell_list)
-			if(!istype(S, /obj/effect/proc_holder/spell/targeted/shapeshift/twilight_wingsoffreedom))
-				shape.spells_list += S.type
-				caster.mind.RemoveSpell(S)
-	H = new(shape,src,caster)
-	shape.apply_status_effect(/datum/status_effect/buff/twilight_dragon_form, src)
-	clothes_req = FALSE
-	human_req = FALSE
+	if(istype(user, /mob/living/carbon/human/species/wildshape))
+		revert_cast(user)
+		return FALSE
 
-	if(do_gib)
-		playsound(caster.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-		caster.spawn_gibs(FALSE)
+	if(!do_after(user, 10 SECONDS, target = user))
+		to_chat(user, span_userdanger("You are unable to concentrate enough to shapeshift!"))
+		revert_cast(user)
+		return FALSE
 
-/mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios
+	user.Stun(30)
+	user.Knockdown(30)
+	INVOKE_ASYNC(user, TYPE_PROC_REF(/mob/living/carbon/human, wildshape_transformation_twilight_dragon), /mob/living/carbon/human/species/wildshape/dragon_matthios)
+
+	return TRUE
+
+// Mob itself
+/mob/living/carbon/human/species/wildshape/dragon_matthios
 	name = "Dragon"
 	desc = "It has been a very long time since the dragons ruled the skies, yet their power still remains formiddable. Despite their monstrous form, ancient intelligence in their eyes betrays their sentience."
-	inherent_spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fireball/greater/matthios_dragon,
-	/obj/effect/proc_holder/spell/invoked/projectile/spitfire/matthios_dragon)
-	del_on_deaggro = null
-	var/list/spells_list = list()
+	race = /datum/species/dragon_matthios
+	footstep_type = FOOTSTEP_MOB_HEAVY
+	ambushable = FALSE
+	skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/twilight_dragon_skin
+	wildshape_icon = 'modular/icons/mob/96x96/ratwood_dragon.dmi'
+	wildshape_icon_state = "dragon_cool"
+	pixel_x = -32
+	pixel_y = -16
 
-/mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios/Initialize()
+/mob/living/carbon/human/species/wildshape/dragon_matthios/gain_inherent_skills()
+	if(mind)
+		adjust_skillrank(/datum/skill/combat/wrestling, SKILL_LEVEL_MASTER, TRUE)
+		adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_MASTER, TRUE)
+		adjust_skillrank(/datum/skill/misc/swimming, SKILL_LEVEL_EXPERT, TRUE)
+		adjust_skillrank(/datum/skill/misc/athletics, SKILL_LEVEL_LEGENDARY, TRUE)
+		adjust_skillrank(/datum/skill/magic/arcane, SKILL_LEVEL_EXPERT, TRUE)
+
+		STASTR = 20
+		STACON = 20
+		STAWIL = 15
+		STAPER = 12
+		STASPD = 6
+		STAINT = 15
+
+		AddSpell(new /obj/effect/proc_holder/spell/self/twilight_dragonclaws)
+		AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball/greater/matthios_dragon)
+		AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/spitfire/matthios_dragon)
+		src.apply_status_effect(/datum/status_effect/buff/twilight_dragon_form)
+
+		real_name = "Dragon"
+
+/mob/living/carbon/human/species/wildshape/dragon_matthios/buckle_mob(mob/living/target, force = TRUE, check_loc = TRUE, lying_buckle = FALSE, hands_needed = 0, target_hands_needed = 0)
+	. = ..(target, force, check_loc, lying_buckle, hands_needed, target_hands_needed)
+
+/datum/species/dragon_matthios
+	name = "dragon"
+	id = "dragon_matthios"
+	species_traits = list(NO_UNDERWEAR, NO_ORGAN_FEATURES, NO_BODYPART_FEATURES)
+	inherent_traits = list(
+		TRAIT_TOXIMMUNE,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_NOPAINSTUN,
+		TRAIT_NOFIRE,
+		TRAIT_NIGHT_VISION,
+		TRAIT_BASHDOORS,
+		TRAIT_STRONGBITE,
+		TRAIT_STEELHEARTED,
+		TRAIT_BREADY,
+		TRAIT_ORGAN_EATER,
+		TRAIT_WILD_EATER,
+		TRAIT_HARDDISMEMBER,
+		TRAIT_PIERCEIMMUNE,
+		TRAIT_LONGSTRIDER,
+		TRAIT_NOFALLDAMAGE1,
+	)
+	inherent_biotypes = MOB_HUMANOID
+	armor = 5
+	no_equip = list(SLOT_SHIRT, SLOT_HEAD, SLOT_WEAR_MASK, SLOT_ARMOR, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_CLOAK, SLOT_BELT, SLOT_BACK_R, SLOT_BACK_L, SLOT_S_STORE, SLOT_RING, SLOT_NECK)
+	nojumpsuit = 1
+	sexes = 1
+	offset_features = list(OFFSET_HANDS = list(0,2), OFFSET_HANDS_F = list(0,2))
+	organs = list(
+		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_HEART = /obj/item/organ/heart,
+		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision,
+		ORGAN_SLOT_EARS = /obj/item/organ/ears,
+		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue/wild_tongue,
+		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
+		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
+		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		)
+
+	languages = list(
+		/datum/language/draconic,
+		/datum/language/common,
+	)
+
+/datum/species/dragon_matthios/send_voice(mob/living/carbon/human/human)
+	playsound(get_turf(human), pick('sound/vo/mobs/vw/aggro (1).ogg','sound/vo/mobs/vw/aggro (2).ogg'), 80, TRUE, -1)
+
+/datum/species/dragon_matthios/regenerate_icons(mob/living/carbon/human/human)
+	human.icon = 'modular/icons/mob/96x96/ratwood_dragon.dmi'
+	human.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
+	human.icon_state = "dragon_cool"
+	human.update_damage_overlays()
+	return TRUE
+
+/datum/species/dragon_matthios/on_species_gain(mob/living/carbon/carbon, datum/species/old_species)
 	. = ..()
-	ai_controller = null
+	RegisterSignal(carbon, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 
-/mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios/death(gibbed)
-	if(src.mind)
-		for(var/S in spells_list)
-			src.mind.AddSpell(new S, src)
+/datum/species/dragon_matthios/update_damage_overlays(mob/living/carbon/human/human)
+	human.remove_overlay(DAMAGE_LAYER)
+	return TRUE
+
+/obj/item/clothing/suit/roguetown/armor/skin_armor/twilight_dragon_skin
+	slot_flags = null
+	name = "draconic scales"
+	desc = "All but impenetrable."
+	icon_state = null
+	body_parts_covered = FULL_BODY
+	body_parts_inherent = FULL_BODY
+	armor = ARMOR_PLATE
+	prevent_crits = PREVENT_CRITS_NONE
+	blocksound = SOFTHIT
+	blade_dulling = DULLING_BASHCHOP
+	sewrepair = FALSE
+	max_integrity = 120
+	item_flags = DROPDEL
+
+/datum/intent/simple/twilight_dragon
+	name = "claw"
+	clickcd = 10
+	icon_state = "incut"
+	blade_class = BCLASS_CUT
+	attack_verb = list("claws", "mauls", "eviscerates")
+	animname = "cut"
+	hitsound = "genslash"
+	penfactor = 60
+	candodge = TRUE
+	canparry = TRUE
+	miss_text = "slashes the air!"
+	miss_sound = "bluntswoosh"
+	item_d_type = "slash"
+
+/obj/item/rogueweapon/twilight_dragon_claw
+	name = "dragon claw"
+	desc = "It is said that true dragons used to infuse their claws with metal alloys to make them more dangerous in combat. Regardless of whether that's true, those talons, blessed by Matthios, are no less powerful."
+	item_state = null
+	lefthand_file = null
+	righthand_file = null
+	icon = 'icons/roguetown/weapons/misc32.dmi'
+	max_blade_int = 600
+	max_integrity = 600
+	force = 25
+	block_chance = 0
+	wdefense = 6
+	blade_dulling = DULLING_SHAFT_WOOD
+	associated_skill = /datum/skill/combat/unarmed
+	wlength = WLENGTH_NORMAL
+	wbalance = WBALANCE_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
+	can_parry = TRUE
+	sharpness = IS_SHARP
+	parrysound = "bladedmedium"
+	swingsound = list('sound/combat/hits/blunt/genblunt (1).ogg','sound/combat/hits/blunt/genblunt (2).ogg','sound/combat/hits/blunt/genblunt (3).ogg','sound/combat/hits/blunt/flailhit.ogg')
+	possible_item_intents = list(/datum/intent/simple/twilight_dragon)
+	parrysound = list('sound/combat/parry/parrygen.ogg')
+	embedding = list("embedded_pain_multiplier" = 0, "embed_chance" = 0, "embedded_fall_chance" = 0)
+	item_flags = DROPDEL
+	experimental_inhand = FALSE
+
+/obj/item/rogueweapon/twilight_dragon_claw/right
+	icon_state = "claw_r"
+
+/obj/item/rogueweapon/twilight_dragon_claw/left
+	icon_state = "claw_l"
+
+/obj/item/rogueweapon/twilight_dragon_claw/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOEMBED, TRAIT_GENERIC)
+
+/obj/effect/proc_holder/spell/self/twilight_dragonclaws
+	name = "Dragon Claws"
+	desc = "Extend or retract your razor-sharp claws."
+	overlay_state = "claws"
+	antimagic_allowed = TRUE
+	recharge_time = 2 SECONDS
+	ignore_cockblock = TRUE
+	var/extended = FALSE
+
+/obj/effect/proc_holder/spell/self/twilight_dragonclaws/cast(mob/user = usr)
 	..()
+	var/obj/item/rogueweapon/twilight_dragon_claw/left/left = user.get_active_held_item()
+	var/obj/item/rogueweapon/twilight_dragon_claw/right/right = user.get_inactive_held_item()
+
+	if(extended)
+		if(istype(left, /obj/item/rogueweapon/twilight_dragon_claw))
+			user.dropItemToGround(left, TRUE)
+			qdel(left)
+
+		if(istype(right, /obj/item/rogueweapon/twilight_dragon_claw))
+			user.dropItemToGround(right, TRUE)
+			qdel(right)
+
+		extended = FALSE
+		return
+
+	left = new(user, 1)
+	right = new(user, 2)
+	user.put_in_hands(left, TRUE, FALSE, TRUE)
+	user.put_in_hands(right, TRUE, FALSE, TRUE)
+	extended = TRUE
+
 
 /datum/status_effect/buff/twilight_dragon_form
 	id = "twilight_dragon_form"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/twilight_dragon_form
 	duration = 4 MINUTES
-	var/obj/effect/proc_holder/spell/targeted/shapeshift/twilight_wingsoffreedom/base_spell
-
-/datum/status_effect/buff/twilight_dragon_form/on_creation(mob/living/new_owner, spell)
-	if(spell)
-		base_spell = spell
-	return ..()
 
 /atom/movable/screen/alert/status_effect/buff/twilight_dragon_form
 	name = "Dragon Form"
@@ -762,13 +942,140 @@
 
 /datum/status_effect/buff/twilight_dragon_form/on_remove()
 	. = ..()
-	var/obj/shapeshift_holder/H = locate() in owner
-	if(H && base_spell)
-		if(owner.mind && istype(owner, /mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios))
-			var/mob/living/simple_animal/hostile/retaliate/rogue/dragon/matthios/D = owner
-			for(var/S in D.spells_list)
-				D.mind.AddSpell(new S, D)
-		base_spell.Restore(owner)
+	if(ishuman(owner))
+		var/mob/living/carbon/human/H = owner
+		if(H.stat != DEAD)
+			H.wildshape_untransform_twilight_dragon(FALSE)
+
+#define TRAIT_SOURCE_WILDSHAPE "wildshape_transform"
+
+/mob/living/carbon/human/species/wildshape/dragon_matthios/death(gibbed, nocutscene = FALSE)
+	wildshape_untransform_twilight_dragon(TRUE, gibbed)
+
+/mob/living/carbon/human/proc/wildshape_transformation_twilight_dragon(shapepath)
+	if(!mind)
+		log_runtime("NO MIND ON [src.name] WHEN TRANSFORMING")
+	Paralyze(1, ignore_canstun = TRUE)
+	//before we shed our items, save our neck and ring, if we have any, so we can quickly rewear them
+	regenerate_icons()
+	icon = null
+	var/oldinv = invisibility
+	invisibility = INVISIBILITY_MAXIMUM
+	cmode = FALSE
+	if(client)
+		SSdroning.play_area_sound(get_area(src), client)
+
+	var/mob/living/carbon/human/species/wildshape/dragon_matthios/W = new shapepath(loc) //We crate a new mob for the wildshaping player to inhabit
+
+	W.set_patron(src.patron)
+	W.gender = gender
+	W.regenerate_icons()
+	W.stored_mob = src
+	playsound(W.loc, 'sound/body/shapeshift-start.ogg', 100, FALSE, 3)
+	src.forceMove(W)
+	W.after_creation()
+	W.stored_language = new
+	W.stored_language.copy_known_languages_from(src)
+	W.stored_skills = ensure_skills().known_skills.Copy()
+	W.stored_experience = ensure_skills().skill_experience.Copy()
+	W.voice_color = voice_color
+	W.cmode_music_override = cmode_music_override
+	W.cmode_music_override_name = cmode_music_override_name
+
+
+	W.set_nutrition(nutrition)
+	W.set_hydration(hydration)
+
+	mind.transfer_to(W)
+	for(var/obj/effect/proc_holder/S in W.mind.spell_list)
+		if(!istype(S, /obj/effect/proc_holder/spell/self/wildshape_twilight_wingsoffreedom))
+			W.stored_spells += list(S.type)
+			W.mind.RemoveSpell(S)
+	skills?.known_skills = list()
+	skills?.skill_experience = list()
+	W.grant_language(/datum/language/draconic)
+	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
+	W.update_a_intents()
+	
+	if(getorganslot(ORGAN_SLOT_PENIS))
+		W.internal_organs_slot[ORGAN_SLOT_PENIS] = /obj/item/organ/penis/knotted/big
+	if(getorganslot(ORGAN_SLOT_TESTICLES))
+		W.internal_organs_slot[ORGAN_SLOT_TESTICLES] = /obj/item/organ/testicles
+	if(getorganslot(ORGAN_SLOT_BREASTS))
+		W.internal_organs_slot[ORGAN_SLOT_BREASTS] = /obj/item/organ/breasts
+	if(getorganslot(ORGAN_SLOT_VAGINA))
+		W.internal_organs_slot[ORGAN_SLOT_VAGINA] = /obj/item/organ/vagina
+
+	// temporal traits so our body won't die or snore
+	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_SOURCE_WILDSHAPE)
+	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_SOURCE_WILDSHAPE)
+	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_SOURCE_WILDSHAPE)
+	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WILDSHAPE)	
+	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_SOURCE_WILDSHAPE)
+	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_SOURCE_WILDSHAPE)
+	ADD_TRAIT(src, TRAIT_PACIFISM, TRAIT_SOURCE_WILDSHAPE) // just an extra layer of protection in case something will go wrong
+	src.status_flags |= GODMODE // so they won't die by any means
+	invisibility = oldinv
+
+	playsound(W.loc, 'sound/vo/mobs/vdragon/drgnroar.ogg', 100, FALSE, 3)
+	W.gain_inherent_skills()
+
+/mob/living/carbon/human/proc/wildshape_untransform_twilight_dragon(dead)
+	if(!stored_mob)
+		return
+	if(!mind)
+		log_runtime("NO MIND ON [src.name] WHEN UNTRANSFORMING")
+	var/mob/living/carbon/human/species/wildshape/WA = src
+	Paralyze(1, ignore_canstun = TRUE)
+	for(var/obj/item/W in src)
+		dropItemToGround(W)
+	icon = null
+	invisibility = INVISIBILITY_MAXIMUM
+
+	var/mob/living/carbon/human/W = stored_mob
+	stored_mob = null
+
+	REMOVE_TRAIT(W, TRAIT_NOSLEEP, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_NOBREATH, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_NOPAIN, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_TOXIMMUNE, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_NOHUNGER, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_SOURCE_WILDSHAPE)
+	REMOVE_TRAIT(W, TRAIT_PACIFISM, TRAIT_SOURCE_WILDSHAPE)
+	W.status_flags &= ~GODMODE
+	// re-equip our stored neck and ring items, if we have them
+
+
+	W.set_nutrition(nutrition)
+	W.set_hydration(hydration)
+
+	W.forceMove(get_turf(src))
+	mind.transfer_to(W)
+	for(var/S in WA.stored_spells)
+		if(S)
+			W.mind.AddSpell(new S, W)
+	if(dead)
+		W.Unconscious(30 SECONDS, TRUE, TRUE)
+		W.visible_message(span_boldwarning("[W] twists and shifts back into humen guise in a sickening lurch of flesh and bone, and promptly passes out!"), span_userdanger("I quickly flee the waning vitality of my former shape, but the strain is too much--"))
+		to_chat(W, span_crit("...DARKNESS..."))
+	W.copy_known_languages_from(WA.stored_language)
+	skills?.known_skills = WA.stored_skills.Copy()
+	skills?.skill_experience = WA.stored_experience.Copy()
+
+	playsound(W.loc, 'sound/body/shapeshift-end.ogg', 100, FALSE, 3)
+	//Compares the list of spells we had before transformation with those we do now. If there are any that don't match, we remove them
+	for(var/obj/effect/proc_holder/spell/originspell in WA.stored_spells)
+		for(var/obj/effect/proc_holder/spell/wildspell in W.mind.spell_list)
+			if((wildspell != originspell) && !istype(wildspell, /obj/effect/proc_holder/spell/self/wildshape_twilight_wingsoffreedom))
+				W.RemoveSpell(wildspell)
+
+	W.regenerate_icons()
+	if(!dead)
+		to_chat(W, span_userdanger("I return to my old form."))
+
+	qdel(src)
+
+#undef TRAIT_SOURCE_WILDSHAPE
 
 /obj/effect/proc_holder/spell/invoked/projectile/fireball/greater/matthios_dragon
 	invocation_type = "none"

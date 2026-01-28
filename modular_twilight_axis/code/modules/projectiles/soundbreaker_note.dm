@@ -15,13 +15,6 @@
 	var/hit_processed = FALSE
 	var/datum/component/combo_core/soundbreaker/component
 
-/obj/projectile/soundbreaker_note/New(loc, mob/living/source, _dmg_mult, _dmg_type, _zone)
-	owner = source
-	if(_dmg_mult) damage_mult = _dmg_mult
-	if(_dmg_type) damage_type = _dmg_type
-	if(_zone) zone = _zone
-	..()
-
 /obj/projectile/soundbreaker_note/Initialize(mapload, mob/living/source, _dmg_mult, _dmg_type, _zone)
 	. = ..()
 	if(!source || QDELETED(source))

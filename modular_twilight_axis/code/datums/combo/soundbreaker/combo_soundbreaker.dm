@@ -76,9 +76,9 @@
 		RevokeSpells()
 
 	if(proxy)
-		proxy.force = 0
-		proxy.last_attack_target = null
 		if(!QDELETED(proxy))
+			proxy.force = 0
+			proxy.last_attack_target = null
 			qdel(proxy)
 	proxy = null
 
@@ -528,8 +528,6 @@
 	zone = TryGetZone(zone)
 
 	var/obj/item/soundbreaker_proxy/P = GetProxy()
-	if(!P)
-		return FALSE
 	if(!P)
 		return FALSE
 

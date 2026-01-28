@@ -3061,4 +3061,5 @@
 #include "modular_twilight_axis\lore\code\species_types\roguetown_species.dm"
 #include "modular_twilight_axis\modules.dme"
 #include "modular_twilight_axis\lore\code\tips\time.dm"
+#include "modular_twilight_axiscode\modules\jobs\job_types\roguetown\adventurer\types\combat\cleric.dm"
 // END_INCLUDE

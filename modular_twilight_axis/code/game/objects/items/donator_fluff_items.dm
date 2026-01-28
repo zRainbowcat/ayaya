@@ -122,3 +122,12 @@
 	item_state = "owlmask"
 	icon = 'modular_twilight_axis/icons/clothing/onmob/stargazer_outfit.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/icons/clothing/onmob/stargazer_outfit.dmi'
+
+/obj/item/clothing/mask/rogue/facemask/steel/owlmask
+	name = "armored owl mask "
+	desc = "Thin metal mask, made to be similar to owl's head shape. This one has additional plates for defense."
+	icon_state = "owlmask"
+	item_state = "owlmask"
+	icon = 'modular_twilight_axis/icons/clothing/onmob/stargazer_outfit.dmi'
+	mob_overlay_icon = 'modular_twilight_axis/icons/clothing/onmob/stargazer_outfit.dmi'
+

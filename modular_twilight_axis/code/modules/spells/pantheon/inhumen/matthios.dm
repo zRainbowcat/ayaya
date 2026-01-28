@@ -560,6 +560,13 @@
 		R.AddComponent(/datum/component/conjured_item, GLOW_COLOR_DISPLACEMENT)
 	user.put_in_hands(R)
 	ADD_TRAIT(R, TRAIT_NODROP, ABSTRACT_ITEM_TRAIT)
+	var/skill = user.get_skill_level(/datum/skill/magic/holy)
+	R.wdefense += skill
+	R.wdefense_dynamic += skill
+	if(skill <= 4)
+		R.force = 5 * skill
+	else
+		R.force = 20
 	src.conjured_weapon = R
 	return TRUE
 
@@ -579,19 +586,9 @@
 	icon = 'modular_twilight_axis/icons/roguetown/weapons/64.dmi'
 	icon_state = "matthios_standard"
 	resistance_flags = FIRE_PROOF
-
-/obj/item/rogueweapon/spear/matthios_standard/proc/skillcheck()
-	var/skill = usr.get_skill_level(/datum/skill/magic/holy)
-	wdefense += skill
-	wdefense_dynamic += skill
-	if(skill <= 4)
-		force = 5 * skill
-	else
-		force = 20
 	
 /obj/item/rogueweapon/spear/matthios_standard/Initialize()
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(skillcheck), src), wait = 1)
 	for(var/mob/living/carbon/human/H in view(7, get_turf(src)))
 		if(istype(H.patron, /datum/patron/inhumen/matthios))
 			H.apply_status_effect(/datum/status_effect/buff/twilight_peoplesbanner)

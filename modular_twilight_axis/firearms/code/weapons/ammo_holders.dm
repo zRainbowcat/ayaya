@@ -153,6 +153,7 @@
 	if(ammo_to_recall)
 		to_chat(user, span_notice("I begin recalling my ammunition..."))
 		if(do_after(user, 3 SECONDS, src))
+			playsound(src, 'sound/magic/blink.ogg', 80)
 			for(var/obj/B in ammo_to_recall)
 				if(!(B in arrows))
 					if(!eatarrow(B, B.loc))

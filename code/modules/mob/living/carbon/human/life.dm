@@ -44,7 +44,7 @@
 
 	if(mind)
 		mind.sleep_adv.add_stress_cycle(get_stress_amount())
-		for(var/datum/antagonist/A in mind.antag_datums)
+		for(var/datum/antagonist/A as anything in mind.antag_datums)
 			A.on_life(src)
 
 	handle_vamp_dreams()
@@ -94,6 +94,10 @@
 
 	handle_gas_mask_sound()
 
+	if(world.time > next_tempo_cull)
+		cull_tempo_list()
+		next_tempo_cull = world.time + TEMPO_CULL_DELAY
+
 	if(stat != DEAD)
 		return 1
 
@@ -104,7 +108,7 @@
 		return
 
 	if(mind)
-		for(var/datum/antagonist/A in mind.antag_datums)
+		for(var/datum/antagonist/A as anything in mind.antag_datums)
 			A.on_life(src)
 
 	. = ..()

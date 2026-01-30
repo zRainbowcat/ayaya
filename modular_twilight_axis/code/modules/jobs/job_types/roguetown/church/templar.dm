@@ -1,11 +1,28 @@
+/datum/job/roguetown/templar/after_spawn(mob/living/H, mob/M, latejoin = TRUE)
+	..()
+	if(ishuman(H))
+		var/prev_real_name = H.real_name
+		var/prev_name = H.name
+		var/churchiny = "Brother"
+		if(should_wear_femme_clothes(H))
+			churchiny = "Sister"
+		H.real_name = "[churchiny] [prev_real_name]"
+		H.name = "[churchiny] [prev_name]"
+
+		for(var/X in peopleknowme)
+			for(var/datum/mind/MF in get_minds(X))
+				if(MF.known_people)
+					MF.known_people -= prev_real_name
+					H.mind.person_knows_me(MF)
+
 /datum/outfit/job/roguetown/templar/monk/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	ADD_TRAIT(H, TRAIT_CLERGY, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_CLERGY_TA, TRAIT_GENERIC)
 	H.change_stat(STATKEY_STR, -1)
 
 /datum/outfit/job/roguetown/templar/crusader/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	ADD_TRAIT(H, TRAIT_CLERGY, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_CLERGY_TA, TRAIT_GENERIC)
 	H.change_stat(STATKEY_STR, -1)
 	H.change_stat(STATKEY_INT, 1)
 	H.change_stat(STATKEY_SPD, 1)
@@ -59,7 +76,7 @@
 		/obj/item/ritechalk = 1,
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
-		/obj/item/storage/keyring/churchie = 1
+		/obj/item/storage/keyring/acolyte = 1
 		)
 	H.cmode_music = 'sound/music/cmode/church/combat_reckoning.ogg'
 	switch(H.patron?.type)
@@ -88,6 +105,8 @@
 			cloak = /obj/item/clothing/cloak/templar/xylixian
 			mask = /obj/item/clothing/mask/rogue/facemask/xylixmask/armored //TA edit
 			H.cmode_music = 'sound/music/combat_jester.ogg'
+			var/datum/inspiration/I = new /datum/inspiration(H)
+			I.grant_inspiration(H, bard_tier = BARD_T1)
 		if(/datum/patron/divine/dendor)
 			wrists = /obj/item/clothing/neck/roguetown/psicross/dendor
 			cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
@@ -108,16 +127,26 @@
 			wrists = /obj/item/clothing/neck/roguetown/psicross/eora
 			cloak = /obj/item/clothing/suit/roguetown/shirt/robe/eora
 		if(/datum/patron/divine/noc)
-			head = /obj/item/clothing/head/roguetown/roguehood/nochood
-			wrists = /obj/item/clothing/neck/roguetown/psicross/noc
-			cloak = /obj/item/clothing/cloak/tabard/crusader/noc
-			mask = /obj/item/clothing/mask/rogue/facemask/steel
+			var/clothestype = list("Classic", "Zybantian")
+			var/clothestypechoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in clothestype
+			switch(clothestypechoice)
+				if("Classic")
+					head = /obj/item/clothing/head/roguetown/roguehood/nochood
+					wrists = /obj/item/clothing/neck/roguetown/psicross/noc
+					cloak = /obj/item/clothing/cloak/tabard/crusader/noc
+					mask = /obj/item/clothing/mask/rogue/facemask/steel
+				if("Zybantian")
+					head = /obj/item/clothing/head/roguetown/roguehood/stargazer
+					wrists = /obj/item/clothing/neck/roguetown/psicross/noc
+					mask = /obj/item/clothing/mask/rogue/facemask/steel/owlmask
+					cloak = /obj/item/clothing/suit/roguetown/shirt/robe/noc/stargazer
+					H.cmode_music = 'sound/music/combat_desertrider.ogg'
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/roguetown/roguehood
 			mask = /obj/item/clothing/head/roguetown/roguehood/ravoxgorget
 			wrists = /obj/item/clothing/neck/roguetown/psicross/ravox
 			cloak = /obj/item/clothing/cloak/templar/ravox
-			backpack_contents = list(/obj/item/ritechalk, /obj/item/book/rogue/law, /obj/item/clothing/mask/rogue/facemask/steel)
+			backpack_contents = list(/obj/item/ritechalk, /obj/item/book/rogue/law, /obj/item/clothing/mask/rogue/facemask/steel, /obj/item/rogueweapon/scabbard/sheath = 1, /obj/item/storage/keyring/acolyte)
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/roguetown/roguehood
 			wrists = /obj/item/clothing/neck/roguetown/psicross/malum
@@ -132,10 +161,12 @@
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/iron
 	// -- End of section for god specific bonuses --
-	ADD_TRAIT(H, TRAIT_CLERGY, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_CLERGY_TA, TRAIT_GENERIC)
 
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_MINOR, devotion_limit = CLERIC_REQ_2)	//Capped to T2 miracles.
+	if(H.mind)
+		SStreasury.give_money_account(ECONOMIC_LOWER_MIDDLE_CLASS, H, "Church Funding.")
 
 /datum/outfit/job/roguetown/templar/vigilant/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
@@ -322,6 +353,7 @@
 		ADD_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
 		H.cmode_music = 'sound/music/cmode/church/combat_eora.ogg'
+		H.mind.special_items["Alt Tabard"] = /obj/item/clothing/cloak/templar/eoran/alt
 	if(H.patron?.type == /datum/patron/divine/malum)
 		H.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
@@ -333,3 +365,38 @@
 		H.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/music, 1, TRUE)
+
+//Кусок с зибантийской хней для темпларов
+/datum/outfit/job/roguetown/templar/monk/pre_equip(mob/living/carbon/human/H)
+	. = ..()
+	if(istype(H.patron, /datum/patron/divine/noc))
+		var/clothestype = list("Classic", "Zybantian")
+		var/clothestypechoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in clothestype
+		switch(clothestypechoice)
+			if("Classic")
+				neck = /obj/item/clothing/neck/roguetown/psicross/noc
+				cloak = /obj/item/clothing/cloak/tabard/crusader/noc
+				head = /obj/item/clothing/head/roguetown/headband/monk
+			if("Zybantian")
+				head = /obj/item/clothing/head/roguetown/roguehood/stargazer
+				neck = /obj/item/clothing/neck/roguetown/psicross/noc
+				mask = /obj/item/clothing/mask/rogue/facemask/steel/owlmask
+				cloak = /obj/item/clothing/suit/roguetown/shirt/robe/noc/stargazer
+				H.cmode_music = 'sound/music/combat_desertrider.ogg'
+
+/datum/outfit/job/roguetown/templar/crusader/pre_equip(mob/living/carbon/human/H)
+	. = ..()
+	if(istype(H.patron, /datum/patron/divine/noc))
+		var/clothestype = list("Classic", "Zybantian")
+		var/clothestypechoice = input(H,"Choose your covering", "TAKE UP FASHION") as anything in clothestype
+		switch(clothestypechoice)
+			if("Classic")
+				wrists = /obj/item/clothing/neck/roguetown/psicross/noc
+				head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+				cloak = /obj/item/clothing/cloak/tabard/crusader/noc
+			if("Zybantian")
+				head = /obj/item/clothing/head/roguetown/roguehood/stargazer
+				wrists = /obj/item/clothing/neck/roguetown/psicross/noc
+				mask = /obj/item/clothing/mask/rogue/facemask/steel/owlmask
+				cloak = /obj/item/clothing/suit/roguetown/shirt/robe/noc/stargazer
+				H.cmode_music = 'sound/music/combat_desertrider.ogg'

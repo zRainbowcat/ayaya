@@ -124,7 +124,7 @@
 /obj/item/gun/ballistic/twilight_firearm
 	name = "Gunpowder weapon"
 	desc = "IF YOU ARE SEEING THIS. REPORT THIS TO A DEV. "
-	icon = 'modular_twilight_axis/firearms/icons/arquebus.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/arquebus.dmi'
 	icon_state = "arquebus"
 	item_state = "arquebus"
 	force = 10
@@ -168,8 +168,9 @@
 	var/load_time = 50
 	var/gunpowder
 	var/powder_per_reload = 1
-	var/locktype = "Wheellock"
+	var/locktype = "Matchlock"
 	var/match_delay = 10
+	var/effective_range = 5
 	var/obj/item/twilight_ramrod/myrod = null
 
 	//Advanced icon stuff
@@ -193,7 +194,7 @@
 
 /obj/item/gun/ballistic/twilight_firearm/Initialize()
 	. = ..()
-	if(locktype == "Wheellock")
+	if(locktype == "Matchlock" || locktype == "Wheellock")
 		myrod = new /obj/item/twilight_ramrod(src)
 
 
@@ -226,7 +227,7 @@
 	if(user.get_active_held_item())
 		return
 	else
-		if(locktype == "Wheellock")
+		if(locktype == "Matchlock" || locktype == "Wheellock")
 			if(myrod)
 				playsound(src, "sound/items/sharpen_short1.ogg",  100, FALSE)
 				to_chat(user, "<span class='warning'>I draw the ramrod from [src]!</span>")
@@ -263,16 +264,6 @@
 /datum/intent/arc/twilight_firearm
 	chargetime = 1
 	chargedrain = 0
-
-/datum/intent/arc/twilight_firearm/can_charge()
-	if(mastermob && masteritem.wielded)
-		if(!masteritem.wielded)
-			return FALSE
-/*		if(mastermob.get_num_arms(FALSE) < 2)
-			return FALSE
-		if(mastermob.get_inactive_held_item())
-			return FALSE*/
-		return TRUE
 
 /datum/intent/arc/twilight_firearm/get_chargetime()
 	if(mastermob && chargetime)
@@ -363,7 +354,7 @@
 					user.put_in_hands(E)
 			return
 	if(istype(A, /obj/item/twilight_ramrod))
-		if(locktype == "Wheellock")
+		if(locktype == "Matchlock" || locktype == "Wheellock")
 			var/obj/item/twilight_ramrod/R=A
 			if(!reloaded)
 				if(chambered)
@@ -400,7 +391,7 @@
 				return
 	if(istype(A, /obj/item/natural/bundle/fibers))
 		var/obj/item/natural/bundle/fibers/W = A
-		if(locktype == "Matchlock")
+		if(locktype == "Fuse")
 			if(!reloaded)
 				if(chambered)
 					user.visible_message("<span class='notice'>[user] begins attaching the fuse to [src].</span>")
@@ -416,7 +407,7 @@
 							icon = advanced_icon_r
 					return
 	if(istype(A, /obj/item/natural/fibers))
-		if(locktype == "Matchlock")
+		if(locktype == "Fuse")
 			if(!reloaded)
 				if(chambered)
 					user.visible_message("<span class='notice'>[user] begins attaching the fuse to [src].</span>")
@@ -478,9 +469,12 @@
 	. = ..()
 	switch(locktype)
 		if("Wheellock")
-			. += span_info("Это оружие оснащено колесцовым замком — оно не требует фитиля, но перед выстрелом пороховой заряд необходимо уплотнить шомполом.")
+			. += span_info("Это оружие оснащено колесцовым замком. Перед выстрелом нужно засыпать порох, установить пулю и уплотнить заряд шомполом.")
 		if("Matchlock")
-			. += span_info("Это оружие оснащено фитильным замком — чтобы его взвести, необходимо установить фитиль.")
+			. += span_info("Это оружие оснащено фитильным замком. Перед выстрелом нужно засыпать порох, установить пулю и уплотнить заряд шомполом.")
+		if("Fuse")
+			. += span_info("Это оружие приводится в действие запальным фитилем. Перед выстрелом нужно засыпать порох, установить пулю и сам фитиль.")
+	. += span_info("Прицельная дальность стрельбы: [effective_range]0 метров.")
 	if(gunpowder)
 		if(chambered)
 			if(reloaded)
@@ -528,7 +522,7 @@
 		else
 			icon = advanced_icon
 	spark_act()
-	if(locktype == "Wheellock")
+	if(locktype == "Matchlock" || locktype == "Wheellock")
 		..()
 		if(!silenced)
 			switch(gunpowder)
@@ -579,7 +573,7 @@
 				shake_camera(M, 3, 1)
 
 		gunpowder = null
-		if(prob(accident_chance))
+		if(prob(accident_chance) && bigboy)
 			user.flash_fullscreen("whiteflash")
 			user.apply_damage(rand(5,15), BURN, pick(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND))
 			user.visible_message("<span class='danger'>[user] accidentally burnt themselves while firing the [src].</span>")
@@ -588,18 +582,18 @@
 				user.dropItemToGround(src)
 				user.Knockdown(rand(15,30))
 				user.Immobilize(30)
-		if(prob(accident_chance))
+		if(prob(accident_chance) && bigboy)
 			user.visible_message("<span class='danger'>[user] is knocked back by the recoil!</span>")
 			user.throw_at(knockback, rand(1,2), 7)
 			if(prob(accident_chance) && firearm_skill < 4)
 				user.dropItemToGround(src)
 				user.Knockdown(rand(15,30))
 				user.Immobilize(30)
-			if(firearm_skill < 3 && prob(50))
-				var/def_zone = "[(user.active_hand_index == 2) ? "r" : "l" ]_arm"
-				var/obj/item/bodypart/BP = user.get_bodypart(def_zone)
-				BP.add_wound(/datum/wound/dislocation)
-	else if(locktype == "Matchlock")
+				if(firearm_skill < 3 && prob(50))
+					var/def_zone = "[(user.active_hand_index == 2) ? "r" : "l" ]_arm"
+					var/obj/item/bodypart/BP = user.get_bodypart(def_zone)
+					BP.add_wound(/datum/wound/dislocation)
+	else if(locktype == "Fuse")
 		if(advanced_icon_f)
 			icon = advanced_icon_f
 		playsound(src, "modular_twilight_axis/firearms/sound/fuse.ogg", 100, FALSE)
@@ -655,19 +649,19 @@
 			for(var/mob/M in range(5, user))
 				if(!M.stat)
 					shake_camera(M, 3, 1)
-			if(prob(accident_chance))
+			if(prob(accident_chance) && bigboy)
 				user.flash_fullscreen("whiteflash")
 				user.apply_damage(rand(5,15), BURN, pick(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND))
 				user.visible_message(span_danger("[user] accidentally burnt themselves while firing the [src]."))
 				user.emote("painscream")
-				if(prob(60))
+				if(prob(60) && firearm_skill < 4)
 					user.dropItemToGround(src)
 					user.Knockdown(rand(15,30))
 					user.Immobilize(30)
-			if(prob(accident_chance))
+			if(prob(accident_chance) && bigboy)
 				user.visible_message(span_danger("[user] is knocked back by the recoil!"))
 				user.throw_at(knockback, rand(1,2), 7)
-				if(prob(accident_chance))
+				if(prob(accident_chance) && firearm_skill < 4)
 					user.dropItemToGround(src)
 					user.Knockdown(rand(15,30))
 					user.Immobilize(30)
@@ -697,31 +691,43 @@
 /obj/item/gun/ballistic/twilight_firearm/arquebus
 	name = "arquebus rifle"
 	desc = "Пороховое оружие второго поколения, стреляющее бронебойными свинцовыми пулями."
-	icon = 'modular_twilight_axis/firearms/icons/arquebus.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/arquebus.dmi'
 	icon_state = "arquebus"
 	item_state = "arquebus"
+	advanced_icon = 'modular_twilight_axis/firearms/icons/arquebus/arquebus.dmi'
+	advanced_icon_norod = 'modular_twilight_axis/firearms/icons/arquebus/arquebus_norod.dmi'
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus/bayonet
 	name = "arquebus rifle"
 	desc = "Пороховое оружие второго поколения, стреляющее бронебойными свинцовыми пулями. Оснащена штыком для использования в ближнем бою."
-	icon = 'modular_twilight_axis/firearms/icons/arquebusbaoynet.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/arquebusbaoynet.dmi'
+	advanced_icon = 'modular_twilight_axis/firearms/icons/arquebus/arquebusbaoynet.dmi'
+	advanced_icon_norod = 'modular_twilight_axis/firearms/icons/arquebus/arquebusbayonet_norod.dmi'
 	gripped_intents = list(/datum/intent/shoot/twilight_firearm, /datum/intent/arc/twilight_firearm, INTENT_GENERIC, /datum/intent/spear/thrust/militia)
 	wdefense = 5
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus/decorated
 	name = "decorated arquebus rifle"
 	desc = "Настоящее произведение искусства в обличии огнестрельного оружия. Приклад и цевье аркебузы украшены золотыми пластинами и инкрустированным рубином, а на стволе выбита надпись: «Взгляните на мои деянья и дрожите»."
-	icon = 'modular_twilight_axis/firearms/icons/decorated_arquebus.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/decorated_arquebus.dmi'
+	advanced_icon = 'modular_twilight_axis/firearms/icons/arquebus/decorated_arquebus.dmi'
+	advanced_icon_norod = 'modular_twilight_axis/firearms/icons/arquebus/decorated_arquebus_norod.dmi'
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus/jagerrifle
 	name = "Jägerbüchse"
 	desc = "Редкая разновидность колесцовой аркебузы, изготавливаемая мастерами Грензельхофта для егерей Фрейкорпс, отличившихся в ходе боевых действий. Легче и менее подвержена износу в сравнении с серийными образцами."
-	icon = 'modular_twilight_axis/firearms/icons/jagerrifle.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/jagerrifle.dmi'
+	advanced_icon = 'modular_twilight_axis/firearms/icons/arquebus/jagerrifle.dmi'
+	advanced_icon_norod = 'modular_twilight_axis/firearms/icons/arquebus/jagerrifle_norod.dmi'
+	locktype = "Wheellock"
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus/bayonet/jagerrifle
 	name = "Jägerbüchse"
 	desc = "Редкая разновидность колесцовой аркебузы, изготавливаемая мастерами Грензельхофта для егерей Фрейкорпс, отличившихся в ходе боевых действий. Легче и менее подвержена износу в сравнении с серийными образцами. Оснащена штыком для использования в ближнем бою."
-	icon = 'modular_twilight_axis/firearms/icons/jagerriflebayonet.dmi'
+	icon = 'modular_twilight_axis/firearms/icons/arquebus/jagerriflebayonet.dmi'
+	advanced_icon = 'modular_twilight_axis/firearms/icons/arquebus/jagerriflebayonet.dmi'
+	advanced_icon_norod = 'modular_twilight_axis/firearms/icons/arquebus/jagerrifle_bayonet_norod.dmi'
+	locktype = "Wheellock"
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus_pistol
 	name = "arquebus pistol"
@@ -740,13 +746,13 @@
 	bigboy = FALSE
 	gripsprite = FALSE
 	cartridge_wording = "bullet"
-	damfactor = 0.7
-	critfactor = 0.7
+	effective_range = 3
 	wdefense = 0
 	advanced_icon = 'modular_twilight_axis/firearms/icons/pistol/pistol.dmi'
 	advanced_icon_r = 'modular_twilight_axis/firearms/icons/pistol/pistol_r.dmi'
 	advanced_icon_norod	= 'modular_twilight_axis/firearms/icons/pistol/pistol_norod.dmi'
 	advanced_icon_r_norod = 'modular_twilight_axis/firearms/icons/pistol/pistol_r_norod.dmi'
+	locktype = "Wheellock"
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus_pistol/getonmobprop(tag)
 	. = ..()
@@ -767,6 +773,7 @@
 	advanced_icon_r = 'modular_twilight_axis/firearms/icons/umbra/pistol_r.dmi'
 	advanced_icon_norod	= 'modular_twilight_axis/firearms/icons/umbra/pistol_norod.dmi'
 	advanced_icon_r_norod = 'modular_twilight_axis/firearms/icons/umbra/pistol_r_norod.dmi'
+	effective_range = 5
 
 /obj/item/gun/ballistic/twilight_firearm/handgonne
 	name = "culverin"
@@ -776,7 +783,7 @@
 	item_state = "handgonne"
 	mag_type = /obj/item/ammo_box/magazine/internal/twilight_firearm/handgonne
 	cartridge_wording = "cannonball"
-	locktype = "Matchlock"
+	locktype = "Fuse"
 	advanced_icon = 'modular_twilight_axis/firearms/icons/handgonne/handgonne.dmi'
 	advanced_icon_r = 'modular_twilight_axis/firearms/icons/handgonne/handgonne_r.dmi'
 	advanced_icon_f	= 'modular_twilight_axis/firearms/icons/handgonne/handgonne_f.dmi'
@@ -798,8 +805,32 @@
 	item_state = "flintgonne"
 	gripped_intents = list(/datum/intent/shoot/twilight_firearm/flintgonne, /datum/intent/arc/twilight_firearm/flintgonne, INTENT_GENERIC)
 	smeltresult = /obj/item/ingot/iron
-	damfactor = 0.7
-	critfactor = 0.7
+	damfactor = 0.9
+	effective_range = 4
+
+/obj/item/gun/ballistic/twilight_firearm/axtgonne
+	name = "axtbüchse"
+	desc = "Кустарный образец огнестрельного оружия первого поколения, который приобрел популярность среди егерей Грензельхофта во время Сумеречной войны. К стволу оружия приделано лезвие топора."
+	icon = 'modular_twilight_axis/firearms/icons/axtbuchse/axtbuchse.dmi'
+	advanced_icon = 'modular_twilight_axis/firearms/icons/axtbuchse/axtbuchse.dmi'
+	advanced_icon_norod	= 'modular_twilight_axis/firearms/icons/axtbuchse/axtbuchse_norod.dmi'
+	icon_state = "axegun"
+	item_state = "axegun"
+	damfactor = 0.9
+	possible_item_intents = list(/datum/intent/axe/cut, /datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/shoot/twilight_firearm, /datum/intent/arc/twilight_firearm, /datum/intent/axe/cut/battle/greataxe, /datum/intent/axe/chop/battle/greataxe)
+	associated_skill = /datum/skill/combat/axes
+
+/obj/item/gun/ballistic/twilight_firearm/axtgonne/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -7,"sy" = 0,"nx" = 7,"ny" = 0,"wx" = -2,"wy" = 0,"ex" = 1,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -93,"sturn" = -93,"wturn" = 90,"eturn" = 90, "nflip" = 0, "sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 5,"sy" = -2,"nx" = -5,"ny" = -1,"wx" = -8,"wy" = -2,"ex" = 8,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 1,"nturn" = -15,"sturn" = 15,"wturn" = -15,"eturn" = 15,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.6,"sx" = -1,"sy" = 0,"nx" = 0,"ny" = 0,"wx" = 2,"wy" = 0,"ex" = 0,"ey" = 0,"nturn" = 45,"sturn" = -45,"wturn" = 45,"eturn" = -45,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
 /datum/intent/shoot/twilight_firearm/flintgonne/get_chargetime()
 	if(mastermob && chargetime)
@@ -834,11 +865,12 @@
 	icon_state = "barker"
 	item_state = "barker"
 	gripped_intents = list(/datum/intent/shoot/twilight_firearm/flintgonne, /datum/intent/arc/twilight_firearm/flintgonne, INTENT_GENERIC)
-	locktype = "Matchlock"
+	locktype = "Fuse"
 	smeltresult = /obj/item/ingot/iron
 	damfactor = 0.7
 	critfactor = 0.3
 	npcdamfactor = 2.5
+	effective_range = 3
 	match_delay = 4
 
 /obj/item/gun/ballistic/twilight_firearm/handgonne/purgatory

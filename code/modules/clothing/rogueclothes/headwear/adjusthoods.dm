@@ -24,6 +24,8 @@
 	block2add = FOV_BEHIND
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
+	equip_delay_self = 1.5 SECONDS
+	unequip_delay_self = 1.5 SECONDS
 
 /obj/item/clothing/head/roguetown/roguehood/ComponentInitialize()
 	. = ..()
@@ -94,7 +96,7 @@
 	name = "hijab"
 	desc = "Flowing like blood from a wound, this tithe of cloth-and-silk spills out to the shoulders. It carries the telltale mark of Naledian stitcheries."
 	item_state = "hijab"
-	icon_state = "deserthood"
+	icon_state = "hijab"
 	hidesnoutADJ = FALSE
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR	//Does not hide face.
 	block2add = null
@@ -103,10 +105,9 @@
 	name = "padded headscarf"
 	desc = "A common sight amongst those travelling the long desert routes, it offers protection from the heat and a modicum of it against the beasts that prowl its more comfortable nites."
 	max_integrity = 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor = ARMOR_SPELLSINGER //basically the same as a warscholar hood
 	item_state = "hijab"
-	icon_state = "deserthood"
+	icon_state = "hijab"
 	naledicolor = TRUE
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/heavyhood
@@ -208,6 +209,30 @@
 	sewrepair = TRUE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
+	block2add = null
+
+// UN-Holy Hoods!
+/obj/item/clothing/head/roguetown/roguehood/unholy
+	name = "foreboding hood"
+	desc = "A veil to the cultic and capricious. The runic sigils stitched along the hems teem with unimaginable knowledge, in the most literal sense of the word."
+	max_integrity = ARMOR_INT_HELMET_CLOTH
+	armor = ARMOR_PADDED
+	color = null
+	item_state = "warlockhood"
+	icon_state = "warlockhood"
+
+/obj/item/clothing/head/roguetown/roguehood/unholy/lich
+	name = "ominous hood"
+	desc = "An otherworldly veil, whispering the constant ponderances of a runic enigma. She watches over you; and Her grin is crooked into one of eternal malice."
+	max_integrity = ARMOR_INT_HELMET_ANTAG 
+
+/obj/item/clothing/head/roguetown/roguehood/unholy/enchanted
+	name = "ominously enchanted hood"
+	desc = "An otherworldly veil, amythortz-woven and crackling with the unignorable truths of a runic enigma. She watches over you; and Her grin is crooked into one of eternal malice."
+	max_integrity = ARMOR_INT_HELMET_ANTAG 
+	armor = ARMOR_SPELLSINGER
+	item_state = "ewarlockhood"
+	icon_state = "ewarlockhood"
 
 //............... Feldshers Hood ............... //
 /obj/item/clothing/head/roguetown/roguehood/feld
@@ -253,6 +278,16 @@
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 
+/obj/item/clothing/head/roguetown/roguehood/shroudwhite
+	name = "robed shroud"
+	desc = "A billowing hood, carrying the aroma of a distant memory."
+	icon_state = "whitehood"
+	item_state = "whitehood"
+	body_parts_covered = HEAD|EARS|NOSE
+	color = null
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+
 //
 
 /obj/item/clothing/head/roguetown/roguehood/psydon
@@ -267,7 +302,7 @@
 	body_parts_covered = NECK | HEAD | HAIR
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = PREVENT_CRITS_NONE
 	armor = ARMOR_SPELLSINGER
 	dynamic_hair_suffix = ""
 	edelay_type = 1
@@ -286,7 +321,7 @@
 	body_parts_covered = NECK | HEAD | HAIR
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = PREVENT_CRITS_NONE
 	armor = ARMOR_SPELLSINGER
 	dynamic_hair_suffix = ""
 	edelay_type = 1
@@ -300,10 +335,10 @@
 	name = "hierophant's pashmina"
 	desc = "A thick hood that covers one's entire head, should they desire, or merely acts as a scarf otherwise. Made with spell-laced fabric to provide some protection against daemons and mortals alike."
 	max_integrity = 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = PREVENT_CRITS_NONE
 	armor = ARMOR_SPELLSINGER
-	icon_state = "deserthood"
-	item_state = "deserthood"
+	icon_state = "hijab"
+	item_state = "hijab"
 	naledicolor = TRUE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
@@ -312,7 +347,7 @@
 	name = "pontifex's pashmina"
 	desc = "A slim hood with thin, yet dense fabric. Stretchy and malleable, allowing for full flexibility and mobility. Made with spell-laced fabric to provide some protection against daemons and mortals alike."
 	max_integrity = 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = PREVENT_CRITS_NONE
 	armor = ARMOR_SPELLSINGER
 	icon_state = "monkhood"
 	item_state = "monkhood"

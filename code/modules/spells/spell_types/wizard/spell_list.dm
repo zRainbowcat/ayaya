@@ -27,6 +27,8 @@ GLOBAL_LIST_INIT(learnable_spells, (list(/obj/effect/proc_holder/spell/invoked/p
 		/obj/effect/proc_holder/spell/invoked/projectile/arcynebolt,
 		/obj/effect/proc_holder/spell/invoked/gravity,
 		/obj/effect/proc_holder/spell/invoked/projectile/repel,
+		/obj/effect/proc_holder/spell/invoked/projectile/gientrock,
+		/obj/effect/proc_holder/spell/invoked/watertrap,
 		/obj/effect/proc_holder/spell/invoked/aerosolize,
 		/obj/effect/proc_holder/spell/targeted/touch/lesserknock,
 		/obj/effect/proc_holder/spell/invoked/counterspell,
@@ -45,6 +47,8 @@ GLOBAL_LIST_INIT(learnable_spells, (list(/obj/effect/proc_holder/spell/invoked/p
 		/obj/effect/proc_holder/spell/self/conjure_armor,
 		/obj/effect/proc_holder/spell/self/conjure_armor/dragonhide,
 		/obj/effect/proc_holder/spell/self/magicians_brick,
+		/obj/effect/proc_holder/spell/invoked/fire_cascade,
+		/obj/effect/proc_holder/spell/invoked/firewalker,
 		/obj/effect/proc_holder/spell/invoked/thunderstrike,
 		/obj/effect/proc_holder/spell/invoked/sundering_lightning,
 		/obj/effect/proc_holder/spell/invoked/meteor_storm,
@@ -58,5 +62,7 @@ GLOBAL_LIST_INIT(learnable_spells, (list(/obj/effect/proc_holder/spell/invoked/p
 		/obj/effect/proc_holder/spell/invoked/raise_deadite,
 		/obj/effect/proc_holder/spell/invoked/bonechill,
 		/obj/effect/proc_holder/spell/invoked/silence,
+		/obj/effect/proc_holder/spell/self/findfamiliar,
+		/obj/effect/proc_holder/spell/invoked/projectile/shrapnelbloom
 		)
 ))

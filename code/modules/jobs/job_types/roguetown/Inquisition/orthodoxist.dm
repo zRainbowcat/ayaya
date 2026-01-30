@@ -15,7 +15,7 @@
 	min_pq = 10
 	max_pq = null
 	round_contrib_points = 2
-	advclass_cat_rolls = list(CTAG_INQUISITION = 20)
+	advclass_cat_rolls = list(CTAG_ORTHODOXIST = 20)
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
 	give_bank_account = 15
@@ -24,6 +24,7 @@
 		/datum/advclass/psydoniantemplar,
 		/datum/advclass/disciple,
 		/datum/advclass/confessor,
+		/datum/advclass/naledimage, //TA EDIT
 		/datum/advclass/psyaltrist
 	)
 	same_job_respawn_delay = 30 MINUTES

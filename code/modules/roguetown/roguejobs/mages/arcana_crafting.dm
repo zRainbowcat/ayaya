@@ -197,7 +197,7 @@
 //fae conversions
 
 /datum/crafting_recipe/roguetown/arcana/fairydust //T1 mage summon loot
-	name = "fairy dust)"
+	name = "fairy dust"
 	result = /obj/item/magic/fairydust
 	reqs = list(/obj/item/magic/manacrystal = 1,
 				/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
@@ -331,9 +331,3 @@
 				/obj/item/rogueore/cinnabar = 1)
 	craftdiff = 5
 
-/datum/crafting_recipe/roguetown/arcana/findfamiliar
-	name = "scroll of find familiar"
-	result = /obj/item/book/granter/spell/blackstone/familiar
-	reqs = list(/obj/item/magic/manacrystal = 1,
-				/obj/item/paper/scroll = 1)
-	craftdiff = 1

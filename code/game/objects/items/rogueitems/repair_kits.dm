@@ -111,14 +111,14 @@
 	icon_state = "armorkit"
 	desc = "A wonderful set of metal patches, individual armor plates and straps for fastening them.  Everything you need to fix a leaky metal armor."
 	repair_type = 1
-	max_integrity = 1000
+	max_integrity = 600
 	table_need = TRUE
 
 /obj/item/repair_kit/metal/bad
 	name = "metal scrap kit"
 	icon_state = "custararmorkit"
 	desc = "A meager set of various pieces of old iron armor, some parts can be used for field repairs, but do not expect a miracle from this pile of metal."
-	max_integrity = 400
+	max_integrity = 300
 
 /obj/item/armorkit_empty
 	name = "empty metal kit"
@@ -136,8 +136,8 @@
 	if(!isitem(O))
 		return
 	var/obj/item/I = O
-	if(I.anvilrepair || I == /obj/item/scrap)
-		if(I.smeltresult == /obj/item/ingot/iron || I == /obj/item/scrap) //all iron stuff and iron scrap
+	if(I.anvilrepair || I.type == /obj/item/scrap)
+		if(I.smeltresult == /obj/item/ingot/iron || I.type == /obj/item/scrap) //all iron stuff and iron scrap
 			if(!do_after(user, 2 SECONDS, target = I))
 				return
 			user.visible_message(span_notice("[user] salvages [I] into usable materials."))

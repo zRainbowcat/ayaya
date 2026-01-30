@@ -286,7 +286,13 @@
 	var/obj/item/L = owner.get_item_for_held_index(1)
 	var/obj/item/R = owner.get_item_for_held_index(2)
 
-	return (istype(L, /obj/item/rogue/instrument) || istype(R, /obj/item/rogue/instrument))
+	if(istype(L, /obj/item/rogue/instrument) || istype(R, /obj/item/rogue/instrument))
+		return TRUE
+
+	if(owner.has_stress_event(/datum/stressevent/music))
+		return TRUE
+
+	return FALSE
 
 /datum/component/combo_core/soundbreaker/proc/GetTargetTurf(atom/target_atom)
 	if(!target_atom)

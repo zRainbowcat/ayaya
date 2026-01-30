@@ -208,6 +208,7 @@
 		/obj/item/clothing/suit/roguetown/armor/plate/full/fluted 	= /obj/item/clothing/suit/roguetown/armor/plate/full/fluted/legacy
 		)
 	result_item = null
+	icon_loadout = /obj/item/clothing/suit/roguetown/armor/plate/full/fluted/legacy
 
 /obj/item/enchantingkit/triumph_weaponkit_tri
 	name = "'Valorian' longsword morphing elixir"
@@ -226,7 +227,7 @@
 		/obj/item/rogueweapon/sword/rapier	  			= /obj/item/rogueweapon/sword/rapier/wideguard
 		)
 	result_item = null
-
+	icon_loadout = /obj/item/rogueweapon/sword/long/triumph/wideguard
 
 /obj/item/enchantingkit/triumph_weaponkit_rock
 	name = "'Rockhillian' longsword morphing elixir"
@@ -237,6 +238,7 @@
 		/obj/item/rogueweapon/sword/long/broadsword/steel		= /obj/item/rogueweapon/sword/long/broadsword/steel/rockhill
 		)
 	result_item = null
+	icon_loadout = /obj/item/rogueweapon/sword/long/triumph/rockhill
 
 /obj/item/enchantingkit/triumph_weaponkit_sabre
 	name = "'Sabreguard' longsword morphing elixir"
@@ -246,6 +248,7 @@
 		/obj/item/rogueweapon/sword/long/kriegmesser	  			= /obj/item/rogueweapon/sword/long/kriegmesser/sabreguard
 		)
 	result_item = null
+	icon_loadout = /obj/item/rogueweapon/sword/long/triumph/sabreguard
 
 /obj/item/enchantingkit/triumph_weaponkit_psy
 	name = "'Psycrucifix' longsword morphing elixir"
@@ -257,3 +260,4 @@
 		/obj/item/rogueweapon/sword/long/psysword	  			= /obj/item/rogueweapon/sword/long/psysword/psycrucifix
 		)
 	result_item = null
+	icon_loadout = /obj/item/rogueweapon/sword/long/triumph/psycrucifix

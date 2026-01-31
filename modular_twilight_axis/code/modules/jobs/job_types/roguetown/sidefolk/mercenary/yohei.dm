@@ -142,8 +142,8 @@
 	wdefense_wbonus = 1
 	max_blade_int = 150 
 	wbalance = WBALANCE_SWIFT
-	possible_item_intents = list(/datum/intent/sword/cut/miaodao/fast, /datum/intent/sword/strike)
-	gripped_intents = list(/datum/intent/sword/cut/miaodao, /datum/intent/sword/thrust/zwei, /datum/intent/sword/peel/miaodao, /datum/intent/rend/reach)
+	possible_item_intents = list(/datum/intent/sword/cut/miaodao, /datum/intent/sword/strike)
+	gripped_intents = list(/datum/intent/sword/cut/miaodao/fast, /datum/intent/sword/thrust/zwei, /datum/intent/sword/peel/miaodao, /datum/intent/rend/reach)
 	alt_intents = null
 
 /obj/item/rogueweapon/greatsword/miaodao/getonmobprop(tag)

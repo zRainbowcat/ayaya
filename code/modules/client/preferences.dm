@@ -250,7 +250,11 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/datum/voicepack/temp_vp
 
+
+	var/mood_messages_in_chat
+
 	var/datum/loadout_panel/loadoutpanel
+
 
 /datum/preferences/New(client/C)
 	parent = C

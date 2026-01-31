@@ -223,13 +223,6 @@ GLOBAL_LIST_EMPTY(cmode_tracks_by_name)
 	credits = "Helbrede - Sons of Tyr"
 	musicpath = list('sound/music/combat_grenzelhoft.ogg')
 
-/datum/combat_music/grenzelhoft_mage //TA mandated cmode music
-	name = "Grenzelhoft Gefechtsgelehrter"
-	desc = ""
-	shortname = "Gefechtsgelehrter"
-	credits = "Helbrede - Helheim"
-	musicpath = list('modular_twilight_axis/sound/music/combat_grenzelhoft_mage.ogg')
-
 /datum/combat_music/heretic_zizo
 	name = "Heretic - Zizo (Lich)"
 	desc = ""
@@ -278,13 +271,6 @@ GLOBAL_LIST_EMPTY(cmode_tracks_by_name)
 	shortname = "Ordinator"
 	musicpath = list('sound/music/combat_inqordinator.ogg')
 
-/datum/combat_music/inquis_blackpowder //TA mandated cmode music
-	name = "Inquisition - Blackpowder Order"
-	desc = ""
-	shortname = "Blackpowder"
-	credits = "Warhammer 40,000: Darktide - Disposal Unit"
-	musicpath = list('modular_twilight_axis/firearms/sound/music/combat_blackpowder.ogg')
-
 /datum/combat_music/jester
 	name = "Jester"
 	desc = ""
@@ -297,13 +283,6 @@ GLOBAL_LIST_EMPTY(cmode_tracks_by_name)
 	desc = ""
 	shortname = "Kazengite"
 	musicpath = list('sound/music/combat_kazengite.ogg')
-
-/datum/combat_music/yohei //TA yohei cmode music
-	name = "Yohei"
-	desc = "Violence and greed, feeding into one another. Perpetuate the cycle."
-	shortname = "Yohei"
-	credits = "Metal Gear Rising Revengeance - The Only Thing I Know For Real (Acoustic + Demo)"
-	musicpath = list('modular_twilight_axis/sound/music/combat_yohei.ogg')
 
 /datum/combat_music/knight
 	name = "Knight (Noble)"

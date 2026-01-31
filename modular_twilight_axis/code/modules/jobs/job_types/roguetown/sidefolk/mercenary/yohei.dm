@@ -70,7 +70,7 @@
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE)
 			H.put_in_hands(new /obj/item/rogueweapon/greatsword/miaodao)
 	var/masks = list("Half-Mask", "Oni", "Kitsune")
-	var/mask_choice = input("Choose your mask.", "...BEHIND THE HORN AND STEEL") as anything in masks
+	var/mask_choice = input("Choose your mask.", "...BEHIND THE HORN AND STEEL.") as anything in masks
 	switch(mask_choice)
 		if("Half-Mask")
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/rogue/facemask/steel/kazengun/yohei, SLOT_WEAR_MASK, TRUE)

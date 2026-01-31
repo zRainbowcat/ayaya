@@ -119,7 +119,6 @@
 
 /datum/intent/sword/cut/miaodao
 	reach = 2
-	swingdelay = 4
 	penfactor = 20
 
 /datum/intent/sword/cut/miaodao/fast

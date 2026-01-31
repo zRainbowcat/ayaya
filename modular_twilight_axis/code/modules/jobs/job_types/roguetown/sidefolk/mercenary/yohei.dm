@@ -106,14 +106,14 @@
 	body_parts_covered = NECK|MOUTH|NOSE
 
 /obj/item/clothing/mask/rogue/facemask/steel/kazengun/yohei/ogre
-	name = "steel oni menpo"
+	name = "steel oni mempo"
 	desc = "\"The second article: Endure in silence, speak only through steel.\""
 	icon_state = "steelonimempo"
 	armor = ARMOR_PLATE
 	body_parts_covered = NECK|FACE
 
 /obj/item/clothing/mask/rogue/facemask/steel/kazengun/yohei/kitsune
-	name = "steel kitsune menpo"
+	name = "steel kitsune mempo"
 	desc = "\"The third article: Mercy is a luxury the wise cannot afford.\""
 	icon_state = "steelkitsunemempo"
 

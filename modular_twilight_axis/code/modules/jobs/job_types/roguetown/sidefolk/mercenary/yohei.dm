@@ -59,7 +59,7 @@
 /datum/outfit/job/roguetown/mercenary/twilight_yohei/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
 	var/weapons = list("Hu Tou Gou", "Miaodao")
-	var/weapon_choice = input("Choose your weapon.", "THE BLADE DECIDES.") as anything in weapons
+	var/weapon_choice = input("Choose your weapon.", "THE BLADE DECIDES...") as anything in weapons
 	switch(weapon_choice) //A large selection of exotic starter options, as per the class gimmick.
 		if ("Hu Tou Gou")
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
@@ -71,7 +71,7 @@
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE)
 			H.put_in_hands(new /obj/item/rogueweapon/greatsword/miaodao)
 	var/masks = list("Half-Mask", "Oni", "Kitsune")
-	var/mask_choice = input("Choose your mask.", "BEHIND THE HORN AND STEEL.") as anything in masks
+	var/mask_choice = input("Choose your mask.", "...BEHIND THE HORN AND STEEL") as anything in masks
 	switch(mask_choice)
 		if("Half-Mask")
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/rogue/facemask/steel/kazengun/yohei, SLOT_WEAR_MASK, TRUE)

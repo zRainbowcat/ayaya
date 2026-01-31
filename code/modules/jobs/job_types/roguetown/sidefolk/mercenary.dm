@@ -59,7 +59,6 @@
 	/datum/advclass/mercenary/twilight_yohei
 	)
 
-
 /datum/job/roguetown/mercenary/after_spawn(mob/living/L, mob/M, latejoin = FALSE)
 	..()
 	if(L && ishuman(L))

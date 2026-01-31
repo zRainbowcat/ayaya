@@ -298,7 +298,7 @@ GLOBAL_LIST_EMPTY(cmode_tracks_by_name)
 	shortname = "Kazengite"
 	musicpath = list('sound/music/combat_kazengite.ogg')
 
-/datum/combat_music/swordhunter //TA yohei cmode music
+/datum/combat_music/yohei //TA yohei cmode music
 	name = "Yohei"
 	desc = "Violence and greed, feeding into one another. Perpetuate the cycle."
 	shortname = "Yohei"

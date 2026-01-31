@@ -86,6 +86,11 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	category = "Головные уборы"
 	path = /obj/item/clothing/head/roguetown/eaststrawhat
 
+/datum/loadout_item/antlers
+	name = "Old antlers"
+	category = "Головные уборы"
+	path = /obj/item/clothing/head/roguetown/antlers
+
 /datum/loadout_item/witchhat
 	name = "Witch Hat"
 	category = "Головные уборы"
@@ -1161,6 +1166,12 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	category = list("Броня", "Донат")
 	donatitem = TRUE
 	
+/datum/loadout_item/donator_eiren4
+	name = "Donator Kit - Darkwood's Embrace"
+	path = /obj/item/clothing/suit/roguetown/armor/longcoat/eiren
+	category = list("Одежда", "Донат")
+	donatitem = TRUE
+
 /datum/loadout_item/donator_zydrasiconosash
 	name = "Donator Kit - Iconoclast Sash - Required: Hauberk(Only men, no small races)"
 	path = /obj/item/enchantingkit/zydrasiconosash

@@ -37,7 +37,7 @@
 	has_loadout = TRUE
 	to_chat(H, span_warning("Au Ra do not see shame in taking coin for war. A worthy conflict tempers the spirit, strengthens the arm, and brings prosperity to the clan waiting beyond the horizon. Above all stands family. Clan is not a memory left behind, but a presence carried with every step. Each contract you accept, each blade you draw, each wound you endure... all of it is for the home where, one day, you may lay your armor aside."))
 
-	head = /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku/yohei
+	head = /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yohei
 	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
 	armor = /obj/item/clothing/suit/roguetown/armor/basiceast/yohei
 	cloak = /obj/item/clothing/cloak/thief_cloak/yohei
@@ -87,9 +87,10 @@
 	armor = ARMOR_LEATHER_STUDDED
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 25
 
-/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku/yohei
+/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yohei
 	max_integrity = 100
 	armor = ARMOR_SPELLSINGER
+	color = CLOTHING_BLACK
 	desc = "A traditional Kazengunese hood, dyed in dark colors."
 
 /obj/item/clothing/cloak/thief_cloak/yohei

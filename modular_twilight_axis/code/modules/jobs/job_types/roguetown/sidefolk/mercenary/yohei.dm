@@ -87,6 +87,7 @@
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER + 25
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yohei
+	name = "shadowed hood"
 	max_integrity = 100
 	armor = ARMOR_SPELLSINGER
 	color = CLOTHING_BLACK

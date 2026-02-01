@@ -898,6 +898,7 @@
 	npcdamfactor = 1.5
 	mag_type = /obj/item/ammo_box/magazine/internal/twilight_firearm/mortar
 	cartridge_wording = "cannonball"
+	smeltresult = /obj/item/ingot/bronze
 	icon_state = "mortar"
 	item_state = "mortar"
 	icon = 'modular_twilight_axis/firearms/icons/mortar/mortar.dmi'

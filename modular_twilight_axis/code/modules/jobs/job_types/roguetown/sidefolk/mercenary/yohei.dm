@@ -80,6 +80,8 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/rogue/facemask/steel/kazengun/yohei/kitsune, SLOT_WEAR_MASK, TRUE)
 
 /obj/item/clothing/suit/roguetown/armor/basiceast/yohei
+	name = "black dobo robe"
+	desc = "A dark dobo robe with reinforced leather inlays. Offers decent protection while allowing for ease of movement."
 	icon = 'modular_twilight_axis/icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/icons/roguetown/clothing/onmob/armor.dmi'
 	icon_state = "yoheisuit"

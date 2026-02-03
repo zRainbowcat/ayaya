@@ -1,4 +1,4 @@
-/obj/structure/roguemachine/balloon_pad/budget2change(budget)
+/obj/structure/roguemachine/balloon_pad/budget2change(budget, mob/user, specify)
 	var/turf/T = get_turf(src)
 	if(!budget || budget <= 0)
 		return
@@ -33,7 +33,9 @@
 			// Create multiple stacks if needed
 			while(zenars > 0)
 				var/stack_size = min(zenars, 20)
-				var/obj/item/roguecoin/silver_stack = new /obj/item/roguecoin/gold(T, stack_size)
+				var/obj/item/roguecoin/gold_stack = new /obj/item/roguecoin/gold(T, stack_size)
+				if(user && zenars == stack_size) // Only put first stack in hands
+					user.put_in_hands(gold_stack)
 				zenars -= stack_size
 	zenars = floor(budget/5)
 	if(zenars)
@@ -47,6 +49,8 @@
 			while(zenars > 0)
 				var/stack_size = min(zenars, 20)
 				var/obj/item/roguecoin/silver_stack = new /obj/item/roguecoin/silver(T, stack_size)
+				if(user && zenars == stack_size) // Only put first stack in hands
+					user.put_in_hands(silver_stack)
 				zenars -= stack_size
 	if(budget >= 1)
 		if(!highest_found)
@@ -57,6 +61,8 @@
 			while(budget > 0)
 				var/stack_size = min(budget, 20)
 				var/obj/item/roguecoin/copper_stack = new /obj/item/roguecoin/copper(T, stack_size)
+				if(user && budget == stack_size) // Only put first stack in hands
+					user.put_in_hands(copper_stack)
 				budget -= stack_size
 	if(!type_to_put || zenars_to_put < 1)
 		return
@@ -64,5 +70,7 @@
 	while(zenars_to_put > 0)
 		var/stack_size = min(zenars_to_put, 20)
 		var/obj/item/roguecoin/G = new type_to_put(T, stack_size)
+		if(user && zenars_to_put == stack_size) // Only put first stack in hands
+			user.put_in_hands(G)
 		zenars_to_put -= stack_size
 	playsound(T, 'sound/misc/coindispense.ogg', 100, FALSE, -1)

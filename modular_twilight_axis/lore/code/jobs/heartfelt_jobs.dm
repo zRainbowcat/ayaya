@@ -83,7 +83,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/armorer/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	neck = /obj/item/storage/belt/rogue/pouch/kronas/rich
 
 /datum/advclass/heartfelt/retinue/courtier
@@ -91,7 +91,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/courtier/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	neck = /obj/item/storage/belt/rogue/pouch/kronas/veryrich
 
 /datum/advclass/heartfelt/retinue/jester
@@ -99,7 +99,7 @@
 	Though grief weighs heavy beneath your painted smile, you turn your steps towards Azuria—hoping your wit, charm, and cunning may yet carve out a place for joy."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/jester/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	beltl = /obj/item/storage/belt/rogue/pouch/kronas/rich
 
 /datum/advclass/heartfelt/retinue/magos
@@ -107,7 +107,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/magos/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/rogue/poison,
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot,
@@ -124,7 +124,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/physician/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpotnew = 2,
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpotnew = 2,
@@ -140,7 +140,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/houseguard/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
 		/obj/item/rope/chain = 1,
@@ -154,7 +154,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/housearb/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
 		/obj/item/rope/chain = 1,
@@ -168,7 +168,7 @@
 	However, with the civil war continuing to ravage your homeland without an end in sight, you now follow your ruler to the distant land of Azuria."
 
 /datum/outfit/job/roguetown/heartfelt/retinue/squire/pre_equip(mob/living/carbon/human/H)
-	..()
+	. = ..()
 	backpack_contents = list(
 		/obj/item/rogueweapon/huntingknife/idagger = 1,  
 		/obj/item/storage/belt/rogue/pouch/kronas/mid = 1,

@@ -119,6 +119,7 @@
 	name = "steel kitsune mempo"
 	desc = "\"The third article: Mercy is a luxury the wise cannot afford.\""
 	icon_state = "steelkitsunemempo"
+	body_parts_covered = NECK|FACE
 
 /datum/intent/sword/cut/miaodao
 	reach = 2

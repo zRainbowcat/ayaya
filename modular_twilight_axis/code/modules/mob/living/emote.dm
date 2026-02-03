@@ -97,8 +97,8 @@ var/list/zone_translations = list(
 	message = "давится."
 
 /datum/emote/living/gasp
-	key_third_person = "удивленно вздыхает"
-	message = "удивленно вздыхает!"
+	key_third_person = "вздыхает!"
+	message = "вздыхает!"
 	message_muffled = "издает приглушенный звук." 
 
 /datum/emote/living/breathgasp

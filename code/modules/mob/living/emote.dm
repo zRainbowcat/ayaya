@@ -108,7 +108,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_burp()
-	set name = "Burp"
+	set name = "Рыгать"
 	set category = "Noises"
 
 	emote("burp", intentional = TRUE)

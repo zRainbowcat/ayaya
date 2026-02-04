@@ -33,9 +33,7 @@ var/list/zone_translations = list(
 /datum/emote/living/pray
 	key_third_person = "молится"
 	message = "прозносит молитву."
-/mob/living/carbon/human/emote_pray()
-	name = "Молиться"
-
+	
 /datum/emote/living/meditate
 	key_third_person = "медитирует"
 	message = "медитирует."

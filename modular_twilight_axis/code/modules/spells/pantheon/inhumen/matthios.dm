@@ -989,7 +989,9 @@
 	W.cmode_music_override = cmode_music_override
 	W.cmode_music_override_name = cmode_music_override_name
 
-
+	W.bleedsuppress = bleedsuppress
+	bleed_rate = 0
+	bleedsuppress = TRUE
 	W.set_nutrition(nutrition)
 	W.set_hydration(hydration)
 
@@ -1062,7 +1064,7 @@
 	W.status_flags &= ~GODMODE
 	// re-equip our stored neck and ring items, if we have them
 
-
+	W.bleedsuppress = bleedsuppress
 	W.set_nutrition(nutrition)
 	W.set_hydration(hydration)
 

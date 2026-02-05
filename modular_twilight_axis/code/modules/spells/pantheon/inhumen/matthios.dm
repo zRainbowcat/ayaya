@@ -32,6 +32,8 @@
 		revert_cast()
 		return FALSE
 	var/mob/living/carbon/human/H = user
+	if(H.buckled)
+		H.buckled.unbuckle_mob(H, TRUE)
 	if(H.handcuffed)
 		var/obj/item/I = H.handcuffed
 		H.clear_cuffs(I, cuff_break = TRUE)

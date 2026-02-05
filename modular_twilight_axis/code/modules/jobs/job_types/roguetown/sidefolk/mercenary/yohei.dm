@@ -9,6 +9,7 @@
 	maximum_possible_slots = 2
 	cmode_music = 'modular_twilight_axis/sound/music/combat_heishi.ogg'
 	subclass_languages = list(/datum/language/kazengunese)
+	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saiga/tame/saddled
 	traits_applied = list(TRAIT_MEDIUMARMOR)
 	subclass_stats = list(
 		STATKEY_STR = 1,
@@ -18,6 +19,9 @@
 		STATKEY_PER = 2,
 		STATKEY_SPD = -1 //Au Ra bodies are naturally more agile, so a slight speed penalty to balance out their racial bonus
 	)
+	subclass_virtues = list(
+		/datum/virtue/utility/riding
+	)
 
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
@@ -25,15 +29,16 @@
 		/datum/skill/misc/sneaking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/bows = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/polearms = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/bows = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 	)
-	extra_context = "This subclass is race-limited to: Au Ra only. Starts with a choice of three unique Kazengunese weapons and a choice of two unique Kazengunese masks."
+	extra_context = "This subclass is race-limited to: Au Ra only. Starts with a horse, choice of three unique Kazengunese weapons and a choice of two unique Kazengunese masks."
 
 /datum/outfit/job/roguetown/mercenary/twilight_heishi/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -151,16 +156,16 @@
 
 /datum/outfit/job/roguetown/mercenary/twilight_yohei/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
-	var/weapons = list("Dual Wield Shortswords", "Bow & Dagger")
+	var/weapons = list("Dual Wield Hookswords", "Bow & Dagger")
 	var/weapon_choice = input("Choose your weapon.", "THE BLADE DECIDES...") as anything in weapons
 	switch(weapon_choice) //A large selection of exotic starter options, as per the class gimmick.
-		if ("Dual Wield Shortswords")
+		if ("Dual Wield Hookswords")
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword/kazengun/kodachi, SLOT_BELT_L, TRUE)
-			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword/kazengun/kodachi, SLOT_BELT_R, TRUE)
-			H.put_in_hands(new /obj/item/rogueweapon/sword/short/kazengun)
-			H.put_in_hands(new /obj/item/rogueweapon/sword/short/kazengun)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_L, TRUE)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_R, TRUE)
+			H.put_in_hands(new /obj/item/rogueweapon/sword/sabre/hook)
+			H.put_in_hands(new /obj/item/rogueweapon/sword/sabre/hook)
 		if ("Bow & Dagger")
 			H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_MASTER, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)

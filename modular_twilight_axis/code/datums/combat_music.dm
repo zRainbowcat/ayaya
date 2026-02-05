@@ -18,3 +18,10 @@
 	shortname = "Yohei"
 	credits = "Metal Gear Rising Revengeance - The Only Thing I Know For Real (Acoustic + Demo)"
 	musicpath = list('modular_twilight_axis/sound/music/combat_yohei.ogg')
+
+/datum/combat_music/heishi
+	name = "Heishi"
+	desc = "Blades cross, sparks fly."
+	shortname = "Heishi"
+	credits = "Rapid As Wildfires - Yu-peng Chen"
+	musicpath = list('modular_twilight_axis/sound/music/combat_heishi.ogg')

@@ -57,6 +57,7 @@
 		/datum/advclass/mercenary/lirvanmerc,
     /datum/advclass/mercenary/twilight_gunslinger,
     /datum/advclass/mercenary/twilight_grenzelhoft_jager,
+	/datum/advclass/mercenary/twilight_heishi,
 	/datum/advclass/mercenary/twilight_yohei
 	)
 

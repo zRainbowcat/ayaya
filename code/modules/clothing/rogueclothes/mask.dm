@@ -344,6 +344,7 @@
 
 /obj/item/clothing/mask/rogue/facemask
 	name = "iron mask"
+	desc = "A simple, utilitarian mask designed to protect the face from oncoming blows."
 	icon_state = "imask"
 	max_integrity = 100
 	blocksound = PLATEHIT
@@ -445,7 +446,8 @@
 			var/additional_time = bounty_amount * 0.1 // 10 mammon = 1 minute
 			additional_time = round(additional_time)
 			timer += additional_time MINUTES
-
+			timer = clamp(timer, 0 MINUTES, 20 MINUTES)
+	
 		var/timer_minutes = timer / 600
 
 		addtimer(CALLBACK(src, PROC_REF(timerup), user), timer)
@@ -454,13 +456,16 @@
 
 /obj/item/clothing/mask/rogue/facemask/steel
 	name = "steel mask"
+	desc = "Expressionless steel sits where a face ought to be. It is better to be \
+	safe than to be known."
 	icon_state = "smask"
 	max_integrity = 200
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/mask/rogue/facemask/steel/paalloy
 	name = "ancient mask"
-	desc = "Polished gilbranze, molded into an intimidating visage. Touch the cheek; it is warm, like flesh. But it is not flesh. Not yet."
+	desc = "Polished gilbranze, molded into an intimidating visage. Touch the cheek; it is warm, \
+	like flesh. But it is not flesh. Not yet."
 	icon_state = "ancientmask"
 	smeltresult = /obj/item/ingot/aaslag
 

@@ -9,7 +9,6 @@
 	maximum_possible_slots = 2
 	cmode_music = 'modular_twilight_axis/sound/music/combat_heishi.ogg'
 	subclass_languages = list(/datum/language/kazengunese)
-	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saiga/tame/saddled
 	traits_applied = list(TRAIT_MEDIUMARMOR)
 	subclass_stats = list(
 		STATKEY_STR = 1,

@@ -33,6 +33,7 @@
 		/datum/skill/combat/bows = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/staves = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
@@ -65,7 +66,7 @@
 
 /datum/outfit/job/roguetown/mercenary/twilight_heishi/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
-	var/weapons = list("Great Sword", "Great Mace", "Spear", "Longbow")
+	var/weapons = list("Great Sword", "Great Mace", "Spear", "Longbow", "Quarterstaff")
 	var/weapon_choice = input("Choose your weapon.", "LET YOUR HANDS SPEAK BEFORE YOUR MOUTH.") as anything in weapons
 	switch(weapon_choice)
 		if ("Great Sword")
@@ -86,6 +87,10 @@
 			H.put_in_hands(new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/longbow/yumi) 
 			H.equip_to_slot_or_del(new /obj/item/quiver/arrows, SLOT_BELT_L, TRUE) 
 			H.change_stat(STATKEY_STR, 1) //Longbows require a bit more strength to use effectively.
+		if ("Quarterstaff")
+			H.adjust_skillrank_up_to(/datum/skill/combat/staves, SKILL_LEVEL_EXPERT, TRUE)
+			H.put_in_hands(new /obj/item/rogueweapon/woodstaff/quarterstaff/bostaff)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE)
 	var/masks = list("Half-Mask", "Full Mask")
 	var/mask_choice = input("Choose your mask.", "HIDE OR REVEAL YOUR STRIKE.") as anything in masks
 	switch(mask_choice)
@@ -114,7 +119,7 @@
 	)
 
 	subclass_skills = list(
-		/datum/skill/combat/swords = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
@@ -155,9 +160,13 @@
 
 /datum/outfit/job/roguetown/mercenary/twilight_yohei/choose_loadout(mob/living/carbon/human/H)
 	. = ..()
-	var/weapons = list("Dual Wield Hookswords", "Bow & Dagger")
+	var/weapons = list("Great Sword", "Dual Wield Hookswords", "Bow")
 	var/weapon_choice = input("Choose your weapon.", "THE BLADE DECIDES...") as anything in weapons
 	switch(weapon_choice) //A large selection of exotic starter options, as per the class gimmick.
+		if ("Great Sword")
+			H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
+			H.put_in_hands(new /obj/item/rogueweapon/greatsword/miaodao)
+			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/gwstrap, SLOT_BACK_R, TRUE)
 		if ("Dual Wield Hookswords")
 			ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			H.adjust_skillrank_up_to(/datum/skill/combat/swords, SKILL_LEVEL_EXPERT, TRUE)
@@ -165,7 +174,7 @@
 			H.equip_to_slot_or_del(new /obj/item/rogueweapon/scabbard/sword, SLOT_BELT_R, TRUE)
 			H.put_in_hands(new /obj/item/rogueweapon/sword/sabre/hook)
 			H.put_in_hands(new /obj/item/rogueweapon/sword/sabre/hook)
-		if ("Bow & Dagger")
+		if ("Bow")
 			H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_MASTER, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 			H.put_in_hands(new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve/hankyu)
@@ -183,6 +192,33 @@
 ///////////////////////////
 //Kagekiri Specific Items//
 ///////////////////////////
+/datum/intent/sword/cut/miaodao
+	reach = 2
+	penfactor = 20
+
+/datum/intent/sword/cut/miaodao/fast
+	clickcd = 9
+
+/datum/intent/sword/peel/miaodao
+	name = "long sword armor peel"
+	reach = 2
+
+/obj/item/rogueweapon/greatsword/miaodao
+	name = "miaodao"
+	icon = 'modular_twilight_axis/icons/roguetown/weapons/64.dmi'
+	icon_state = "odachi"
+	desc = "An unusually long saber of Kazengunese origin. The lighter blade lends itself to one-handed use better than a zweihander, but maintaining edge alignment is tricky and requires experience."
+	force = 24
+	force_wielded = 30
+	minstr = 8
+	wdefense = 6
+	wdefense_wbonus = 1
+	max_blade_int = 150 
+	wbalance = WBALANCE_SWIFT
+	possible_item_intents = list(/datum/intent/sword/cut/miaodao, /datum/intent/sword/strike)
+	gripped_intents = list(/datum/intent/sword/cut/miaodao/fast, /datum/intent/sword/thrust/zwei, /datum/intent/sword/peel/miaodao, /datum/intent/sword/chop/long)
+	alt_intents = null
+
 /obj/item/clothing/suit/roguetown/armor/basiceast/yohei
 	name = "black dobo robe"
 	desc = "A dark dobo robe with reinforced leather inlays. Offers decent protection while allowing for ease of movement."
@@ -306,33 +342,6 @@
 	minstr = 11
 	slot_flags = ITEM_SLOT_BACK
 
-/datum/intent/sword/cut/miaodao
-	reach = 2
-	penfactor = 20
-
-/datum/intent/sword/cut/miaodao/fast
-	clickcd = 9
-
-/datum/intent/sword/peel/miaodao
-	name = "long sword armor peel"
-	reach = 2
-
-/obj/item/rogueweapon/greatsword/miaodao
-	name = "miaodao"
-	icon = 'modular_twilight_axis/icons/roguetown/weapons/64.dmi'
-	icon_state = "odachi"
-	desc = "An unusually long saber of Kazengunese origin. The lighter blade lends itself to one-handed use better than a zweihander, but maintaining edge alignment is tricky and requires experience."
-	force = 24
-	force_wielded = 30
-	minstr = 8
-	wdefense = 6
-	wdefense_wbonus = 1
-	max_blade_int = 150 
-	wbalance = WBALANCE_SWIFT
-	possible_item_intents = list(/datum/intent/sword/cut/miaodao, /datum/intent/sword/strike)
-	gripped_intents = list(/datum/intent/sword/cut/miaodao/fast, /datum/intent/sword/thrust/zwei, /datum/intent/sword/peel/miaodao, /datum/intent/sword/chop/long)
-	alt_intents = null
-
 /obj/item/rogueweapon/greatsword/miaodao/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -357,3 +366,10 @@
 	desc = "The asymmetrical and elegant relic from Kazengun, hard-hitting and powerful, bringing fear to orcish hordes and demons on a whim."
 	icon = 'modular_twilight_axis/icons/roguetown/weapons/64.dmi'
 	icon_state = "yumi_bow"
+
+/obj/item/rogueweapon/woodstaff/quarterstaff/bostaff
+	name = "bo staff"
+	icon = 'modular_twilight_axis/icons/roguetown/weapons/64.dmi'
+	icon_state = "bostaff"
+	desc = "The bo, or 'kazengunese quarterstaff', is a simple weapon used in martial arts to entrap, strike and sweep the enemy."
+	wdefense_wbonus = 9

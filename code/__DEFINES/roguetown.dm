@@ -381,6 +381,7 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CLASS_CAT_NOBLE	"Noble"
 #define CLASS_CAT_CLERIC "Cleric"
 #define CLASS_CAT_ROGUE	"Rogue"
+#define CLASS_CAT_MYSTIC "Mystic"
 #define CLASS_CAT_RANGER "Ranger"
 #define CLASS_CAT_MAGE "Mage"
 #define CLASS_CAT_WARRIOR "Warrior"

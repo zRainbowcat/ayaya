@@ -21,7 +21,7 @@
 		"Urban Orc accent" = "norf_replacement.json",
 		"Drakian accent" = "hissy_replacement.json",
 		"Inzectoid accent" = "inzectoid_replacement.json",
-		"Feline accent" = "feline_replacement.json",
+	//	"Feline accent" = "feline_replacement.json",
 		"Slopes accent" = "welsh_replacement.json",
 		"Axian accent" = "welsh_replacement.json",
 		"Abyssal accent" = "abyssal_accent.json"

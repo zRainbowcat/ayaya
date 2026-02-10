@@ -380,3 +380,18 @@
       taxation methods.
   saltprjak:
   - balance: Giant Virtue now grants 1 CON, charging doors deals less damage.
+2026-02-10:
+  Antoonij:
+  - bugfix: Sundering Lightning cd
+  Baneuus:
+  - rscadd: You're no longer able to summon creatures while at Ravox's arena.
+  - rscadd: Dendorites no longer able to transform while at Ravox's arena.
+  - rscadd: Necrites no longer able to leave through the Door while at Ravox's arena.
+  NewyearnewmeUwu:
+  - bugfix: prosthetics now render properly
+  Ryan180602:
+  - bugfix: lets filling pits have a 3s delay.
+  - code_imp: seperate it/its into masc-fem
+  WeNeedMorePhoron:
+  - balance: Adventurer & Pilgrimage wave weight reverted back to 100 with approximately
+      20% chance of rolling each wave.

@@ -131,9 +131,10 @@
 		return
 
 	if(attacking_shovel.heldclod)
-		visible_message(span_notice("[user] begins filling [src]."))
-		if(!do_after(user, 3 SECONDS, TRUE, src, TRUE))
-			return
+		if(stage > 2)
+			visible_message(span_notice("[user] begins filling [src]."))
+			if(!do_after(user, 3 SECONDS, TRUE, src, TRUE))
+				return
 		playsound(loc,'sound/items/empty_shovel.ogg', 100, TRUE)
 		QDEL_NULL(attacking_shovel.heldclod)
 		if(stage == 3) //close grave

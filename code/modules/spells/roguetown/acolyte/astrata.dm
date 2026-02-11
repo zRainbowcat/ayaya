@@ -1050,6 +1050,7 @@
 	wdefense = 5
 	wdefense_wbonus = 3 //8 total. 1 better than a basic arming sword
 	tool_behaviour = TOOL_CAUTERY //The Main Gimmick here
+	smeltresult = null
 
 	icon = 'icons/roguetown/weapons/special/astratablade.dmi'
 	icon_state = "solar_blade"
@@ -1064,3 +1065,6 @@
 	. = ..()
 	set_light(5, 4, l_color = LIGHT_COLOR_WHITE)
 
+/obj/item/rogueweapon/sword/astrata_sword/dropped(mob/user, silent)
+	. = ..()
+	qdel(src)

@@ -584,6 +584,7 @@
 		R.force = 5 * skill
 	else
 		R.force = 20
+	R.update_force_dynamic()
 	src.conjured_weapon = R
 	return TRUE
 

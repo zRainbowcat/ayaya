@@ -1,2 +1,0 @@
-GLOBAL_LIST_EMPTY(fellowships)
-GLOBAL_LIST_EMPTY(fellowship_uis_by_mob)

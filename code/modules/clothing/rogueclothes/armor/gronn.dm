@@ -205,7 +205,7 @@
 	icon_state = "gronnhelm"
 	item_state = "gronnhelm"
 
-/obj/item/clothing/suit/roguetown/armor/brigandine/gronn
+/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn //TA EDIT - inherits stats from fluted cuirass
 	name = "gronn byrine hauberk"
 	desc = "A chain shirt of Gronnic design with a leather coat layered over, \
 			offering additional protection and superior movement. It is often used by sea raiders."
@@ -213,8 +213,6 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnchain"
 	item_state = "gronnchain"
-	smeltresult = /obj/item/ingot/iron
-	armor = ARMOR_MAILLE
 
 /obj/item/clothing/gloves/roguetown/chain/gronn
 	name = "gronn byrine gloves"

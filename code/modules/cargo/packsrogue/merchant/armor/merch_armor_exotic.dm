@@ -23,7 +23,7 @@
 	cost = 225
 	contains = list(
 		/obj/item/clothing/head/roguetown/helmet/bascinet/atgervi/gronn/ownel,
-		/obj/item/clothing/suit/roguetown/armor/brigandine/gronn,
+		/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn,
 		/obj/item/clothing/gloves/roguetown/chain/gronn,
 		/obj/item/clothing/under/roguetown/chainlegs/gronn
 		)

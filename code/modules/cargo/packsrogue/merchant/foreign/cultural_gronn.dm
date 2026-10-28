@@ -87,7 +87,7 @@
 	cost = 540
 	contains = list(
 		/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/atgervi,
-		/obj/item/clothing/suit/roguetown/armor/brigandine/gronn,
+		/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn,
 		/obj/item/clothing/head/roguetown/helmet/bascinet/atgervi,
 		/obj/item/clothing/gloves/roguetown/angle/atgervi,
 		/obj/item/clothing/under/roguetown/trou/leather/atgervi,
@@ -150,7 +150,7 @@
 /datum/supply_pack/rogue/gronn/gronnic_brigandine
 	name = "Gronnic Brigandine"
 	cost = 200
-	contains = list(/obj/item/clothing/suit/roguetown/armor/brigandine/gronn)
+	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn)
 	ship_qty_min = 1
 	ship_qty_max = 2
 

@@ -76,7 +76,7 @@
 				shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced/atgervi
 				head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi/gronn/ownel
 				gloves = /obj/item/clothing/gloves/roguetown/chain/gronn
-				armor = /obj/item/clothing/suit/roguetown/armor/brigandine/gronn
+				armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn
 				pants = /obj/item/clothing/under/roguetown/chainlegs/gronn
 				wrists = /obj/item/clothing/wrists/roguetown/bracers/splint
 				backr = /obj/item/rogueweapon/shield/iron

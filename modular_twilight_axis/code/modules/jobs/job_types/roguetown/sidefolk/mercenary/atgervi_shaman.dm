@@ -27,7 +27,7 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
 	)
-	extra_context = "This subclass has two choices: Spiritism (Master spiritism, shamanic totems) or Miracles (Journeyman Holy, capped to T2). You cannot walk both paths."
+	extra_context = "This subclass has two choices: Spiritism (Master spiritism, shamanic totems) or Miracles (Expert Holy, capped to T3). You cannot walk both paths."
 
 /datum/outfit/job/roguetown/mercenary/atgervi_shaman
 	allowed_patrons = ALL_GRONNIC_PATRONS //Variant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
@@ -44,8 +44,8 @@
 		is_miracles = (path_choice == "Miracles")
 	if(is_miracles)
 		var/datum/devotion/C = new /datum/devotion(H, H.patron)
-		C.grant_miracles(H, cleric_tier = CLERIC_T2, passive_gain = CLERIC_REGEN_WEAK, devotion_limit = CLERIC_REQ_1)	//Capped to T2 miracles, same as the old commented-out Atgervi Shaman.
-		H.adjust_skillrank_up_to(/datum/skill/magic/holy, SKILL_LEVEL_JOURNEYMAN, TRUE)
+		C.grant_miracles(H, cleric_tier = CLERIC_T3, devotion_limit = CLERIC_REQ_3)
+		H.adjust_skillrank_up_to(/datum/skill/magic/holy, SKILL_LEVEL_EXPERT, TRUE)
 		if(H.patron?.type == /datum/patron/inhumen/zizo)
 			H.mind?.AddSpell(new /datum/action/cooldown/spell/minion_order)
 			H.mind?.AddSpell(new /datum/action/cooldown/spell/gravemark)

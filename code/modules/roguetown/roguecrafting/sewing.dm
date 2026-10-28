@@ -250,8 +250,8 @@
 	name = "silk shirt"
 	category = "Shirts"
 	result = /obj/item/clothing/suit/roguetown/shirt/shadowshirt
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/silk = 3)
+	reqs = list(/obj/item/natural/cloth = 6, //TA EDIT
+				/obj/item/natural/silk = 3) //TA EDIT
 	craftdiff = 4
 
 /datum/crafting_recipe/roguetown/sewing/clothshirt

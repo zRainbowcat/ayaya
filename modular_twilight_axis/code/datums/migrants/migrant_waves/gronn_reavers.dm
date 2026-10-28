@@ -105,7 +105,7 @@
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi/gronn/ownel
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	cloak = /obj/item/clothing/cloak/darkcloak/bear
-	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/gronn
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/atgervi
 	pants = /obj/item/clothing/under/roguetown/platelegs/iron/gronn
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/iron/gronn
@@ -286,7 +286,7 @@
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi/gronn/ownel
 	neck = /obj/item/clothing/neck/roguetown/gorget
-	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/gronn
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
 	pants = /obj/item/clothing/under/roguetown/splintlegs
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/iron

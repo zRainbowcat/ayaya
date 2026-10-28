@@ -10,10 +10,11 @@
 	cmode_music = sound("sound/music/combat_condottiero.ogg")
 	traits_applied = list(TRAIT_MEDIUMARMOR)
 	subclass_stats = list(
-		STATKEY_WIL = 1,
+		STATKEY_WIL = 3,
 		STATKEY_PER = 2,
 		STATKEY_SPD = 2,
-		STATKEY_INT = 2
+		STATKEY_INT = 2,
+		STATKEY_CON = 1
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
@@ -41,8 +42,8 @@
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan //Literally Etruscan. You don't get a choice, you're wearing this, sire.
 	armor = /obj/item/clothing/suit/roguetown/armor/brigandine //It's THE Etruscan armor, come on!
 	backl = /obj/item/storage/backpack/rogue/satchel
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shadowshirt //padded is too strong I guess.
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
+	pants = /obj/item/clothing/under/roguetown/brigandinelegs
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/brigandine
 	backpack_contents = list(
@@ -86,13 +87,14 @@
 	cmode_music = sound("sound/music/combat_condottiero.ogg")
 	traits_applied = list(TRAIT_DODGEEXPERT)
 	subclass_stats = list(
-		STATKEY_WIL = 2,
+		STATKEY_WIL = 3,
 		STATKEY_PER = 3, //sharpshooters
-		STATKEY_SPD = 2
+		STATKEY_SPD = 2,
+		STATKEY_INT = 2
 	)
 	subclass_skills = list(
 		/datum/skill/combat/crossbows = SKILL_LEVEL_MASTER, //Possibly too high, no idea.
-		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
@@ -116,15 +118,16 @@
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/steel
 	head = /obj/item/clothing/head/roguetown/helmet/kettle/
+	mask = /obj/item/clothing/mask/rogue/facemask/steel
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltl = /obj/item/rogueweapon/scabbard/sword
-	l_hand = /obj/item/rogueweapon/sword/short
+	l_hand = /obj/item/rogueweapon/sword/rapier/vaquero
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/jackchain
 	beltr = /obj/item/quiver/bolt/standard
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
+	pants = /obj/item/clothing/under/roguetown/brigandinelegs
 	neck = /obj/item/clothing/neck/roguetown/coif/heavypadding
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary = 1,

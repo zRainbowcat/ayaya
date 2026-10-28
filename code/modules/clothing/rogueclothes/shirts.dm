@@ -170,13 +170,13 @@
 	item_state = "shadowshirt"
 	r_sleeve_status = SLEEVE_TORN
 	l_sleeve_status = SLEEVE_TORN
-	body_parts_covered = CHEST|VITALS
+	body_parts_covered = COVERAGE_ALL_BUT_HANDFEET //TA EDIT
+	armor = ARMOR_PADDED //TA EDIT
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER //TA EDIT
+	armor_class = ARMOR_CLASS_LIGHT //TA EDIT
 
 /obj/item/clothing/suit/roguetown/shirt/shadowshirt/elflock
-	allowed_race = NON_DWARVEN_RACE_TYPES
-	body_parts_covered = COVERAGE_ALL_BUT_ARMFEET
-	max_integrity = ARMOR_INT_CHEST_LIGHT_BASE
-	armor = ARMOR_PADDED
+	allowed_race = NON_DWARVEN_RACE_TYPES //TA EDIT - stats inherited
 
 /obj/item/clothing/suit/roguetown/shirt/shadowshirt/elflock/drowraider
 	desc = "custom-fit silk shirt"

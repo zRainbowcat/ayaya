@@ -20,9 +20,9 @@
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_EXPERT,	//Shouldn't be better than the smith (though the stats are already)
-		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/blacksmithing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/smelting = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/blacksmithing = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/smelting = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -79,7 +79,8 @@
 	traits_applied = list(TRAIT_HEAVYARMOR)
 	subclass_stats = list(
 		STATKEY_CON = 5,
-		STATKEY_WIL = 4,
+		STATKEY_WIL = 5,
+		STATKEY_PER = 1,
 		STATKEY_STR = 2,
 		STATKEY_SPD = -2
 	)
@@ -102,11 +103,13 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/dwarven
 	cloak = /obj/item/clothing/cloak/forrestercloak/snow
 	belt = /obj/item/storage/belt/rogue/leather
-	beltl = /obj/item/flashlight/flare/torch
+	beltl = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/rogue/satchel
-	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
+	neck = /obj/item/clothing/neck/roguetown/gorget/steel
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/plate/dwarven
-	pants = /obj/item/clothing/under/roguetown/trou/leather
+	pants = /obj/item/clothing/under/roguetown/platelegs
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/full/dwarven
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/dwarven
 	backpack_contents = list(

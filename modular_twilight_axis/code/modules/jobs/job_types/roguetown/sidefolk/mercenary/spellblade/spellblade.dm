@@ -16,6 +16,7 @@
 		STATKEY_CON = 1,
 		STATKEY_WIL = 2,
 		STATKEY_INT = 4,
+		STATKEY_PER = 2,
 	)
 	subclass_skills = list(
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,

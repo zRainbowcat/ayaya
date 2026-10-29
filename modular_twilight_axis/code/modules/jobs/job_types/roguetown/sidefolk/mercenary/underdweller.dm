@@ -11,7 +11,7 @@
 	subclass_stats = list(
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
-		STATKEY_SPD = 1,
+		STATKEY_SPD = 2,
 		STATKEY_STR = 1,
 		STATKEY_LCK = 1
 	)
@@ -38,7 +38,7 @@
 /datum/outfit/job/roguetown/mercenary/underdweller/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/kettle/minershelm
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/chain
@@ -48,13 +48,14 @@
 	belt = /obj/item/storage/belt/rogue/leather/black		//Should give these guys a unique miners belt at some point..
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	beltl = /obj/item/rogueweapon/stoneaxe/woodcut/pick
-	beltr = /obj/item/rogueweapon/huntingknife
+	beltr = /obj/item/rogueweapon/shield/buckler
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backr = /obj/item/rogueweapon/shield/wood
+	backr = /obj/item/twstrap/bombstrap/firebomb
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/storage/belt/rogue/pouch/coins/poor,
 		/obj/item/bomb = 2,
+		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1
 		)
 	H.merctype = 12

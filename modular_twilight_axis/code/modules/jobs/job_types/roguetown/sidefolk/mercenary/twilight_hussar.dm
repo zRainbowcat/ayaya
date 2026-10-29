@@ -31,7 +31,7 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN // Expert since +1 FROM VIRTUE!!!!
+		/datum/skill/misc/riding = SKILL_LEVEL_MASTER // virtue +1 is capped at Expert, so this stays Master
 	)
 
 /datum/outfit/job/roguetown/mercenary/twilight_hussar/pre_equip(mob/living/carbon/human/H)

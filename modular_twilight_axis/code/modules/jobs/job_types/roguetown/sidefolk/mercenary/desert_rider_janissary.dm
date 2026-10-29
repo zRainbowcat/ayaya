@@ -12,7 +12,8 @@
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_WIL = 2,
-		STATKEY_SPD = 2
+		STATKEY_PER = 3,
+		STATKEY_CON = 3
 	)
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
@@ -40,10 +41,10 @@
 	neck = /obj/item/clothing/neck/roguetown/chaincoif/full
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/brigandine
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/chain
-	pants = /obj/item/clothing/under/roguetown/brigandinelegs
-	backr = /obj/item/storage/backpack/rogue/satchel
+	pants = /obj/item/clothing/under/roguetown/chainlegs
+	backr = /obj/item/rogueweapon/scabbard/gwstrap
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
@@ -52,21 +53,13 @@
 		/obj/item/rogueweapon/scabbard/sheath,
 		/obj/item/storage/belt/rogue/pouch/coins/poor
 		)
-	var/weapons = list("Mace & Shield","Spear & Shield")
 	if(H.mind)
-		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 		H.set_blindness(0)
-		switch(weapon_choice)
-			if("Mace & Shield")
-				H.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
-				r_hand = /obj/item/rogueweapon/mace/goden/steel
-				backl = /obj/item/rogueweapon/shield/tower/raneshen
-			if("Spear & Shield")
-				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
-				r_hand = /obj/item/rogueweapon/spear
-				backl = /obj/item/rogueweapon/shield/tower/raneshen
+	r_hand = /obj/item/rogueweapon/mace/goden/steel
+	backl = /obj/item/rogueweapon/shield/tower/raneshen
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	belt = /obj/item/storage/belt/rogue/leather/shalal
-	beltl = /obj/item/rogueweapon/sword/long/marlin
-	beltr = /obj/item/rogueweapon/scabbard/sword
+	beltl = /obj/item/storage/backpack/rogue/satchel/short
+	beltr = /obj/item/rogueweapon/sword/long/marlin
+	H.put_in_hands(new /obj/item/rogueweapon/scabbard/sword)
 	H.merctype = 4

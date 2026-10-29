@@ -77,12 +77,13 @@
 				head = /obj/item/clothing/head/roguetown/helmet/bascinet/atgervi/gronn/ownel
 				gloves = /obj/item/clothing/gloves/roguetown/chain/gronn
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/gronn
+				shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/iron
 				pants = /obj/item/clothing/under/roguetown/chainlegs/gronn
 				wrists = /obj/item/clothing/wrists/roguetown/bracers/splint
 				backr = /obj/item/rogueweapon/shield/iron
 				beltr = /obj/item/rogueweapon/scabbard/sword
 				l_hand = /obj/item/rogueweapon/sword/short/gronn //New heavy shortsword.
-				neck = /obj/item/clothing/neck/roguetown/leather
+				neck = /obj/item/clothing/neck/roguetown/coif/heavypadding
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/combat/shields, 4, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/combat/axes, 2, TRUE)
@@ -92,8 +93,8 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
 				H.change_stat(STATKEY_STR, 2)
 				H.change_stat(STATKEY_PER, 2) //You technically wield a shortsword
-				H.change_stat(STATKEY_WIL, 2)
-				H.change_stat(STATKEY_CON, 2)
+				H.change_stat(STATKEY_WIL, 3)
+				H.change_stat(STATKEY_CON, 3)
 				H.change_stat(STATKEY_INT, -1) //Unga swordsman.
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				H.dna.species.soundpack_m = GLOB.voice_packs[/datum/voicepack/male/warrior]
@@ -116,9 +117,9 @@
 				H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, 2, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/craft/traps, 3, TRUE)			//Ditto
 				H.change_stat(STATKEY_CON, 1)
-				H.change_stat(STATKEY_WIL, 2)
+				H.change_stat(STATKEY_WIL, 3)
 				H.change_stat(STATKEY_SPD, 2)
-				H.change_stat(STATKEY_PER, 2)
+				H.change_stat(STATKEY_PER, 3)
 				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 				H.dna.species.soundpack_m = GLOB.voice_packs[/datum/voicepack/male/evil] //Dodge builds are evil
 				var/weapons = list("Handclaws","Dual Handaxes")
@@ -127,7 +128,9 @@
 					switch(weapon_choice)
 						if("Handclaws")
 							H.adjust_skillrank_up_to(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, TRUE)
-							l_hand = /obj/item/rogueweapon/handclaw //You dont get the insane fucking steel or the special Iskarn ones
+							r_hand = /obj/item/rogueweapon/handclaw //You dont get the insane fucking steel or the special Iskarn ones
+							l_hand = /obj/item/rogueweapon/handclaw
+							ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 						if("Dual Handaxes")
 							H.adjust_skillrank_up_to(/datum/skill/combat/axes, SKILL_LEVEL_EXPERT, TRUE)
 							r_hand = /obj/item/rogueweapon/stoneaxe/handaxe
@@ -148,12 +151,11 @@
 	cmode_music = sound("sound/music/combat_vagarian.ogg")
 	subclass_languages = list(/datum/language/gronnic)
 	subclass_stats = list(
-		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7 and it's limited to one, singular slot. This is fine.
-		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
-		STATKEY_INT = 2,
+		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 11 and it's limited to one, singular slot. This is fine.
+		STATKEY_STR = 3, //TO WIELD THE MAUL OR THE GREATAXE.
+		STATKEY_INT = 3,
 		STATKEY_CON = 3,
-		STATKEY_PER = -1, //CAN'T SEE SHIT OUTTA THIS THING!!
-		STATKEY_SPD = -3 //SLOW AND UNWIELDY
+		STATKEY_SPD = -2 //SLOW AND UNWIELDY
 	)
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
@@ -164,7 +166,6 @@
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT, //All of you can suck my dick they're SEAMEN
 		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/maces = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
@@ -182,10 +183,21 @@
 	gloves = /obj/item/clothing/gloves/roguetown/plate/iron/gronn
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/iron/gronn
 	cloak = /obj/item/clothing/cloak/volfmantle			//Aura farming.
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/iron //Weakspot.
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/iron/gronn //Weakspot.
 	pants = /obj/item/clothing/under/roguetown/platelegs/iron/gronn
-	r_hand = /obj/item/rogueweapon/mace/maul //this is literally the only weapon type they'll get to use. No alternatives.
-	neck = /obj/item/clothing/neck/roguetown/bevor/iron //Their weakspot. Go replace it if you're a chud I guess
+	if(H.mind)
+		var/weapons = list("Maul", "Minotaur Greataxe (+1 STR, -1 SPD)")
+		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
+		switch(weapon_choice)
+			if("Maul")
+				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
+				r_hand = /obj/item/rogueweapon/mace/maul
+			if("Minotaur Greataxe (+1 STR, -1 SPD)")
+				H.adjust_skillrank_up_to(/datum/skill/combat/axes, SKILL_LEVEL_EXPERT, TRUE)
+				H.change_stat(STATKEY_STR, 1)
+				H.change_stat(STATKEY_SPD, -1)
+				r_hand = /obj/item/rogueweapon/greataxe/steel/doublehead/minotaur
+	neck = /obj/item/clothing/neck/roguetown/bevor/iron/gronn //Their weakspot. Go replace it if you're a chud I guess
 	backl = /obj/item/storage/backpack/rogue/satchel/black
 	backr = /obj/item/rogueweapon/scabbard/gwstrap
 	belt = /obj/item/storage/belt/rogue/leather

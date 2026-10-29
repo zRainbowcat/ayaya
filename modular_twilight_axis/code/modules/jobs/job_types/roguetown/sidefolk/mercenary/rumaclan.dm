@@ -13,7 +13,8 @@
 		STATKEY_CON = 3,
 		STATKEY_WIL = 3,
 		STATKEY_STR = 2,
-		STATKEY_PER = 1,
+		STATKEY_PER = 2,
+		STATKEY_INT = 1,
 		STATKEY_SPD = -1
 	)
 	subclass_skills = list(
@@ -54,11 +55,11 @@
 		var/tattoo_choice = input(H, "Choose your tattoos", "WHAT MARKS DO YOU CARRY?") as anything in tattoos
 		switch(tattoo_choice)
 			if("Defiant (Blacksteel, fragile)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/blacksteel //200 blacksteel
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/blacksteel //270 blacksteel
 			if("Harmonious (Plate, balanced)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma //250 plate
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma //338 plate
 			if("Enduring (Padded, durable)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/padded //300 padded
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/padded //405 padded
 				H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_NOVICE, TRUE) //you're going to need it.
 		var/clothing = list("White Shirt","Dark Shirt","Dress")
 		var/clothing_choice = input(H, "Choose your attire.", "WHAT SILK SWATHES YOU?") as anything in clothing
@@ -124,11 +125,9 @@
 	category_tags = list(CTAG_MERCENARY, CTAG_MERCPARTY_MARKSMAN)
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_HONORBOUND)
 	subclass_stats = list(
-		STATKEY_SPD = 4,
-		STATKEY_PER = 2,
-		STATKEY_WIL = 2,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1
+		STATKEY_SPD = 3,
+		STATKEY_PER = 3,
+		STATKEY_WIL = 2
 	)
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
@@ -168,11 +167,11 @@
 		var/tattoo_choice = input(H, "Choose your tattoos", "WHAT MARKS DO YOU CARRY?") as anything in tattoos
 		switch(tattoo_choice)
 			if("Defiant (Blacksteel, fragile)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/blacksteel //200 blacksteel
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/blacksteel //270 blacksteel
 			if("Harmonious (Plate, balanced)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma //250 plate
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma //338 plate
 			if("Enduring (Padded, durable)")
-				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/padded //300 padded
+				armor = /obj/item/clothing/suit/roguetown/armor/manual/meditation/body/easttats/ruma/padded //405 padded
 				H.adjust_skillrank_up_to(/datum/skill/misc/medicine, SKILL_LEVEL_NOVICE, TRUE) //you're going to need it.
 		var/clothing = list("White Shirt","Dark Shirt","Dress")
 		var/clothing_choice = input(H, "Choose your attire.", "WHAT SILK SWATHES YOU?") as anything in clothing

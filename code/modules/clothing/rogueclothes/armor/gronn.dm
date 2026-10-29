@@ -272,6 +272,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnplategloves"
 	item_state = "gronnplategloves"
+	max_integrity = ARMOR_INT_SIDE_STEEL //TA EDIT
 
 /obj/item/clothing/under/roguetown/platelegs/iron/gronn
 	name = "gronn norsii iron chausses"
@@ -280,6 +281,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnplatepants"
 	item_state = "gronnplatepants"
+	max_integrity = ARMOR_INT_LEG_STEEL_PLATE //TA EDIT
 
 /obj/item/clothing/shoes/roguetown/boots/armor/iron/gronn
 	name = "gronn norsii iron boots"
@@ -290,3 +292,14 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnplateboots"
 	item_state = "gronnplateboots"
+	max_integrity = ARMOR_INT_SIDE_STEEL //TA EDIT
+
+//TA EDIT START
+/obj/item/clothing/neck/roguetown/bevor/iron/gronn
+	name = "gronn norsii iron bevor"
+	max_integrity = ARMOR_INT_SIDE_STEEL
+
+/obj/item/clothing/wrists/roguetown/bracers/iron/gronn
+	name = "gronn norsii iron bracers"
+	max_integrity = ARMOR_INT_SIDE_STEEL
+//TA EDIT END

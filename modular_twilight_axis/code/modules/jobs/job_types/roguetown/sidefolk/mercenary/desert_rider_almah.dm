@@ -12,8 +12,8 @@
 	subclass_stats = list(
 		STATKEY_SPD = 1, // Weighted 7. Swap str for spd
 		STATKEY_INT = 1, // Weighted 7. But a very nice statblock
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
+		STATKEY_PER = 2,
+		STATKEY_CON = 2,
 		STATKEY_WIL = 2, // With 2 Wil they should not be struggling
 	)
 	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 0, "utilities" = 5)
@@ -43,9 +43,9 @@
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/brigandine
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/chain
-	pants = /obj/item/clothing/under/roguetown/brigandinelegs
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	belt = /obj/item/storage/belt/rogue/leather/shalal
 	backr = /obj/item/storage/backpack/rogue/satchel/black

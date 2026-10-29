@@ -263,7 +263,7 @@
 	master_trainable = uses_stock_longsword_kit()
 	// The master's skill and the master's intents go together. No master skill unless using master intents.
 	if(master_trainable)
-		AddComponent(/datum/component/skill_blessed, TRAIT_LONGSWORDSMAN, /datum/skill/combat/swords, SKILL_LEVEL_MASTER)
+		AddComponent(/datum/component/skill_blessed, TRAIT_LONGSWORDSMAN, /datum/skill/combat/swords, SKILL_LEVEL_LEGENDARY) //TA EDIT
 
 /// Whether this sword is still a plain longsword. Special swords like the greatkopesh don't count.
 /obj/item/rogueweapon/sword/long/proc/uses_stock_longsword_kit()
@@ -464,7 +464,7 @@
 
 /obj/item/rogueweapon/sword/long/training/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/skill_blessed, TRAIT_LONGSWORDSMAN, /datum/skill/combat/swords, SKILL_LEVEL_MASTER)
+	AddComponent(/datum/component/skill_blessed, TRAIT_LONGSWORDSMAN, /datum/skill/combat/swords, SKILL_LEVEL_LEGENDARY) //TA EDIT
 
 /obj/item/rogueweapon/sword/long/cleric
 	name = "anointed longsword"
@@ -1551,7 +1551,7 @@
 
 /obj/item/rogueweapon/sword/sabre/freifechter/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/skill_blessed, TRAIT_SABRIST, /datum/skill/combat/swords, SKILL_LEVEL_MASTER, TRUE)
+	AddComponent(/datum/component/skill_blessed, TRAIT_SABRIST, /datum/skill/combat/swords, SKILL_LEVEL_LEGENDARY, TRUE) //TA EDIT
 
 //Unique church sword - slightly better than regular sabre due to falx chop.
 /obj/item/rogueweapon/sword/sabre/nockhopesh

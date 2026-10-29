@@ -1,4 +1,4 @@
-﻿/datum/advclass/mercenary/atgervi
+/datum/advclass/mercenary/atgervi
 	name = "Atgervi Varangian"
 	tutorial = "You are a Varangian of the Gronn Highlands. Warrior-Traders most known for their exploits into the Raneshen Empire, which will be forever remembered by historians."
 	allowed_sexes = list(MALE, FEMALE)

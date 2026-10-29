@@ -10,10 +10,10 @@
 	class_select_category = CLASS_CAT_AAVNR
 	category_tags = list(CTAG_MERCENARY, CTAG_MERCPARTY_BRAVO)
 	cmode_music = sound("sound/music/frei_fencer.ogg")
-	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_LONGSWORDSMAN, TRAIT_FENCERDEXTERITY, TRAIT_PARRYEXPERT, TRAIT_PSYDONITE_2) //TA EDIT
+	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_LONGSWORDSMAN, TRAIT_FENCERDEXTERITY) //TA EDIT
 	subclass_stats = list(
-		STATKEY_INT = 3,
-		STATKEY_PER = 3,
+		STATKEY_INT = 2,
+		STATKEY_PER = 2,
 		STATKEY_WIL = 2,
 		STATKEY_CON = 1
 	)
@@ -75,7 +75,7 @@
 	class_select_category = CLASS_CAT_AAVNR
 	category_tags = list(CTAG_MERCENARY, CTAG_MERCPARTY_VANGUARD)
 	cmode_music = sound("sound/music/frei_fencer.ogg")
-	traits_applied = list(TRAIT_BADTRAINER, TRAIT_FENCERDEXTERITY, TRAIT_INTELLECTUAL, TRAIT_PARRYEXPERT, TRAIT_PSYDONITE_2) //TA EDIT
+	traits_applied = list(TRAIT_BADTRAINER, TRAIT_FENCERDEXTERITY, TRAIT_INTELLECTUAL) //TA EDIT
 	subclass_stats = list(
 		STATKEY_CON = 2,
 		STATKEY_PER = 3,
@@ -83,7 +83,7 @@
 		STATKEY_WIL = 2
 	)
 	subclass_skills = list(
-		/datum/skill/combat/polearms = SKILL_LEVEL_MASTER,	//This is the danger zone. Ultimately, the class won't be picked without this. I took the liberty of adjusting everything around to make this somewhat inoffensive, but we'll see if it sticks.
+		/datum/skill/combat/polearms = SKILL_LEVEL_LEGENDARY,	//This is the danger zone. Ultimately, the class won't be picked without this. I took the liberty of adjusting everything around to make this somewhat inoffensive, but we'll see if it sticks.
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,	//Wrestling is a swordsman's luxury.
@@ -133,11 +133,12 @@
 	class_select_category = CLASS_CAT_AAVNR
 	category_tags = list(CTAG_MERCENARY, CTAG_MERCPARTY_BRAVO)
 	cmode_music = sound("sound/music/frei_sabre.ogg")
-	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_FENCERDEXTERITY, TRAIT_SABRIST, TRAIT_PARRYEXPERT, TRAIT_PSYDONITE_2) //TA EDIT
+	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_FENCERDEXTERITY, TRAIT_SABRIST) //TA EDIT
 	subclass_stats = list(
 		STATKEY_INT = 2,
 		STATKEY_PER = 3,
-		STATKEY_SPD = 2
+		STATKEY_SPD = 1,
+		STATKEY_WIL = 2
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

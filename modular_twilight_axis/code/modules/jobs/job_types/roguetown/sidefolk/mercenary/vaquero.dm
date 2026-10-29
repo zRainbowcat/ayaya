@@ -11,9 +11,10 @@
 		/datum/virtue/combat/guarded
 	)
 	subclass_stats = list(
-		STATKEY_SPD = 3,
+		STATKEY_SPD = 2,
 		STATKEY_INT = 2,
-		STATKEY_WIL = 1
+		STATKEY_WIL = 1,
+		STATKEY_PER = 2
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -96,6 +97,7 @@
 		switch(weapon_choice)
 			if("Maille Training")
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+				H.change_stat(STATKEY_CON, 2)
 			if("Bardic Inspiration")
 				var/datum/inspiration/I = new /datum/inspiration(H)
 				I.grant_inspiration(H, bard_tier = BARD_T2)

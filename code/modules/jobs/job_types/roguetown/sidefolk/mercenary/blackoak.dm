@@ -14,7 +14,7 @@
 	subclass_stats = list(
 		STATKEY_STR = 3,
 		STATKEY_WIL = 2,
-		STATKEY_CON = 3,
+		STATKEY_CON = 3, //TA EDIT
 		STATKEY_PER = 1,
 		STATKEY_INT = -1
 	)
@@ -43,15 +43,15 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/elven_plate
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel/elvish
-	beltr = /obj/item/flashlight/flare/torch/lantern
+	beltr = /obj/item/flashlight/flare/torch/lantern //TA EDIT
 	shoes = /obj/item/clothing/shoes/roguetown/boots/elven_boots
 	cloak = /obj/item/clothing/cloak/forrestercloak
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy //TA EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/elven_gloves
 	belt = /obj/item/storage/belt/rogue/leather/black
 	backl = /obj/item/storage/backpack/rogue/satchel/black
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/hatanga
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants //TA EDIT
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
@@ -91,9 +91,9 @@
 	subclass_stats = list(
 		STATKEY_SPD = 3,
 		STATKEY_WIL = 2,
-		STATKEY_PER = 3,
-		STATKEY_CON = -1,
-		STATKEY_INT = 1
+		STATKEY_PER = 3, //TA EDIT
+		STATKEY_CON = -1, //TA EDIT
+		STATKEY_INT = 1 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/combat/bows = SKILL_LEVEL_MASTER,
@@ -121,17 +121,17 @@
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve/blackoak
 	shoes = /obj/item/clothing/shoes/roguetown/boots/elven_boots
 	cloak = /obj/item/clothing/cloak/forrestercloak
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy //TA EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/elven_gloves
 	belt = /obj/item/storage/belt/rogue/leather/black
 	backl = /obj/item/storage/backpack/rogue/satchel/black
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/hatanga
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants //TA EDIT
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1, //TA EDIT
 		)
 	H.merctype = 2
 
@@ -185,8 +185,8 @@
 	subclass_stats = list(
 		STATKEY_INT = 1,
 		STATKEY_SPD = 2,
-		STATKEY_CON = 2,
-		STATKEY_WIL = 2,
+		STATKEY_CON = 2, //TA EDIT
+		STATKEY_WIL = 2, //TA EDIT
 	)
 	subclass_mage_aspects = list("mastery" = FALSE, "major" = 0, "minor" = 0, "utilities" = 5)
 	subclass_skills = list(
@@ -218,18 +218,18 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/elven_plate
 	shoes = /obj/item/clothing/shoes/roguetown/boots/elven_boots
 	cloak = /obj/item/clothing/cloak/forrestercloak
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather/heavy //TA EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/elven_gloves
 	belt = /obj/item/storage/belt/rogue/leather/black
 	backl = /obj/item/storage/backpack/rogue/satchel/black
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/hatanga
-	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
+	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants //TA EDIT
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel/special
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary = 1,
 		/obj/item/storage/belt/rogue/pouch/coins/poor = 1,
-		/obj/item/flashlight/flare/torch/lantern = 1,
+		/obj/item/flashlight/flare/torch/lantern = 1, //TA EDIT
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 		/obj/item/rogueweapon/spellbook/greater = 1,
 		/obj/item/chalk = 1,

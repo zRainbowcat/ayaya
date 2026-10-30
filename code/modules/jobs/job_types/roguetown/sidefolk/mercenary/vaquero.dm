@@ -11,10 +11,10 @@
 		/datum/virtue/combat/guarded
 	)
 	subclass_stats = list(
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 2, //TA EDIT
 		STATKEY_INT = 2,
-		STATKEY_WIL = 1,
-		STATKEY_PER = 2
+		STATKEY_WIL = 1, //TA EDIT
+		STATKEY_PER = 2 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
@@ -40,15 +40,15 @@
 
 /datum/outfit/job/roguetown/mercenary/vaquero/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/helmet/sallet/morion
+	head = /obj/item/clothing/head/roguetown/helmet/sallet/morion //TA EDIT
 	mouth = /obj/item/alch/rosa
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	neck = /obj/item/clothing/neck/roguetown/gorget
-	pants = /obj/item/clothing/under/roguetown/brigandinelegs
-	shirt = /obj/item/clothing/suit/roguetown/shirt/padedetrshirt
+	pants = /obj/item/clothing/under/roguetown/brigandinelegs //TA EDIT
+	shirt = /obj/item/clothing/suit/roguetown/shirt/padedetrshirt //TA EDIT
 	belt = /obj/item/storage/belt/rogue/leather
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/brigandine
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/brigandine //TA EDIT
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat
 	cloak = /obj/item/clothing/cloak/half/rider/red
 	backl = /obj/item/storage/backpack/rogue/satchel
@@ -62,8 +62,8 @@
 					/obj/item/lockpick = 1,
 					/obj/item/flashlight/flare/torch = 1,
 					/obj/item/roguekey/mercenary = 1,
-					/obj/item/rogueweapon/scabbard/sheath = 1,
-					/obj/item/clothing/head/roguetown/duelhat/etrusca = 1
+					/obj/item/rogueweapon/scabbard/sheath = 1, //TA EDIT
+					/obj/item/clothing/head/roguetown/duelhat/etrusca = 1 //TA EDIT
 					)
 	if(H.mind)
 		var/instruments = list("Harp","Lute","Accordion","Guitar","Hurdy-Gurdy","Viola","Vocal Talisman", "Psyaltery", "Flute", "Drum", "Shamisen")
@@ -97,9 +97,9 @@
 		switch(weapon_choice)
 			if("Maille Training")
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-				H.change_stat(STATKEY_CON, 2)
+				H.change_stat(STATKEY_CON, 2) //TA EDIT
 			if("Bardic Inspiration")
 				var/datum/inspiration/I = new /datum/inspiration(H)
-				I.grant_inspiration(H, bard_tier = BARD_T2)
+				I.grant_inspiration(H, bard_tier = BARD_T2) //TA EDIT
 				H.mind?.AddSpell(new /datum/action/cooldown/spell/projectile/vicious_mockery) //I guess all the other bards have it too?
 	H.merctype = 13

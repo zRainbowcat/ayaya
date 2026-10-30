@@ -12,8 +12,8 @@
 	cmode_music = sound("sound/music/frei_fencer.ogg")
 	traits_applied = list(TRAIT_BADTRAINER, TRAIT_INTELLECTUAL, TRAIT_LONGSWORDSMAN, TRAIT_FENCERDEXTERITY) //TA EDIT
 	subclass_stats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 2,
+		STATKEY_INT = 2, //TA EDIT
+		STATKEY_PER = 2, //TA EDIT
 		STATKEY_WIL = 2,
 		STATKEY_CON = 1
 	)
@@ -83,7 +83,7 @@
 		STATKEY_WIL = 2
 	)
 	subclass_skills = list(
-		/datum/skill/combat/polearms = SKILL_LEVEL_LEGENDARY,	//This is the danger zone. Ultimately, the class won't be picked without this. I took the liberty of adjusting everything around to make this somewhat inoffensive, but we'll see if it sticks.
+		/datum/skill/combat/polearms = SKILL_LEVEL_LEGENDARY,	//This is the danger zone. Ultimately, the class won't be picked without this. I took the liberty of adjusting everything around to make this somewhat inoffensive, but we'll see if it sticks. //TA EDIT
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,	//Wrestling is a swordsman's luxury.
@@ -137,8 +137,8 @@
 	subclass_stats = list(
 		STATKEY_INT = 2,
 		STATKEY_PER = 3,
-		STATKEY_SPD = 1,
-		STATKEY_WIL = 2
+		STATKEY_SPD = 1, //TA EDIT
+		STATKEY_WIL = 2 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,

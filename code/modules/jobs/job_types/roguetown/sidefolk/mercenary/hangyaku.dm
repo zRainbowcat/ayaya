@@ -11,12 +11,12 @@
 	noble_income = 15
 	cmode_music = sound("sound/music/combat_Kazengun_Firestorm.ogg")
 	maximum_possible_slots = 3
-	subclass_stats = list(	// 13 - 2 weight, aka, 11 weighted.
+	subclass_stats = list(	// 13 - 2 weight, aka, 11 weighted. //TA EDIT
 		STATKEY_STR = 2,
-		STATKEY_INT = 2,
+		STATKEY_INT = 2, //TA EDIT
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
-		STATKEY_PER = 3,
+		STATKEY_PER = 3, //TA EDIT
 		STATKEY_SPD = -1
 	)
 	subclass_skills = list( //impressively limited in terms of what they can do. this is a wall that doesn't do much else.
@@ -122,7 +122,7 @@
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
 		STATKEY_PER = 1,
-		STATKEY_SPD = 1
+		STATKEY_SPD = 1 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,

@@ -13,7 +13,7 @@
 		STATKEY_CON = 3,
 		STATKEY_WIL = 3,
 		STATKEY_STR = 2, //Should give minimum required stats to use Zweihander
-		STATKEY_PER = 3,
+		STATKEY_PER = 3, //TA EDIT
 		STATKEY_SPD = -1 //They get heavy armor now + sword option; so lower speed.
 	)
 	subclass_skills = list(
@@ -37,7 +37,7 @@
 	..()
 	to_chat(H, span_warning("You are a Doppelsoldner - \"Double-pay Mercenary\" - an experienced frontline swordsman trained by the Zenitstadt fencing guild."))
 	backl = /obj/item/rogueweapon/scabbard/gwstrap
-	armor = /obj/item/clothing/suit/roguetown/armor/plate/blacksteel/modern
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/blacksteel/modern //TA EDIT
 	if(H.mind)
 		var/weapons = list("Zweihander", "Kriegmesser & Buckler")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
@@ -48,7 +48,7 @@
 				beltr = /obj/item/rogueweapon/scabbard/sword
 				r_hand = /obj/item/rogueweapon/sword/long/kriegmesser
 				l_hand = /obj/item/rogueweapon/shield/buckler
-		var/helmets = list(
+		var/helmets = list( //TA EDIT START
 			"Sallet" = /obj/item/clothing/head/roguetown/helmet/sallet/grenzelhoft,
 			"Visored Sallet" = /obj/item/clothing/head/roguetown/helmet/sallet/visored/grenzelhoft,
 			"Etruscan Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan/grenzelhoft,
@@ -59,12 +59,12 @@
 		)
 		var/helmchoice = input(H, "Choose your helm.", "HEADGEAR") as anything in helmets
 		if(helmchoice != "None")
-			head = helmets[helmchoice]
+			head = helmets[helmchoice] //TA EDIT END
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather
-	neck = /obj/item/clothing/neck/roguetown/gorget/steel
-	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/grenzelhoft
-	pants = /obj/item/clothing/under/roguetown/chainlegs/grenzelhoft
+	neck = /obj/item/clothing/neck/roguetown/gorget/steel //TA EDIT
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/grenzelhoft //TA EDIT
+	pants = /obj/item/clothing/under/roguetown/chainlegs/grenzelhoft //TA EDIT
 	shoes = /obj/item/clothing/shoes/roguetown/grenzelhoft
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves
 	backr = /obj/item/storage/backpack/rogue/satchel/black
@@ -93,7 +93,7 @@
 		STATKEY_CON = 2,
 		STATKEY_WIL = 2,
 		STATKEY_SPD = 1,
-		STATKEY_PER = 1
+		STATKEY_PER = 1 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
@@ -115,7 +115,7 @@
 	..()
 	to_chat(H, span_warning("You're an experienced soldier skilled in the use of polearms and axes. Your equals make up the bulk of the mercenary guild's forces."))
 	backl = /obj/item/rogueweapon/scabbard/gwstrap
-	armor = /obj/item/clothing/suit/roguetown/armor/plate/blacksteel/modern
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/blacksteel/modern //TA EDIT
 	if(H.mind)
 		var/weapons = list("Halberd", "Partizan")
 		var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
@@ -124,7 +124,7 @@
 				r_hand = /obj/item/rogueweapon/halberd
 			if("Partizan")
 				r_hand = /obj/item/rogueweapon/spear/partizan
-		var/helmets = list(
+		var/helmets = list( //TA EDIT START
 			"Sallet" = /obj/item/clothing/head/roguetown/helmet/sallet/grenzelhoft,
 			"Visored Sallet" = /obj/item/clothing/head/roguetown/helmet/sallet/visored/grenzelhoft,
 			"Etruscan Bascinet" = /obj/item/clothing/head/roguetown/helmet/bascinet/etruscan/grenzelhoft,
@@ -135,12 +135,12 @@
 		)
 		var/helmchoice = input(H, "Choose your helm.", "HEADGEAR") as anything in helmets
 		if(helmchoice != "None")
-			head = helmets[helmchoice]
+			head = helmets[helmchoice] //TA EDIT END
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather
-	neck = /obj/item/clothing/neck/roguetown/gorget/steel
-	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/grenzelhoft
-	pants = /obj/item/clothing/under/roguetown/chainlegs/grenzelhoft
+	neck = /obj/item/clothing/neck/roguetown/gorget/steel //TA EDIT
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/grenzelhoft //TA EDIT
+	pants = /obj/item/clothing/under/roguetown/chainlegs/grenzelhoft //TA EDIT
 	shoes = /obj/item/clothing/shoes/roguetown/grenzelhoft
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves
 	backr = /obj/item/storage/backpack/rogue/satchel/black

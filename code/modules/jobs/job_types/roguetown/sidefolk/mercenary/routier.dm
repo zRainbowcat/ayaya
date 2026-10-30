@@ -12,10 +12,10 @@
 	cmode_music = sound("sound/music/combat_routier.ogg")
 	subclass_stats = list(
 		STATKEY_CON = 4,
-		STATKEY_WIL = 3,
+		STATKEY_WIL = 3, //TA EDIT
 		STATKEY_STR = 2,
 		STATKEY_PER = 1,
-		STATKEY_INT = 1,
+		STATKEY_INT = 1, //TA EDIT
 		STATKEY_SPD = -1
 	)
 	subclass_skills = list(
@@ -41,7 +41,7 @@
 
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
-	var/classes = list("Sword & Board","Macebearer","Flailman", "Foot Lancer", "Longswordsman", "Greatswordsman")
+	var/classes = list("Sword & Board","Macebearer","Flailman", "Foot Lancer", "Longswordsman", "Greatswordsman") //TA EDIT
 	if(H.mind)
 		var/classchoice = input(H, "Choose your archetypes", "Available archetypes") as anything in classes
 		H.set_blindness(0)
@@ -50,27 +50,27 @@
 			if("Sword & Board")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
 				beltl = /obj/item/rogueweapon/scabbard/sword
-				l_hand = /obj/item/rogueweapon/sword/short/silver
+				l_hand = /obj/item/rogueweapon/sword/short/silver //TA EDIT
 				backl = /obj/item/rogueweapon/shield/tower/metal
 			if("Longswordsman")
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
 				beltl = /obj/item/rogueweapon/scabbard/sword
-				l_hand = /obj/item/rogueweapon/sword/long/silver
-			if("Greatswordsman")
+				l_hand = /obj/item/rogueweapon/sword/long/silver //TA EDIT
+			if("Greatswordsman") //TA EDIT
 				H.adjust_skillrank_up_to(/datum/skill/combat/swords, 4, TRUE)
-				l_hand = /obj/item/rogueweapon/greatsword/silver
+				l_hand = /obj/item/rogueweapon/greatsword/silver //TA EDIT
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
 			if("Macebearer")
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, 4, TRUE)
-				beltl = /obj/item/rogueweapon/mace/steel/silver
+				beltl = /obj/item/rogueweapon/mace/steel/silver //TA EDIT
 				backl = /obj/item/rogueweapon/shield/tower/metal
 			if("Flailman")
 				H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, 4, TRUE)
-				beltl = /obj/item/rogueweapon/flail/sflail/silver
+				beltl = /obj/item/rogueweapon/flail/sflail/silver //TA EDIT
 				backl = /obj/item/rogueweapon/shield/tower/metal
 			if("Foot Lancer")
 				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, 4, TRUE)
-				r_hand = /obj/item/rogueweapon/halberd/silver
+				r_hand = /obj/item/rogueweapon/halberd/silver //TA EDIT
 				backl = /obj/item/rogueweapon/scabbard/gwstrap
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather

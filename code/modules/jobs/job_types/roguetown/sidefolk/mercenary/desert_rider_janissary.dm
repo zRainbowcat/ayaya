@@ -12,8 +12,8 @@
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_WIL = 2,
-		STATKEY_PER = 3,
-		STATKEY_CON = 3
+		STATKEY_PER = 3, //TA EDIT
+		STATKEY_CON = 3 //TA EDIT
 	)
 	subclass_skills = list(
 		/datum/skill/combat/maces = SKILL_LEVEL_JOURNEYMAN,
@@ -41,10 +41,10 @@
 	neck = /obj/item/clothing/neck/roguetown/chaincoif/full
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/raneshen
-	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	wrists = /obj/item/clothing/wrists/roguetown/bracers //TA EDIT
 	gloves = /obj/item/clothing/gloves/roguetown/chain
-	pants = /obj/item/clothing/under/roguetown/chainlegs
-	backr = /obj/item/rogueweapon/scabbard/gwstrap
+	pants = /obj/item/clothing/under/roguetown/chainlegs //TA EDIT
+	backr = /obj/item/rogueweapon/scabbard/gwstrap //TA EDIT
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
@@ -55,11 +55,11 @@
 		)
 	if(H.mind)
 		H.set_blindness(0)
-	r_hand = /obj/item/rogueweapon/mace/goden/steel
-	backl = /obj/item/rogueweapon/shield/tower/raneshen
+	r_hand = /obj/item/rogueweapon/mace/goden/steel //TA EDIT
+	backl = /obj/item/rogueweapon/shield/tower/raneshen //TA EDIT
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	belt = /obj/item/storage/belt/rogue/leather/shalal
-	beltl = /obj/item/storage/backpack/rogue/satchel/short
-	beltr = /obj/item/rogueweapon/sword/long/marlin
-	H.put_in_hands(new /obj/item/rogueweapon/scabbard/sword)
+	beltl = /obj/item/storage/backpack/rogue/satchel/short //TA EDIT
+	beltr = /obj/item/rogueweapon/sword/long/marlin //TA EDIT
+	H.put_in_hands(new /obj/item/rogueweapon/scabbard/sword) //TA EDIT
 	H.merctype = 4

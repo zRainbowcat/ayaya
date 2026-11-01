@@ -220,7 +220,8 @@
 
 			if(newletter == " " && prob(7))
 				newletter = "... э-э... "
-			//TA EDIT
+			else if(newletter == "." && prob(5))
+				newletter = " *ИК*."
 		else
 			if(rand(1, 3) == 3)
 				if(lowerletter == "o")

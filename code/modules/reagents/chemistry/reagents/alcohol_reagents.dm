@@ -56,6 +56,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			con_mult *= 0.8
 		if(C.has_flaw(/datum/charflaw/addiction/alcoholic))
 			con_mult *= 0.8
+			if(con_mult <= 0)
+				con_mult = 0.1
 //		if(HAS_TRAIT(C, TRAIT_ALCOHOL_TOLERANCE))
 //			alcohol_rate *= 0.5
 		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * alcohol_rate * con_mult)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
